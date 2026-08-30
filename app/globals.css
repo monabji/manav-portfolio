@@ -78,7 +78,7 @@
   display: grid;
   place-items: center;
   border: 8px solid #000;
-  background: #0b0b0b;
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -90,7 +90,7 @@
   pointer-events: none;
   background-image: radial-gradient(#303030 0.7px, transparent 0.7px);
   background-size: 8px 8px;
-  opacity: 0.22;
+  opacity: 0;
 }
 
 .landing-content {

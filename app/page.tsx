@@ -4,7 +4,20 @@ import { cn } from '@/lib/utils';
 
 export default function Home() {
   return (
-    <main className="landing-frame">
+    <main className="landing-frame relative isolate">
+      <div
+        data-aifx="ascii"
+        data-aifx-colors="#0e394a,#2f80d9,#c9f0ff"
+        data-aifx-speed="1.2"
+        data-aifx-cell-size="21"
+        data-aifx-scale="1.62"
+        data-aifx-glow="0.2"
+        data-aifx-flicker="0.23"
+        data-aifx-contrast="0.85"
+        data-aifx-scanlines="0.18"
+        className="absolute inset-0 -z-10 pointer-events-none"
+        aria-hidden="true"
+      />
       <section className="landing-content" aria-labelledby="landing-title">
         <div className="landing-title-wrap">
           <h1 id="landing-title" className="landing-title-accessible">
