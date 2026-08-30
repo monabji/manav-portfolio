@@ -99,14 +99,28 @@
   text-align: center;
 }
 
-.landing-title {
-  margin: 0;
-  font-family: 'Arial Black', Arial, Helvetica, sans-serif;
-  font-size: clamp(4.75rem, 18vw, 10rem);
-  font-weight: 900;
-  line-height: 0.86;
-  letter-spacing: -0.075em;
-  text-transform: uppercase;
+.landing-title-wrap {
+  position: relative;
+  width: 100%;
+  min-height: clamp(5rem, 18vw, 10rem);
+}
+
+.landing-title-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.landing-ascii {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
 }
 
 .landing-tagline {
