@@ -37,17 +37,17 @@
   --foreground: #fff;
   --card: #000;
   --card-foreground: #fff;
-  --primary: #fff;
-  --primary-foreground: #000;
+  --primary: #2f80d9;
+  --primary-foreground: #fff;
   --secondary: #000;
   --secondary-foreground: #fff;
   --muted: #000;
   --muted-foreground: rgba(255, 255, 255, 0.72);
-  --accent: #fff;
-  --accent-foreground: #000;
+  --accent: #2f80d9;
+  --accent-foreground: #fff;
   --border: rgba(255, 255, 255, 0.55);
   --input: #000;
-  --ring: #fff;
+  --ring: #2f80d9;
   --radius: 0px;
 }
 
@@ -1083,4 +1083,53 @@ body,
 .software-card-content ul,
 .project-links {
   color: #fff;
+}
+
+/* Shared electric-blue accent from the landing ASCII waves. */
+.site-brand span,
+.eyebrow,
+.education-years,
+.skills-list dt,
+.section-kicker,
+.project-status,
+.design-card-caption > p {
+  color: #2f80d9;
+}
+
+.site-nav a[aria-current='page'],
+.section-number {
+  background: #2f80d9;
+  color: #fff;
+}
+
+.site-nav a[aria-current='page'] *,
+.section-number * {
+  color: #fff;
+}
+
+.landing-actions .retro-button:first-child {
+  border-color: #2f80d9;
+  background: #2f80d9;
+  color: #fff;
+}
+
+.landing-actions .retro-button:last-child,
+.archive-link {
+  border-color: #2f80d9;
+  color: #2f80d9;
+}
+
+.experience-panel .organisation-mark {
+  border-color: #2f80d9;
+  color: #2f80d9;
+}
+
+.project-links a:hover,
+.project-links a:focus-visible,
+.archive-link:hover,
+.archive-link:focus-visible,
+.landing-actions .retro-button:focus-visible {
+  background: #2f80d9;
+  color: #fff;
+  outline-color: #2f80d9;
 }
