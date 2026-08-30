@@ -346,6 +346,12 @@ a {
   margin-top: 46px;
 }
 
+.about-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .content-section,
 .skills-panel,
 .social-panel,

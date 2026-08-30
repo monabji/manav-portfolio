@@ -82,28 +82,28 @@ export default function AboutPage() {
         </section>
 
         <div className="about-layout">
-          <section className="content-section" aria-labelledby="education-heading">
-            <div className="section-heading-row">
-              <p className="section-number">01</p>
-              <h2 id="education-heading">Education</h2>
-            </div>
-            <div className="education-list">
-              {education.map((item) => (
-                <article className="education-row" key={item.qualification}>
-                  <p className="education-years">{item.years}</p>
-                  <div>
-                    <h3>{item.qualification}</h3>
-                    <p>{item.institution}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+          <div className="about-main-column">
+            <section className="content-section" aria-labelledby="education-heading">
+              <div className="section-heading-row">
+                <p className="section-number">01</p>
+                <h2 id="education-heading">Education</h2>
+              </div>
+              <div className="education-list">
+                {education.map((item) => (
+                  <article className="education-row" key={item.qualification}>
+                    <p className="education-years">{item.years}</p>
+                    <div>
+                      <h3>{item.qualification}</h3>
+                      <p>{item.institution}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
 
-          <aside className="about-sidebar">
             <section className="experience-panel" aria-labelledby="experience-heading">
               <div className="section-heading-row compact">
-                <p className="section-number">02</p>
+                <p className="section-number">03</p>
                 <h2 id="experience-heading">Experience</h2>
               </div>
               <div className="experience-list">
@@ -121,10 +121,12 @@ export default function AboutPage() {
                 ))}
               </div>
             </section>
+          </div>
 
+          <aside className="about-sidebar">
             <section className="skills-panel" aria-labelledby="skills-heading">
               <div className="section-heading-row compact">
-                <p className="section-number">03</p>
+                <p className="section-number">02</p>
                 <h2 id="skills-heading">Technical skills</h2>
               </div>
               <dl className="skills-list">
