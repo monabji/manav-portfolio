@@ -47,6 +47,11 @@ const softwareProjects = [
         href: 'https://github.com/monabji/hackathon-winners-library',
         kind: 'github',
       },
+      {
+        label: 'Live site',
+        href: 'https://hackathon-winners-library.vercel.app/',
+        kind: 'external',
+      },
     ],
   },
   {
@@ -55,10 +60,10 @@ const softwareProjects = [
     status: 'PROTOTYPE',
     className: 'tint-lime',
     description:
-      'An accessible citizen-service redesign for India’s UDID journey—applications, corrections, appointments, renewals, and progress tracking—for the Build For India hackathon.',
+      'An accessible citizen-service redesign for India’s UDID journey - applications, corrections, appointments, renewals, and progress tracking - for the Build For India hackathon.',
     tags: ['REACT', 'TYPESCRIPT', 'ACCESSIBILITY'],
     links: [
-      { label: 'Prototype', href: 'https://github.com/monabji/build-for-india', kind: 'external' },
+      { label: 'Live site', href: 'https://build-for-india-main.vercel.app/', kind: 'external' },
       { label: 'Source', href: 'https://github.com/monabji/build-for-india', kind: 'github' },
     ],
   },
@@ -150,7 +155,7 @@ export default function ProjectsPage() {
 
       <div className="page-container">
         <section className="page-title-block tint-salmon" aria-labelledby="projects-title">
-          <p className="eyebrow">SELECTED WORK / 2025—NOW</p>
+          <p className="eyebrow">SELECTED WORK / 2025-NOW</p>
           <h1 id="projects-title">MY PROJECTS</h1>
         </section>
 

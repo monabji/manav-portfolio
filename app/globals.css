@@ -475,6 +475,13 @@ a {
   height: 22px;
 }
 
+.organisation-mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
 .experience-row h3,
 .experience-row p {
   margin: 0;

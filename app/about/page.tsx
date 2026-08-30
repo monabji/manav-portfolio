@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ArrowUpRight, Code2, Mail, MicVocal, Network, Orbit } from 'lucide-react';
+import { ArrowUpRight, Code2, Mail, Network } from 'lucide-react';
 
 import { PortfolioHeader } from '@/components/portfolio-header';
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const education = [
   {
-    years: '2025 — 2029',
+    years: '2025 - 2029',
     qualification: 'B.Tech · Computer Science & Engineering (Core)',
     institution: 'VIT University, Vellore Campus',
   },
@@ -52,14 +52,12 @@ const experience = [
   {
     organisation: 'Association for Computing Machinery',
     role: 'Core Member',
-    mark: 'ACM',
-    icon: Orbit,
+    image: '/experience/acm.png',
   },
   {
     organisation: 'Nuvens Toastmasters International',
-    role: 'Vice President — PR',
-    mark: 'TM',
-    icon: MicVocal,
+    role: 'Vice President - PR',
+    image: '/experience/toastmasters.png',
   },
 ];
 
@@ -107,11 +105,10 @@ export default function AboutPage() {
                 <h2 id="experience-heading">Experience</h2>
               </div>
               <div className="experience-list">
-                {experience.map(({ organisation, role, mark, icon: Icon }) => (
+                {experience.map(({ organisation, role, image }) => (
                   <article className="experience-row" key={organisation}>
                     <div className="organisation-mark" aria-hidden="true">
-                      <Icon />
-                      <span>{mark}</span>
+                      <img src={image} alt="" />
                     </div>
                     <div>
                       <h3>{role}</h3>
@@ -167,10 +164,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <footer className="site-footer">
-        <span>MANAV BHAVIN SONI</span>
-        <span>VIT · VELLORE · 2025—2029</span>
-      </footer>
     </main>
   );
 }

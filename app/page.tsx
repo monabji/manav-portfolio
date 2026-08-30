@@ -23,7 +23,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <p className="landing-tagline">a boy who loves tech</p>
+        <p className="landing-tagline">a boy who loves tech.</p>
         <nav className="landing-actions" aria-label="Explore Manav's portfolio">
           <a
             href="/about"
