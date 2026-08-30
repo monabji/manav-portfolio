@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 
 import './globals.css';
 
@@ -46,7 +45,6 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body>
         {children}
-        <Script src="https://cdn.aidesigner.ai/effects/runtime/v1.js" strategy="afterInteractive" />
       </body>
     </html>
   );
