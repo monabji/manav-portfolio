@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ArrowUpRight, Code2, Mail, Network } from 'lucide-react';
+import { ArrowUpRight, Code2, Mail, MicVocal, Network, Orbit } from 'lucide-react';
 
 import { PortfolioHeader } from '@/components/portfolio-header';
 
@@ -48,6 +48,21 @@ const socialLinks = [
   },
 ];
 
+const experience = [
+  {
+    organisation: 'Association for Computing Machinery',
+    role: 'Core Member',
+    mark: 'ACM',
+    icon: Orbit,
+  },
+  {
+    organisation: 'Nuvens Toastmasters International',
+    role: 'Vice President — PR',
+    mark: 'TM',
+    icon: MicVocal,
+  },
+];
+
 export default function AboutPage() {
   return (
     <main className="site-frame">
@@ -59,14 +74,10 @@ export default function AboutPage() {
           <h1 id="about-title">KNOW MORE ABOUT ME</h1>
         </section>
 
-        <section className="intro-panel">
-          <p className="intro-mark" aria-hidden="true">
-            👋
-          </p>
+        <section className="intro-panel intro-panel-copy-only">
           <p className="intro-copy">
-            Hi, I’m <strong>Manav!</strong> A student and an aspiring 3D designer and game
-            developer. This is a selection of my projects, with many more to come. Feel
-            free to reach out—and I hope you enjoy my work.
+            Hi! I&apos;m Manav! A student at VIT Vellore and I just love messing around in tech.
+            I&apos;m Intrested in GameDev, 3D Desgin, AIML and Cybersecuriy. Feel free to reach out!
           </p>
         </section>
 
@@ -90,9 +101,30 @@ export default function AboutPage() {
           </section>
 
           <aside className="about-sidebar">
-            <section className="skills-panel" aria-labelledby="skills-heading">
+            <section className="experience-panel" aria-labelledby="experience-heading">
               <div className="section-heading-row compact">
                 <p className="section-number">02</p>
+                <h2 id="experience-heading">Experience</h2>
+              </div>
+              <div className="experience-list">
+                {experience.map(({ organisation, role, mark, icon: Icon }) => (
+                  <article className="experience-row" key={organisation}>
+                    <div className="organisation-mark" aria-hidden="true">
+                      <Icon />
+                      <span>{mark}</span>
+                    </div>
+                    <div>
+                      <h3>{role}</h3>
+                      <p>{organisation}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="skills-panel" aria-labelledby="skills-heading">
+              <div className="section-heading-row compact">
+                <p className="section-number">03</p>
                 <h2 id="skills-heading">Technical skills</h2>
               </div>
               <dl className="skills-list">
@@ -106,14 +138,14 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <dt>Practice</dt>
-                  <dd>HackerRank · Codeforces</dd>
+                  <dd>HackerRank · Codeforces · CTFs</dd>
                 </div>
               </dl>
             </section>
 
             <section className="social-panel" aria-labelledby="social-heading">
               <div className="section-heading-row compact">
-                <p className="section-number">03</p>
+                <p className="section-number">04</p>
                 <h2 id="social-heading">Find me online</h2>
               </div>
               <div className="social-list">
