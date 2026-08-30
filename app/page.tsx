@@ -14,10 +14,10 @@ export default function Home() {
             <ASCIIText
               text="Manav"
               enableWaves
-              asciiFontSize={8}
-              textFontSize={220}
+              asciiFontSize={10}
+              textFontSize={420}
               textColor="#f1be22"
-              planeBaseHeight={7.5}
+              planeBaseHeight={18}
             />
           </div>
         </div>

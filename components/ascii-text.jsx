@@ -111,7 +111,7 @@ class AsciiFilter {
     this.pre.style.top = '0';
     this.pre.style.zIndex = '9';
     this.pre.style.backgroundAttachment = 'fixed';
-    this.pre.style.mixBlendMode = 'difference';
+    this.pre.style.mixBlendMode = 'normal';
   }
 
   render(scene, camera) {
@@ -136,7 +136,8 @@ class AsciiFilter {
     const dy = this.mouse.y - this.center.y;
     const deg = (Math.atan2(dy, dx) * 180) / Math.PI;
     this.deg += (deg - this.deg) * 0.075;
-    this.domElement.style.filter = `hue-rotate(${this.deg.toFixed(1)}deg)`;
+    // Keep the glyph layer on-brand and readable while the mesh still responds to the pointer.
+    this.domElement.style.filter = 'none';
   }
 
   asciify(context, width, height) {
@@ -460,12 +461,13 @@ export default function ASCIIText({
           text-align: left;
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(circle, #ff6188 0%, #fc9867 50%, #ffd866 100%);
-          background-attachment: fixed;
-          -webkit-text-fill-color: transparent;
-          -webkit-background-clip: text;
+          color: #f1be22;
+          background: transparent;
+          -webkit-text-fill-color: #f1be22;
+          text-shadow: 0 0 3px rgba(241, 190, 34, 0.38);
+          font-weight: 600;
           z-index: 9;
-          mix-blend-mode: difference;
+          mix-blend-mode: normal;
         }
 
         .ascii-text-fallback::after {
@@ -483,4 +485,3 @@ export default function ASCIIText({
     </div>
   );
 }
-
