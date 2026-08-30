@@ -16,7 +16,7 @@ export default function Home() {
               enableWaves
               asciiFontSize={10}
               textFontSize={420}
-              textColor="#f1be22"
+              textColor="#fdf9f3"
               planeBaseHeight={18}
             />
           </div>

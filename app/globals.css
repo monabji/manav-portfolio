@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
@@ -20,9 +21,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: Arial, Helvetica, sans-serif;
-  --font-serif: 'Times New Roman', Times, serif;
-  --font-heading: 'Arial Black', Arial, Helvetica, sans-serif;
+  --font-sans: 'IBM Plex Mono', monospace;
+  --font-serif: 'IBM Plex Mono', monospace;
+  --font-heading: 'IBM Plex Mono', monospace;
   --radius-sm: 0;
   --radius-md: 0;
   --radius-lg: 0;
@@ -32,21 +33,21 @@
 :root,
 .dark {
   color-scheme: dark;
-  --background: #050505;
-  --foreground: #f4f0e8;
-  --card: #101010;
-  --card-foreground: #f4f0e8;
-  --primary: #f1be22;
-  --primary-foreground: #050505;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #f4f0e8;
-  --muted: #161616;
-  --muted-foreground: #b8b1a5;
-  --accent: #f1be22;
-  --accent-foreground: #050505;
-  --border: #4a4741;
-  --input: #2a2926;
-  --ring: #f1be22;
+  --background: #000;
+  --foreground: #fff;
+  --card: #000;
+  --card-foreground: #fff;
+  --primary: #fff;
+  --primary-foreground: #000;
+  --secondary: #000;
+  --secondary-foreground: #fff;
+  --muted: #000;
+  --muted-foreground: rgba(255, 255, 255, 0.72);
+  --accent: #fff;
+  --accent-foreground: #000;
+  --border: rgba(255, 255, 255, 0.55);
+  --input: #000;
+  --ring: #fff;
   --radius: 0px;
 }
 
@@ -63,12 +64,12 @@
     @apply bg-background text-foreground;
     margin: 0;
     min-width: 320px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'IBM Plex Mono', monospace;
   }
 
   ::selection {
-    background: #f1be22;
-    color: #050505;
+    background: #fff;
+    color: #000;
   }
 }
 
@@ -877,4 +878,137 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* Monochrome portfolio treatment */
+body,
+body * {
+  font-family: 'IBM Plex Mono', monospace !important;
+}
+
+html,
+body,
+.landing-frame,
+.site-frame,
+.site-header,
+.site-footer,
+.page-title-block,
+.intro-panel,
+.content-section,
+.skills-panel,
+.social-panel,
+.design-card {
+  background: #000;
+  color: #fff;
+}
+
+.landing-frame::before {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 0.7px, transparent 0.7px);
+}
+
+.tint-olive,
+.tint-sage,
+.tint-salmon,
+.tint-peach,
+.tint-lime,
+.tint-sky,
+.tint-periwinkle {
+  background: #000;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.site-frame :is(p, span, h1, h2, h3, h4, a, dt, dd, small, li),
+.site-brand span,
+.eyebrow,
+.section-kicker,
+.project-status,
+.project-index,
+.education-years,
+.skills-list dt,
+.design-card-caption > p {
+  color: #fff;
+}
+
+.intro-copy,
+.education-row p:last-child,
+.skills-list dd,
+.social-list small,
+.projects-section-head > p,
+.software-card-content > p,
+.design-card-caption span,
+.site-footer {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.intro-copy strong {
+  color: #fff;
+}
+
+.intro-mark {
+  filter: grayscale(1) contrast(2);
+}
+
+.site-header,
+.site-footer,
+.page-title-block,
+.intro-panel,
+.content-section,
+.skills-panel,
+.social-panel,
+.design-card,
+.education-row,
+.social-list a,
+.skills-list > div,
+.section-heading-row,
+.section-number,
+.project-links,
+.project-links a,
+.software-card,
+.software-card-header,
+.project-index,
+.project-status,
+.design-card-caption,
+.design-card-wide .design-card-caption {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.site-nav a[aria-current='page'],
+.section-number {
+  background: #fff;
+  color: #000;
+}
+
+.site-nav a[aria-current='page'] *,
+.section-number * {
+  color: #000;
+}
+
+.retro-button,
+.archive-link,
+.site-footer a {
+  border-color: #fff;
+  color: #fff;
+  background: #000;
+}
+
+.retro-button:focus-visible,
+.site-nav a:focus-visible,
+.site-brand:focus-visible,
+.project-links a:focus-visible,
+.archive-link:focus-visible,
+.social-list a:focus-visible,
+.site-footer a:focus-visible {
+  outline-color: #fff;
+}
+
+.design-card img {
+  filter: grayscale(1) contrast(1.15);
+}
+
+.software-card,
+.software-card-header,
+.software-card-content,
+.software-card-content ul,
+.project-links {
+  color: #fff;
 }

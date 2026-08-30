@@ -30,15 +30,8 @@ uniform float uTime;
 uniform sampler2D uTexture;
 
 void main() {
-  float time = uTime;
-  vec2 pos = vUv;
-
-  float move = sin(time + mouse) * 0.01;
-  float r = texture2D(uTexture, pos + cos(time * 2. - time + pos.x) * 0.01).r;
-  float g = texture2D(uTexture, pos + tan(time * 0.5 + pos.x - time) * 0.01).g;
-  float b = texture2D(uTexture, pos - cos(time * 2. + time + pos.y) * 0.01).b;
-  float a = texture2D(uTexture, pos).a;
-  gl_FragColor = vec4(r, g, b, a);
+  vec4 textureColor = texture2D(uTexture, vUv);
+  gl_FragColor = textureColor;
 }
 `;
 
@@ -171,7 +164,7 @@ class AsciiFilter {
 }
 
 class CanvasTxt {
-  constructor(text, { fontSize = 200, fontFamily = 'Arial', color = '#fdf9f3' } = {}) {
+  constructor(text, { fontSize = 200, fontFamily = 'IBM Plex Mono', color = '#fdf9f3' } = {}) {
     this.canvas = document.createElement('canvas');
     this.context = this.canvas.getContext('2d');
     this.text = text;
@@ -461,10 +454,10 @@ export default function ASCIIText({
           text-align: left;
           position: absolute;
           inset: 0;
-          color: #f1be22;
+          color: #fdf9f3;
           background: transparent;
-          -webkit-text-fill-color: #f1be22;
-          text-shadow: 0 0 3px rgba(241, 190, 34, 0.38);
+          -webkit-text-fill-color: #fdf9f3;
+          text-shadow: 0 0 3px rgba(253, 249, 243, 0.38);
           font-weight: 600;
           z-index: 9;
           mix-blend-mode: normal;
@@ -476,8 +469,8 @@ export default function ASCIIText({
           inset: 0;
           display: grid;
           place-items: center;
-          color: #f1be22;
-          font: 900 clamp(4.75rem, 18vw, 10rem)/0.86 Arial Black, Arial, sans-serif;
+          color: #fdf9f3;
+          font: 700 clamp(4.75rem, 18vw, 10rem)/0.86 'IBM Plex Mono', monospace;
           letter-spacing: -0.075em;
           text-transform: uppercase;
         }
