@@ -2,12 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-
-const apps = [
-  { href: '/', label: 'Home', icon: '/aero/home.png' },
-  { href: '/about', label: 'About me', icon: '/aero/profile.png' },
-  { href: '/projects', label: 'My projects', icon: '/aero/games.png' },
-];
+import { crystalIcons, desktopApps } from '@/config/portfolio';
 
 function playTone(kind: 'open' | 'close' | 'select') {
   const AudioContextClass = window.AudioContext ||
@@ -78,7 +73,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
       </div>
 
       <aside className="desktop-icons" aria-label="Desktop shortcuts">
-        {apps.slice(1).map((app) => (
+        {desktopApps.slice(1).map((app) => (
           <a href={app.href} key={app.href} onClick={() => soundOn && playTone('open')}>
             <img src={app.icon} alt="" />
             <span>{app.label}</span>
@@ -90,14 +85,14 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
 
       <div className={`start-menu ${menuOpen ? 'is-open' : ''}`} ref={menuRef} aria-hidden={!menuOpen}>
         <div className="start-user">
-          <img src="/aero/profile.png" alt="" />
+          <img src={crystalIcons.profile} alt="" />
           <div><strong>Manav</strong><span>VIT Vellore</span></div>
         </div>
         <nav aria-label="Start menu">
-          {apps.map((app) => (
+          {desktopApps.map((app) => (
             <a href={app.href} key={app.href} tabIndex={menuOpen ? 0 : -1}>
               <img src={app.icon} alt="" />
-              <span><strong>{app.label}</strong><small>{app.href === '/' ? 'Welcome screen' : app.href === '/about' ? 'Education, skills and experience' : 'Code, games and 3D work'}</small></span>
+              <span><strong>{app.label}</strong><small>{app.description}</small></span>
             </a>
           ))}
         </nav>
@@ -111,7 +106,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
           <span className="sr-only">{menuOpen ? 'Close start menu' : 'Open start menu'}</span>
         </button>
         <nav className="taskbar-apps" aria-label="Open portfolio pages">
-          {apps.map((app) => (
+          {desktopApps.map((app) => (
             <a href={app.href} key={app.href} aria-label={app.label} className={pathname === app.href ? 'is-active' : ''} aria-current={pathname === app.href ? 'page' : undefined} onClick={() => soundOn && playTone('select')}>
               <img src={app.icon} alt="" /><span>{app.label}</span>
             </a>
@@ -119,7 +114,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
         </nav>
         <div className="tray">
           <button type="button" onClick={toggleSound} aria-pressed={soundOn} title={soundOn ? 'Mute UI sounds' : 'Enable UI sounds'}>
-            <img src="/aero/sound.png" alt="" /><span>{soundOn ? 'Sound on' : 'Sound off'}</span>
+            <img src={crystalIcons.sound} alt="" /><span>{soundOn ? 'Sound on' : 'Sound off'}</span>
           </button>
           <time>{clock}</time>
         </div>
