@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 
+import { AeroBackdrop } from '@/components/aero-backdrop';
+
+import './tokens.css';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -22,9 +25,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/og.png',
-        width: 1729,
-        height: 910,
-        alt: 'MANAV - a boy who loves tech',
+        width: 1733,
+        height: 908,
+        alt: 'Manav, a boy who loves tech, in a bright Frutiger Aero landscape',
       },
     ],
   },
@@ -42,8 +45,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body>
+        <AeroBackdrop />
         {children}
       </body>
     </html>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const education = [
   {
     years: '2025 - 2029',
-    qualification: 'B.Tech · Computer Science & Engineering (Core)',
+    qualification: 'B.Tech, Computer Science & Engineering (Core)',
     institution: 'VIT University, Vellore Campus',
   },
   {
@@ -67,21 +67,22 @@ export default function AboutPage() {
       <PortfolioHeader current="about" />
 
       <div className="page-container">
-        <section className="page-title-block tint-olive" aria-labelledby="about-title">
-          <p className="eyebrow">PROFILE / 001</p>
-          <h1 id="about-title">KNOW MORE ABOUT ME</h1>
-        </section>
-
-        <section className="intro-panel intro-panel-copy-only">
-          <p className="intro-copy">
-            Hi! I&apos;m Manav! A student at VIT Vellore and I just love messing around in tech.
-            I&apos;m Intrested in GameDev, 3D Desgin, AIML and Cybersecuriy. Feel free to reach out!
-          </p>
+        <section className="page-hero" aria-labelledby="about-title">
+          <span className="panel-gloss" aria-hidden="true" />
+          <div className="page-hero-copy">
+            <p className="eyebrow">Profile 01</p>
+            <h1 id="about-title">Know more about me</h1>
+            <p className="intro-copy">
+              Hi! I&apos;m Manav! A student at VIT Vellore and I just love messing around in tech.
+              I&apos;m Intrested in GameDev, 3D Desgin, AIML and Cybersecuriy. Feel free to reach out!
+            </p>
+          </div>
+          <div className="page-hero-orb" aria-hidden="true"><span /></div>
         </section>
 
         <div className="about-layout">
           <div className="about-main-column">
-            <section className="content-section" aria-labelledby="education-heading">
+            <section className="content-section aero-panel" aria-labelledby="education-heading">
               <div className="section-heading-row">
                 <p className="section-number">01</p>
                 <h2 id="education-heading">Education</h2>
@@ -99,7 +100,7 @@ export default function AboutPage() {
               </div>
             </section>
 
-            <section className="experience-panel" aria-labelledby="experience-heading">
+            <section className="experience-panel aero-panel" aria-labelledby="experience-heading">
               <div className="section-heading-row compact">
                 <p className="section-number">03</p>
                 <h2 id="experience-heading">Experience</h2>
@@ -121,7 +122,7 @@ export default function AboutPage() {
           </div>
 
           <aside className="about-sidebar">
-            <section className="skills-panel" aria-labelledby="skills-heading">
+            <section className="skills-panel aero-panel" aria-labelledby="skills-heading">
               <div className="section-heading-row compact">
                 <p className="section-number">02</p>
                 <h2 id="skills-heading">Technical skills</h2>
@@ -129,7 +130,7 @@ export default function AboutPage() {
               <dl className="skills-list">
                 <div>
                   <dt>Languages</dt>
-                  <dd>C · C++ · Python · Lua · GDScript · HTML · CSS</dd>
+                  <dd>C, C++, Python, Lua, GDScript, HTML, CSS</dd>
                 </div>
                 <div>
                   <dt>Development</dt>
@@ -137,12 +138,12 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <dt>Practice</dt>
-                  <dd>HackerRank · Codeforces · CTFs</dd>
+                  <dd>HackerRank, Codeforces, CTFs</dd>
                 </div>
               </dl>
             </section>
 
-            <section className="social-panel" aria-labelledby="social-heading">
+            <section className="social-panel aero-panel" aria-labelledby="social-heading">
               <div className="section-heading-row compact">
                 <p className="section-number">04</p>
                 <h2 id="social-heading">Find me online</h2>

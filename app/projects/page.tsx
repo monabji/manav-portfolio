@@ -14,21 +14,19 @@ const softwareProjects = [
   {
     index: '01',
     title: 'CarWars',
-    status: 'SHIPPED',
-    className: 'tint-sage',
+    status: 'Shipped',
     description:
       'A PSX-style car game built from the ground up with Unity and original Blender assets, showcased at the Gravitas Expo.',
-    tags: ['UNITY', 'BLENDER', 'GAME DEV'],
+    tags: ['Unity', 'Blender', 'Game development'],
     links: [{ label: 'Source', href: 'https://github.com/ACM-VIT/carwars', kind: 'github' }],
   },
   {
     index: '02',
     title: 'AI Retinopathy Grading',
-    status: 'IN PROGRESS',
-    className: 'tint-salmon',
+    status: 'In progress',
     description:
       'An AI project in progress for detecting and grading diabetic retinopathy from retinal imagery using the IDRiD dataset.',
-    tags: ['PYTHON', 'AI / ML', 'HEALTHTECH'],
+    tags: ['Python', 'AI / ML', 'Healthtech'],
     links: [
       { label: 'Source', href: 'https://github.com/monabji/idrid-dr-grading', kind: 'github' },
     ],
@@ -36,11 +34,10 @@ const softwareProjects = [
   {
     index: '03',
     title: 'Hackathon Winners Library',
-    status: 'WEB',
-    className: 'tint-peach',
+    status: 'Web',
     description:
       'A focused website for tracking hackathon winners and collecting standout builds in one browsable library.',
-    tags: ['WEB', 'DATABASE', 'HACKATHONS'],
+    tags: ['Web', 'Database', 'Hackathons'],
     links: [
       {
         label: 'Source',
@@ -57,11 +54,10 @@ const softwareProjects = [
   {
     index: '04',
     title: 'UDID Saathi',
-    status: 'PROTOTYPE',
-    className: 'tint-lime',
+    status: 'Prototype',
     description:
       'An accessible citizen-service redesign for India’s UDID journey - applications, corrections, appointments, renewals, and progress tracking - for the Build For India hackathon.',
-    tags: ['REACT', 'TYPESCRIPT', 'ACCESSIBILITY'],
+    tags: ['React', 'TypeScript', 'Accessibility'],
     links: [
       { label: 'Live site', href: 'https://build-for-india-main.vercel.app/', kind: 'external' },
       { label: 'Source', href: 'https://github.com/monabji/build-for-india', kind: 'github' },
@@ -70,11 +66,10 @@ const softwareProjects = [
   {
     index: '05',
     title: 'Tonoclear',
-    status: '3RD PLACE',
-    className: 'tint-periwinkle',
+    status: '3rd place',
     description:
       'A hardware + IoT build created for the ACEi Hackathon in Chennai. The project took third place.',
-    tags: ['HARDWARE', 'IOT', 'HACKATHON'],
+    tags: ['Hardware', 'IoT', 'Hackathon'],
     links: [
       {
         label: 'View deck',
@@ -88,42 +83,42 @@ const softwareProjects = [
 const designProjects = [
   {
     title: 'Skull Landscape',
-    category: 'LANDSCAPES / BLENDER',
+    category: 'Landscapes / Blender',
     image: '/work/skull-landscape.png',
     alt: 'A Blender render of a skull in a rocky landscape with shallow depth of field',
     description: 'Natural textures, depth of field, and a cinematic environmental composition.',
   },
   {
     title: 'Liminal Pool',
-    category: 'LANDSCAPES / BLENDER',
+    category: 'Landscapes / Blender',
     image: '/work/liminal-pool.png',
     alt: 'A liminal indoor swimming pool rendered in Blender',
     description: 'An atmospheric interior study built around reflections and spatial lighting.',
   },
   {
     title: 'Flooded Tunnel',
-    category: 'LANDSCAPES / BLENDER',
+    category: 'Landscapes / Blender',
     image: '/work/flooded-tunnel.png',
     alt: 'A moody flooded tunnel environment rendered in Blender',
     description: 'Repetition, water, and subdued lighting create an immersive architectural scene.',
   },
   {
     title: 'Fog City',
-    category: 'GAME MAP DESIGN',
+    category: 'Game map design',
     image: '/work/game-map.png',
     alt: 'A foggy, abandoned-looking city block designed as a game map',
     description: 'A quiet urban block with worn buildings, dim streetlights, and an uneasy mood.',
   },
   {
     title: 'Procedural Planet',
-    category: 'NODES / BLENDER',
+    category: 'Nodes / Blender',
     image: '/work/procedural-planet.png',
     alt: 'A blue procedural planet with cloud detail against a black background',
     description: 'Layered noise and shader nodes create scalable terrain, clouds, and atmosphere.',
   },
   {
     title: 'Board Game Assets',
-    category: 'ASSETS / BLENDER',
+    category: 'Assets / Blender',
     image: '/work/dice-assets.png',
     alt: 'A colorful Blender render of a die surrounded by board game pawns',
     description: 'A playful modeling and materials study using simple, readable forms.',
@@ -154,15 +149,20 @@ export default function ProjectsPage() {
       <PortfolioHeader current="projects" />
 
       <div className="page-container">
-        <section className="page-title-block tint-salmon" aria-labelledby="projects-title">
-          <p className="eyebrow">SELECTED WORK / 2025-NOW</p>
-          <h1 id="projects-title">MY PROJECTS</h1>
+        <section className="page-hero projects-hero" aria-labelledby="projects-title">
+          <span className="panel-gloss" aria-hidden="true" />
+          <div className="page-hero-copy">
+            <p className="eyebrow">Selected work, 2025 to now</p>
+            <h1 id="projects-title">My projects</h1>
+            <p className="intro-copy">Experiments that became prototypes, games, and working products.</p>
+          </div>
+          <div className="page-hero-orb projects-orb" aria-hidden="true"><span /></div>
         </section>
 
         <section className="projects-section" aria-labelledby="builds-heading">
           <div className="projects-section-head">
             <div>
-              <p className="section-kicker">CODE / GAMES / HARDWARE</p>
+              <p className="section-kicker">Code, games, hardware</p>
               <h2 id="builds-heading">Things I’ve built</h2>
             </div>
             <p>Experiments that became prototypes, games, and working products.</p>
@@ -170,7 +170,7 @@ export default function ProjectsPage() {
 
           <div className="software-grid">
             {softwareProjects.map((project) => (
-              <Card className={`software-card ${project.className}`} key={project.title}>
+              <Card className="software-card" key={project.title}>
                 <CardHeader className="software-card-header">
                   <p className="project-index">{project.index}</p>
                   <span className="project-status">{project.status}</span>
@@ -197,7 +197,7 @@ export default function ProjectsPage() {
         <section className="projects-section design-section" aria-labelledby="design-heading">
           <div className="projects-section-head">
             <div>
-              <p className="section-kicker">3D / ENVIRONMENTS / ASSETS</p>
+              <p className="section-kicker">3D, environments, assets</p>
               <h2 id="design-heading">Design work</h2>
             </div>
             <a
@@ -226,9 +226,9 @@ export default function ProjectsPage() {
       </div>
 
       <footer className="site-footer">
-        <span>MORE WORK IS ALWAYS ON THE WAY.</span>
+        <span>More work is always on the way.</span>
         <a href="mailto:manav.bhavinsoni2025@vitstudent.ac.in">
-          SAY HELLO <ArrowUpRight aria-hidden="true" />
+          Say hello <ArrowUpRight aria-hidden="true" />
         </a>
       </footer>
     </main>

@@ -1,43 +1,28 @@
-import { buttonVariants } from '@/components/ui/button';
-import ASCIIText from '@/components/ascii-text';
-import AsciiWaveBackground from '@/components/ascii-wave-background';
-import { cn } from '@/lib/utils';
-
 export default function Home() {
   return (
-    <main className="landing-frame relative isolate">
-      <AsciiWaveBackground />
-      <section className="landing-content" aria-labelledby="landing-title">
-        <div className="landing-title-wrap">
-          <h1 id="landing-title" className="landing-title-accessible">
-            Manav
-          </h1>
-          <div className="landing-ascii" aria-hidden="true">
-            <ASCIIText
-              text="Manav"
-              enableWaves
-              asciiFontSize={10}
-              textFontSize={420}
-              textColor="#fdf9f3"
-              planeBaseHeight={18}
-            />
+    <main className="landing-page">
+      <section className="landing-hero" aria-labelledby="landing-title">
+        <div className="landing-glass-panel">
+          <span className="landing-gloss" aria-hidden="true" />
+          <div className="landing-copy">
+            <h1 id="landing-title">Manav</h1>
+            <p>a boy who loves tech.</p>
+            <nav className="landing-actions" aria-label="Explore Manav's portfolio">
+              <a href="/about" className="aero-button aero-button-primary">
+                know more about me
+              </a>
+              <a href="/projects" className="aero-button aero-button-secondary">
+                my projects
+              </a>
+            </nav>
           </div>
+          <div className="landing-waterline" aria-hidden="true" />
         </div>
-        <p className="landing-tagline">a boy who loves tech.</p>
-        <nav className="landing-actions" aria-label="Explore Manav's portfolio">
-          <a
-            href="/about"
-            className={cn(buttonVariants({ variant: 'default' }), 'retro-button')}
-          >
-            know more about me
-          </a>
-          <a
-            href="/projects"
-            className={cn(buttonVariants({ variant: 'outline' }), 'retro-button')}
-          >
-            my projects
-          </a>
-        </nav>
+        <div className="landing-orb" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
       </section>
     </main>
   );
