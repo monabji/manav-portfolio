@@ -1,0 +1,20 @@
+ASSET CREDITS
+
+Desktop wallpaper
+"Green hill blue sky" by Darwin Bell, used under CC BY 2.0.
+Source: https://commons.wikimedia.org/wiki/File:Green_hill_blue_sky_(288868960).jpg
+License: https://creativecommons.org/licenses/by/2.0/
+The image is cropped and color-enhanced by CSS for use as a full-screen background.
+
+Interface icons
+Nuvola icon theme by David Vignoni, used under GNU LGPL.
+Source and icon gallery: https://commons.wikimedia.org/wiki/Nuvola
+License: https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+UI sounds
+Original tones synthesized in the browser with the Web Audio API. No audio files are copied or autoplayed.
+
+Design references
+https://frutigeraeroarchive.org/
+https://frutiger-aero.neocities.org/
+https://www.craftedbyarjun.com/

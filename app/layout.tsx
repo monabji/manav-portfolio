@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { AeroBackdrop } from '@/components/aero-backdrop';
+import { DesktopShell } from '@/components/desktop-shell';
 
 import './tokens.css';
 import './globals.css';
@@ -47,8 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AeroBackdrop />
-        {children}
+        <DesktopShell>{children}</DesktopShell>
       </body>
     </html>
   );
