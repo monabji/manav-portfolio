@@ -57,7 +57,8 @@ export function AeroOrbit() {
       camera.aspect = width / Math.max(height, 1);
       camera.updateProjectionMatrix();
     };
-    const observer = new ResizeObserver(resize); observer.observe(mount); resize();
+    window.addEventListener('resize', resize);
+    resize();
 
     let frame = 0;
     const animate = (time: number) => {
@@ -73,7 +74,7 @@ export function AeroOrbit() {
     frame = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(frame); observer.disconnect(); mount.removeEventListener('pointermove', onPointer);
+      cancelAnimationFrame(frame); window.removeEventListener('resize', resize); mount.removeEventListener('pointermove', onPointer);
       scene.traverse((object) => { if (object instanceof THREE.Mesh || object instanceof THREE.LineSegments) { object.geometry.dispose(); const material = object.material; if (Array.isArray(material)) material.forEach((item) => item.dispose()); else material.dispose(); } });
       renderer.dispose(); mount.removeChild(renderer.domElement);
     };
