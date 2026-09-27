@@ -1,9 +1,9 @@
 export const crystalIcons = {
-  home: '/crystal/projects.png',
+  home: '/crystal/network.png',
   profile: '/crystal/browser.png',
   projects: '/crystal/blender.png',
   browser: '/crystal/browser.png',
-  code: '/crystal/projects.png',
+  code: '/crystal/graphics.png',
   blender: '/crystal/blender.png',
   sound: '/crystal/sound.png',
 } as const;

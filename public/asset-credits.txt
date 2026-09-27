@@ -1,15 +1,18 @@
 ASSET CREDITS
 
 Desktop wallpaper
-"Green hill blue sky" by Darwin Bell, used under CC BY 2.0.
-Source: https://commons.wikimedia.org/wiki/File:Green_hill_blue_sky_(288868960).jpg
-License: https://creativecommons.org/licenses/by/2.0/
-The image is cropped and color-enhanced by CSS for use as a full-screen background.
+"The Remarkable Beauty of Windows 7 Background" from Wallpapers.com.
+Source: https://wallpapers.com/background/windows-7-background-imfecqv6cnsicbx4.html
+Wallpaper provided by Wallpapers.com and used with the attribution requested on its source page.
 
 Interface icons
-Nuvola icon theme by David Vignoni, used under GNU LGPL.
-Source and icon gallery: https://commons.wikimedia.org/wiki/Nuvola
+Crystal Project icons by Everaldo Coelho, used under GNU LGPL 2.1 or later.
+Source and icon gallery: https://commons.wikimedia.org/wiki/Category:Crystal_Project_App_Icons
+Blender icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_Blender.png
 License: https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+Hero people image
+Provided by Manav as a design reference and used directly in the landing-page 3D scene.
 
 UI sounds
 Original tones synthesized in the browser with the Web Audio API. No audio files are copied or autoplayed.
