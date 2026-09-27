@@ -19,7 +19,7 @@ export default function Home() {
           </div>
           <PeopleHero3D />
         </div>
-        <div className="window-status"><span>Ready</span><span>3 pages · 11 projects</span></div>
+        <div className="window-status"><span>Ready</span><span>4 pages · 11 projects</span></div>
       </AeroWindow>
     </main>
   );

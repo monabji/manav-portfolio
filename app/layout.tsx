@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { DesktopShell } from '@/components/desktop-shell';
+import { DesktopSettingsProvider } from '@/components/desktop-settings';
 
 import './tokens.css';
 import './globals.css';
@@ -48,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <DesktopShell>{children}</DesktopShell>
+        <DesktopSettingsProvider><DesktopShell>{children}</DesktopShell></DesktopSettingsProvider>
       </body>
     </html>
   );

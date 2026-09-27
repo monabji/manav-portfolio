@@ -37,6 +37,72 @@ function Notepad() {
   </div>;
 }
 
+function Gallery() {
+  return <div className="gallery-app">
+    <div className="gallery-toolbar"><span>Pictures Library</span><span>0 items</span></div>
+    <div className="gallery-empty">
+      <img src="/crystal/gallery.png" alt="" />
+      <strong>This folder is empty</strong>
+      <span>Photos you add later will appear here.</span>
+    </div>
+    <div className="utility-status"><span>Gallery</span><span>0 pictures</span></div>
+  </div>;
+}
+
+const includedMusic = [
+  { title: 'Emotional piano.wav', artist: 'triangelx', src: '/music/calm-piano.wav', format: 'WAV' },
+  { title: 'Ambiant Wait.ogg', artist: 'Komiku', src: '/music/ambiant-wait.ogg', format: 'OGG' },
+] as const;
+
+function MusicPlayer() {
+  const [selectedSrc, setSelectedSrc] = useState<string>(includedMusic[0].src);
+  const [selectedTitle, setSelectedTitle] = useState<string>(includedMusic[0].title);
+  const [localTracks, setLocalTracks] = useState<Array<{ title: string; src: string }>>([]);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => () => localTracks.forEach((track) => URL.revokeObjectURL(track.src)), [localTracks]);
+
+  const selectTrack = (title: string, src: string) => {
+    setSelectedTitle(title);
+    setSelectedSrc(src);
+  };
+
+  const loadLocalMusic = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files ?? []).filter((file) => file.type.startsWith('audio/'));
+    if (!files.length) return;
+    const tracks = files.map((file) => ({ title: file.name, src: URL.createObjectURL(file) }));
+    setLocalTracks((current) => {
+      current.forEach((track) => URL.revokeObjectURL(track.src));
+      return tracks;
+    });
+    selectTrack(tracks[0].title, tracks[0].src);
+    event.target.value = '';
+  };
+
+  return <div className="music-app">
+    <div className="music-address"><img src="/crystal/sound.png" alt="" /><span>Manav OS</span><b>›</b><strong>Music</strong><b>›</b><span>Sample Music</span></div>
+    <div className="music-layout">
+      <section className="music-file-list" aria-label="Music files">
+        <div className="music-column-head"><span>Name</span><span>Type</span><span>Artist</span></div>
+        {includedMusic.map((track) => <button type="button" key={track.src} className={selectedSrc === track.src ? 'is-selected' : ''} onClick={() => selectTrack(track.title, track.src)}>
+          <img src="/crystal/sound.png" alt="" /><span>{track.title}</span><small>{track.format}</small><small>{track.artist}</small>
+        </button>)}
+        {localTracks.map((track) => <button type="button" key={track.src} className={selectedSrc === track.src ? 'is-selected' : ''} onClick={() => selectTrack(track.title, track.src)}>
+          <img src="/crystal/sound.png" alt="" /><span>{track.title}</span><small>Audio</small><small>On this device</small>
+        </button>)}
+        <label className="music-add-file">Add music from this device<input type="file" accept="audio/*" multiple onChange={loadLocalMusic} /></label>
+      </section>
+      <section className="music-now-playing" aria-label="Music player">
+        <div className="music-record"><img src="/crystal/sound.png" alt="" /></div>
+        <div><small>NOW SELECTED</small><strong>{selectedTitle}</strong></div>
+        <audio ref={audioRef} controls preload="metadata" src={selectedSrc} aria-label={`Play ${selectedTitle}`} />
+        <span>Included demo tracks are freely licensed. Load your own Windows sample files to play those here.</span>
+      </section>
+    </div>
+    <div className="utility-status"><span>Sample Music</span><span>{includedMusic.length + localTracks.length} audio files</span></div>
+  </div>;
+}
+
 export function DesktopUtilityWindow({ id, title, icon, state, onClose, onMinimize, onMaximize, onFocus }: {
   id: DesktopUtilityId;
   title: string;
@@ -78,6 +144,6 @@ export function DesktopUtilityWindow({ id, title, icon, state, onClose, onMinimi
         <button type="button" className="window-close" onClick={onClose} aria-label={`Close ${title}`} title="Close">×</button>
       </div>
     </header>
-    {id === 'notepad' ? <Notepad /> : <SnakeGame active={!state.minimized} />}
+    {id === 'notepad' ? <Notepad /> : id === 'snake' ? <SnakeGame active={!state.minimized} /> : id === 'gallery' ? <Gallery /> : <MusicPlayer />}
   </section>;
 }

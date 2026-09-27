@@ -10,8 +10,13 @@ Crystal Project icons by Everaldo Coelho, used under GNU LGPL 2.1 or later.
 Source and icon gallery: https://commons.wikimedia.org/wiki/Category:Crystal_Project_App_Icons
 Blender icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_Blender.png
 Notepad (KEdit) icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_kedit.png
-Snake (joystick) icon: https://commons.wikimedia.org/wiki/File:Joystick.png
+Snake (KSnake) icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_Ksnake.png
+Gallery (KView) icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_Kview.png
 License: https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+Included sample music (CC0 1.0)
+"Emotional piano" by triangelx: https://commons.wikimedia.org/wiki/File:Emotional_piano.wav
+"Ambiant Wait" by Komiku: https://commons.wikimedia.org/wiki/File:Komiku_-_16_-_Ambiant_Wait.ogg
 
 Desktop social shortcuts
 GitHub mark from Simple Icons (CC0): https://github.com/simple-icons/simple-icons/blob/develop/icons/github.svg

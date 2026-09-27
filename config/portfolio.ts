@@ -7,6 +7,11 @@ export const crystalIcons = {
   blender: '/crystal/blender.png',
   notepad: '/crystal/notepad.png',
   gamepad: '/crystal/gamepad.png',
+  snake: '/crystal/ksnake.png',
+  gallery: '/crystal/gallery.png',
+  email: '/aero/email.png',
+  music: '/crystal/sound.png',
+  dashboard: '/crystal/graphics.png',
   sound: '/crystal/sound.png',
 } as const;
 
@@ -29,17 +34,26 @@ export const desktopApps = [
     icon: crystalIcons.projects,
     description: 'Code, games and 3D work',
   },
+  {
+    href: '/dashboard',
+    label: 'My dashboard',
+    icon: crystalIcons.dashboard,
+    description: 'Personal desktop settings',
+  },
 ] as const;
 
 export const desktopUtilities = [
   { id: 'notepad', label: 'Notepad', icon: crystalIcons.notepad, description: 'Write and save notes' },
-  { id: 'snake', label: 'Snake', icon: crystalIcons.gamepad, description: 'Play a quick game' },
+  { id: 'snake', label: 'Snake', icon: crystalIcons.snake, description: 'Play a quick game' },
+  { id: 'gallery', label: 'Gallery', icon: crystalIcons.gallery, description: 'Open the picture library' },
+  { id: 'music', label: 'Music', icon: crystalIcons.music, description: 'Browse and play music' },
 ] as const;
 export type DesktopUtilityId = (typeof desktopUtilities)[number]['id'];
 
 export const desktopLinks = [
   { id: 'github', label: 'GitHub', href: 'https://github.com/monabji', description: 'See my code' },
   { id: 'linkedin', label: 'LinkedIn', href: 'https://in.linkedin.com/in/manav-soni-310784375', description: 'Connect with me' },
+  { id: 'email', label: 'Email', href: 'mailto:manav.bhavinsoni2025@vitstudent.ac.in', description: 'Write me an email' },
 ] as const;
 
 export const aboutTabs = ['Overview', 'Education', 'Skills', 'Experience', 'Connect'] as const;
