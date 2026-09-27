@@ -21,7 +21,7 @@ export function ProjectsWindow() {
   return (
     <AeroWindow title="Manav's Project Explorer" icon={crystalIcons.projects} className="content-window projects-window">
       <div className="window-toolbar">
-        <button type="button" onClick={() => history.back()} aria-label="Go back">‹</button><button type="button" onClick={() => history.forward()} aria-label="Go forward">›</button>
+        <a href="/about" className="toolbar-arrow" aria-label="Go to About" title="About">‹</a><a href="/" className="toolbar-arrow" aria-label="Go to Home" title="Home">›</a>
         <div className="address-bar"><img src={crystalIcons.home} alt="" /><span>Manav OS</span><b>›</b><strong>Projects</strong><b>›</b><span>{tab === 'software' ? 'Things I built' : '3D showcase'}</span></div>
         <a className="showcase-link" aria-label="Open full 3D showcase" href="https://special-goat-5c6.notion.site/My-Portfolio-Manav-Bhavin-Soni-2e2e42723d8f802da4fdee6434d0d53c" target="_blank" rel="noreferrer">Full showcase ↗</a>
       </div>

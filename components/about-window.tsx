@@ -13,8 +13,8 @@ export function AboutWindow() {
   return (
     <AeroWindow title="About Manav" icon={crystalIcons.profile} className="content-window">
       <div className="window-toolbar">
-        <button type="button" onClick={() => history.back()} aria-label="Go back">‹</button>
-        <button type="button" onClick={() => history.forward()} aria-label="Go forward">›</button>
+        <a href="/" className="toolbar-arrow" aria-label="Go to Home" title="Home">‹</a>
+        <a href="/projects" className="toolbar-arrow" aria-label="Go to Projects" title="Projects">›</a>
         <div className="address-bar"><img src={crystalIcons.profile} alt="" /><span>Manav OS</span><b>›</b><strong>About me</strong></div>
       </div>
       <div className="aero-tabs" role="tablist" aria-label="About sections">
@@ -22,7 +22,7 @@ export function AboutWindow() {
       </div>
       <div className="about-app-body">
         <aside className="about-profile-card">
-          <div className="profile-orb"><img src={crystalIcons.profile} alt="A glossy Crystal Project browser icon" /></div>
+          <div className="profile-orb"><img src={crystalIcons.profile} alt="People profile icon" /></div>
           <h1>Hi! I&apos;m Manav!</h1>
           <p>A student at VIT Vellore and I just love messing around in tech.</p>
           <div className="interest-pills"><span>GameDev</span><span>3D Design</span><span>AI/ML</span><span>Cybersecurity</span></div>

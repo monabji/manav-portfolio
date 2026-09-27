@@ -9,7 +9,13 @@ Interface icons
 Crystal Project icons by Everaldo Coelho, used under GNU LGPL 2.1 or later.
 Source and icon gallery: https://commons.wikimedia.org/wiki/Category:Crystal_Project_App_Icons
 Blender icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_Blender.png
+Notepad (KEdit) icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_kedit.png
+Snake (joystick) icon: https://commons.wikimedia.org/wiki/File:Joystick.png
 License: https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+Desktop social shortcuts
+GitHub mark from Simple Icons (CC0): https://github.com/simple-icons/simple-icons/blob/develop/icons/github.svg
+LinkedIn icon from Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Linkedin_icon.svg
 
 Hero people image
 Provided by Manav as a design reference and used directly in the landing-page 3D scene.

@@ -6,16 +6,16 @@ export default function Home() {
   return (
     <main className="route-stage home-stage" id="main-content">
       <AeroWindow title="Welcome to Manav OS" icon={crystalIcons.home} className="home-window">
-        <div className="window-menubar"><span>File</span><span>Explore</span><span>Help</span></div>
+        <nav className="window-menubar" aria-label="Portfolio sections"><a href="/">Home</a><a href="/about">About me</a><a href="/projects">Projects</a></nav>
         <div className="home-window-body">
           <div className="landing-copy">
             <h1 id="landing-title">Manav</h1>
             <p>a boy who loves tech.</p>
             <nav className="landing-actions" aria-label="Explore Manav's portfolio">
               <a href="/about" className="aero-button aero-button-primary"><img src={crystalIcons.profile} alt="" />know more about me</a>
-              <a href="/projects" className="aero-button aero-button-secondary"><img src={crystalIcons.blender} alt="" />my projects</a>
+              <a href="/projects" className="aero-button aero-button-secondary"><img src={crystalIcons.projects} alt="" />my projects</a>
             </nav>
-            <p className="desktop-hint">Double-click the desktop shortcuts or use the taskbar to explore.</p>
+            <p className="desktop-hint">Open a shortcut or choose an app from the taskbar.</p>
           </div>
           <PeopleHero3D />
         </div>

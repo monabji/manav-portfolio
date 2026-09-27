@@ -1,10 +1,12 @@
 export const crystalIcons = {
   home: '/crystal/network.png',
-  profile: '/crystal/browser.png',
-  projects: '/crystal/blender.png',
+  profile: '/crystal/people.png',
+  projects: '/crystal/projects.png',
   browser: '/crystal/browser.png',
   code: '/crystal/graphics.png',
   blender: '/crystal/blender.png',
+  notepad: '/crystal/notepad.png',
+  gamepad: '/crystal/gamepad.png',
   sound: '/crystal/sound.png',
 } as const;
 
@@ -27,6 +29,17 @@ export const desktopApps = [
     icon: crystalIcons.projects,
     description: 'Code, games and 3D work',
   },
+] as const;
+
+export const desktopUtilities = [
+  { id: 'notepad', label: 'Notepad', icon: crystalIcons.notepad, description: 'Write and save notes' },
+  { id: 'snake', label: 'Snake', icon: crystalIcons.gamepad, description: 'Play a quick game' },
+] as const;
+export type DesktopUtilityId = (typeof desktopUtilities)[number]['id'];
+
+export const desktopLinks = [
+  { id: 'github', label: 'GitHub', href: 'https://github.com/monabji', description: 'See my code' },
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://in.linkedin.com/in/manav-soni-310784375', description: 'Connect with me' },
 ] as const;
 
 export const aboutTabs = ['Overview', 'Education', 'Skills', 'Experience', 'Connect'] as const;
@@ -68,7 +81,7 @@ export type Project = {
 };
 
 export const softwareProjects: Project[] = [
-  { title: 'CarWars', status: 'Shipped', description: 'A PSX-style car game built from the ground up with Unity and original Blender assets, showcased at the Gravitas Expo.', tags: ['Unity', 'Blender', 'Game development'], icon: crystalIcons.blender, links: [{ label: 'Open source code', href: 'https://github.com/ACM-VIT/carwars' }] },
+  { title: 'CarWars', status: 'Shipped', description: 'A PSX-style car game built from the ground up with Unity and original Blender assets, showcased at the Gravitas Expo.', tags: ['Unity', 'Blender', 'Game development'], icon: crystalIcons.gamepad, links: [{ label: 'Open source code', href: 'https://github.com/ACM-VIT/carwars' }] },
   { title: 'AI Retinopathy Grading', status: 'In progress', description: 'An AI project in progress for detecting and grading diabetic retinopathy from retinal imagery using the IDRiD dataset.', tags: ['Python', 'AI / ML', 'Healthtech'], icon: crystalIcons.code, links: [{ label: 'Open source code', href: 'https://github.com/monabji/idrid-dr-grading' }] },
   { title: 'Hackathon Winners Library', status: 'Live website', description: 'A focused website for tracking hackathon winners and collecting standout builds in one browsable library.', tags: ['Web', 'Database', 'Hackathons'], icon: crystalIcons.browser, links: [{ label: 'Visit website', href: 'https://hackathon-winners-library.vercel.app/' }, { label: 'Open source code', href: 'https://github.com/monabji/hackathon-winners-library' }] },
   { title: 'UDID Saathi', status: 'Prototype', description: 'An accessible citizen-service redesign for India’s UDID journey: applications, corrections, appointments, renewals, and progress tracking for the Build For India hackathon.', tags: ['React', 'TypeScript', 'Accessibility'], icon: crystalIcons.browser, links: [{ label: 'Visit website', href: 'https://build-for-india-main.vercel.app/' }, { label: 'Open source code', href: 'https://github.com/monabji/build-for-india' }] },

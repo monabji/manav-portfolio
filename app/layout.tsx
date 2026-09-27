@@ -4,6 +4,7 @@ import { DesktopShell } from '@/components/desktop-shell';
 
 import './tokens.css';
 import './globals.css';
+import './windows7.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://manav-bhavin-soni-portfolio.monabji.chatgpt.site'),
