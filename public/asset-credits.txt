@@ -34,6 +34,13 @@ Original raster resources: https://github.com/Visnalize/resources/tree/main/icon
 Additional Favorites/Desktop resources: https://github.com/bartekl1/WindowsResources
 Windows frame/control/scrollbar CSS: 7.css by Khang Nguyen Duy (MIT).
 https://github.com/khang-nd/7.css
+
+Windows 7 Start orb and sound tray artwork
+Copyright Microsoft Corporation. Archived by Visnalize / Win7 Simu.
+https://win7simu.visnalize.com/img/start-button.b35eae12.webp
+https://win7simu.visnalize.com/img/volume-100.fb90d926.webp
+https://win7simu.visnalize.com/img/volume-muted.e186b3c5.webp
+These original shell images are not covered by the Crystal or 7.css licenses.
 https://frutigeraeroarchive.org/
 https://frutiger-aero.neocities.org/
 https://www.craftedbyarjun.com/

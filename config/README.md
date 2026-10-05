@@ -16,7 +16,9 @@ The Personal Dashboard can change the wallpaper and shortcut icons, and add webs
 
 Page components render these arrays. `app/globals.css` owns the original layout and `app/windows7.css` layers the Windows 7 / Vista desktop styling on top.
 
-The desktop/taskbar/Start menu come from `components/desktop-shell.tsx`.
+The desktop/taskbar/Start menu come from `components/desktop-shell.tsx`. Start search filters the same app/shortcut registries; the right-hand shortcuts open the existing pages and utilities. Show desktop toggles between minimized windows and their saved state.
+
+`app/desktop-theme.css` is the final personalization layer for the whole desktop: taskbar, two-column Start menu, shortcut grid, fonts, landing controls and app content. Change shared desktop design tokens there instead of adding per-page styles. Original Start orb and volume artwork lives in `public/win7/shell`, with credits in `public/asset-credits.txt`.
 
 All pages, floating apps, and project dialogs use `WindowTitlebar` and `ExplorerChrome` from `components/window-chrome.tsx`. This is the single place to change window controls, breadcrumbs, search, menus, and command bars. `ExplorerSidebar` provides the shared navigation tree. `AeroWindow` manages route-window minimize/restore/maximize and takes `breadcrumbs` and `hasSidebar` props. Floating utility windows use the same chrome with their own draggable window state.
 

@@ -54,7 +54,7 @@ export function AboutWindow() {
             <section className="app-section connect-app">
               <div className="app-section-title"><img src={crystalIcons.browser} alt="" /><div><span>CONTACTS</span><h2>Find me online</h2></div></div>
               <div className="contact-tiles">
-                {socialLinks.map((link) => <a key={link.href} href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>{'icon' in link ? <img src={link.icon} alt="" /> : <span className="contact-glyph">{link.glyph}</span>}<div><strong>{link.label}</strong><small>{link.detail}</small></div><b>↗</b></a>)}
+                {socialLinks.map((link) => <a key={link.href} href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}><img src={link.icon} alt="" /><div><strong>{link.label}</strong><small>{link.detail}</small></div><b>↗</b></a>)}
               </div>
             </section>
           )}

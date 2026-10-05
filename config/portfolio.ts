@@ -77,9 +77,9 @@ export const experience = [
 ] as const;
 
 export const socialLinks = [
-  { label: 'GitHub', detail: '@monabji', href: 'https://github.com/monabji', glyph: 'GH' },
-  { label: 'LinkedIn', detail: 'Manav Soni', href: 'https://in.linkedin.com/in/manav-soni-310784375', glyph: 'in' },
-  { label: 'Email', detail: 'manav.bhavinsoni2025@vitstudent.ac.in', href: 'mailto:manav.bhavinsoni2025@vitstudent.ac.in', icon: crystalIcons.browser },
+  { label: 'GitHub', detail: '@monabji', href: 'https://github.com/monabji', icon: '/brands/github.svg' },
+  { label: 'LinkedIn', detail: 'Manav Soni', href: 'https://in.linkedin.com/in/manav-soni-310784375', icon: '/brands/linkedin.svg' },
+  { label: 'Email', detail: 'manav.bhavinsoni2025@vitstudent.ac.in', href: 'mailto:manav.bhavinsoni2025@vitstudent.ac.in', icon: crystalIcons.email },
 ] as const;
 
 export type Project = {

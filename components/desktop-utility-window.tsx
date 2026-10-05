@@ -60,12 +60,33 @@ function MusicPlayer() {
   const [selectedTitle, setSelectedTitle] = useState<string>(includedMusic[0].title);
   const [localTracks, setLocalTracks] = useState<Array<{ title: string; src: string }>>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(100);
+  const [audioError, setAudioError] = useState('');
+  const formatTime = (seconds: number) => `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60).toString().padStart(2, '0')}`;
 
   useEffect(() => () => localTracks.forEach((track) => URL.revokeObjectURL(track.src)), [localTracks]);
 
   const selectTrack = (title: string, src: string) => {
+    if (src === selectedSrc) return;
+    setPlaying(false);
+    setElapsed(0);
+    setDuration(0);
+    setAudioError('');
     setSelectedTitle(title);
     setSelectedSrc(src);
+  };
+
+  const togglePlayback = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (!audio.paused) audio.pause();
+    else {
+      try { await audio.play(); setAudioError(''); }
+      catch { setAudioError('This audio file could not be played. Try another track.'); }
+    }
   };
 
   const loadLocalMusic = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,7 +117,16 @@ function MusicPlayer() {
       <section className="music-now-playing" aria-label="Music player">
         <div className="music-record"><img src="/crystal/sound.png" alt="" /></div>
         <div><small>NOW SELECTED</small><strong>{selectedTitle}</strong></div>
-        <audio ref={audioRef} controls preload="metadata" src={selectedSrc} aria-label={`Play ${selectedTitle}`} />
+        <audio ref={audioRef} preload="metadata" src={selectedSrc} onLoadedMetadata={event => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)} onTimeUpdate={event => setElapsed(event.currentTarget.currentTime)} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} onError={() => setAudioError('This audio file could not be loaded. Try another track.')} />
+        <div className="media-player-controls">
+          <div className="media-seek"><time>{formatTime(elapsed)}</time><input type="range" aria-label="Playback position" min="0" max={duration || 1} step="0.1" value={elapsed} disabled={!duration} onChange={event => { const next = Number(event.target.value); if (audioRef.current) audioRef.current.currentTime = next; setElapsed(next); }} /><time>{formatTime(duration)}</time></div>
+          <div className="media-transport">
+            <button className="media-play" type="button" aria-label={playing ? 'Pause music' : 'Play music'} onClick={() => void togglePlayback()}>{playing ? 'Ⅱ' : '▶'}</button>
+            <button className="media-stop" type="button" aria-label="Stop music" onClick={() => { if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; } setElapsed(0); }}>■</button>
+            <label className="media-volume"><img src={volume ? '/win7/shell/volume.webp' : '/win7/shell/volume-muted.webp'} alt="" /><input type="range" aria-label="Music volume" min="0" max="100" value={volume} onChange={event => { const next = Number(event.target.value); setVolume(next); if (audioRef.current) audioRef.current.volume = next / 100; }} /></label>
+          </div>
+        </div>
+        {audioError && <p className="media-error" role="status">{audioError}</p>}
         <span>Included demo tracks are freely licensed. Load your own Windows sample files to play those here.</span>
       </section>
     </div>

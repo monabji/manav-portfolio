@@ -54,23 +54,37 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [clock, setClock] = useState('');
+  const [date, setDate] = useState('');
+  const [startQuery, setStartQuery] = useState('');
   const [utilities, setUtilities] = useState<UtilityStates>(initialUtilities);
   const zCounter = useRef(90);
   const menuRef = useRef<HTMLDivElement>(null);
+  const desktopSnapshot = useRef<UtilityStates | null>(null);
+  const matchesSearch = (label: string, description = '') => `${label} ${description}`.toLowerCase().includes(startQuery.trim().toLowerCase());
+  const matchingApps = desktopApps.filter(app => matchesSearch(app.label, app.description));
+  const matchingUtilities = desktopUtilities.filter(app => matchesSearch(app.label, app.description));
+  const matchingLinks = desktopLinks.filter(link => matchesSearch(link.label, link.description));
+  const matchingShortcuts = settings.shortcuts.filter(link => matchesSearch(link.label, link.href));
 
   useEffect(() => {
     setSoundOn(localStorage.getItem('manav-sound') === 'on');
-    const updateClock = () => setClock(new Intl.DateTimeFormat('en-IN', { hour: '2-digit', minute: '2-digit' }).format(new Date()));
+    const updateClock = () => {
+      const now = new Date();
+      setClock(new Intl.DateTimeFormat('en-IN', { hour: '2-digit', minute: '2-digit' }).format(now));
+      setDate(new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(now));
+    };
     updateClock();
     const timer = window.setInterval(updateClock, 30_000);
     return () => window.clearInterval(timer);
   }, []);
 
-  useEffect(() => setMenuOpen(false), [pathname]);
+  useEffect(() => { setMenuOpen(false); desktopSnapshot.current = null; }, [pathname]);
+  useEffect(() => { if (!menuOpen) setStartQuery(''); }, [menuOpen]);
   useEffect(() => {
     const open = (event: Event) => {
       const id = (event as CustomEvent).detail as DesktopUtilityId;
       if (!desktopUtilities.some(app => app.id === id)) return;
+      desktopSnapshot.current = null;
       zCounter.current += 1;
       setUtilities(current => ({ ...current, [id]: { ...current[id], open: true, minimized: false, zIndex: zCounter.current } }));
       setMenuOpen(false);
@@ -93,6 +107,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
     setUtilities((current) => ({ ...current, [id]: { ...current[id], ...patch } }));
   };
   const openUtility = (id: DesktopUtilityId) => {
+    desktopSnapshot.current = null;
     zCounter.current += 1;
     changeUtility(id, { open: true, minimized: false, zIndex: zCounter.current });
     setMenuOpen(false);
@@ -114,11 +129,19 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
   };
   const showDesktop = () => {
     setMenuOpen(false);
-    setUtilities((current) => Object.fromEntries(Object.entries(current).map(([id, state]) => [id, { ...state, minimized: true }])) as UtilityStates);
-    window.dispatchEvent(new Event('manav:minimize-route'));
+    if (desktopSnapshot.current) {
+      setUtilities(desktopSnapshot.current);
+      desktopSnapshot.current = null;
+      window.dispatchEvent(new Event('manav:restore-route'));
+    } else {
+      desktopSnapshot.current = utilities;
+      setUtilities((current) => Object.fromEntries(Object.entries(current).map(([id, state]) => [id, { ...state, minimized: true }])) as UtilityStates);
+      window.dispatchEvent(new Event('manav:minimize-route'));
+    }
     if (soundOn) playTone('select');
   };
   const onRouteClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    desktopSnapshot.current = null;
     if (pathname === href) {
       event.preventDefault();
       window.dispatchEvent(new Event('manav:restore-route'));
@@ -147,24 +170,37 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
     />)}
 
     <div className={`start-menu ${menuOpen ? 'is-open' : ''}`} ref={menuRef} aria-hidden={!menuOpen}>
-      <div className="start-user"><img src={crystalIcons.profile} alt="" /><div><strong>Manav</strong><span>VIT Vellore</span></div></div>
-      <nav aria-label="Start menu">
-        {desktopApps.map((app) => <a href={app.href} key={app.href} tabIndex={menuOpen ? 0 : -1} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span><strong>{app.label}</strong><small>{app.description}</small></span></a>)}
-        {desktopUtilities.map((app) => <button key={app.id} type="button" tabIndex={menuOpen ? 0 : -1} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span><strong>{app.label}</strong><small>{app.description}</small></span></button>)}
-        {desktopLinks.map((link) => <a href={link.href} key={link.id} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined} tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}><BrandIcon brand={link.id} icon={settings.iconOverrides[`link:${link.id}`]} /><span><strong>{link.label}</strong><small>{link.description}</small></span></a>)}
-        {settings.shortcuts.map((link) => <a href={link.href} key={link.id} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined} tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}><img src={link.icon} alt="" /><span><strong>{link.label}</strong><small>{link.href}</small></span></a>)}
+      <div className="start-programs">
+      <nav className="has-scrollbar" aria-label="Start menu">
+        {matchingApps.map((app) => <a href={app.href} key={app.href} tabIndex={menuOpen ? 0 : -1} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span><strong>{app.label}</strong><small>{app.description}</small></span></a>)}
+        {matchingUtilities.map((app) => <button key={app.id} type="button" tabIndex={menuOpen ? 0 : -1} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span><strong>{app.label}</strong><small>{app.description}</small></span></button>)}
+        {matchingLinks.map((link) => <a href={link.href} key={link.id} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined} tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}><BrandIcon brand={link.id} icon={settings.iconOverrides[`link:${link.id}`]} /><span><strong>{link.label}</strong><small>{link.description}</small></span></a>)}
+        {matchingShortcuts.map((link) => <a href={link.href} key={link.id} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined} tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}><img src={link.icon} alt="" /><span><strong>{link.label}</strong><small>{link.href}</small></span></a>)}
+        {!matchingApps.length && !matchingUtilities.length && !matchingLinks.length && !matchingShortcuts.length && <p className="start-empty">No programs found.</p>}
       </nav>
-      <div className="start-foot"><span>Manav OS</span><a href="/asset-credits.txt" target="_blank" rel="noreferrer">Asset credits</a></div>
+      <label className="start-search"><input aria-label="Search programs" placeholder="Search programs" value={startQuery} onChange={event => setStartQuery(event.target.value)} tabIndex={menuOpen ? 0 : -1} /><span className="search-symbol" aria-hidden="true" /></label>
+      </div>
+      <div className="start-places">
+        <div className="start-user"><img src={crystalIcons.profile} alt="" /><div><strong>Manav</strong><span>VIT Vellore</span></div></div>
+        <a href="/about" tabIndex={menuOpen ? 0 : -1} onClick={event => onRouteClick(event, '/about')}>About Manav</a>
+        <a href="/projects" tabIndex={menuOpen ? 0 : -1} onClick={event => onRouteClick(event, '/projects')}>Projects</a>
+        <button type="button" tabIndex={menuOpen ? 0 : -1} onClick={() => openUtility('gallery')}>Pictures</button>
+        <button type="button" tabIndex={menuOpen ? 0 : -1} onClick={() => openUtility('music')}>Music</button>
+        <div className="start-separator" />
+        <a href="/dashboard" tabIndex={menuOpen ? 0 : -1} onClick={event => onRouteClick(event, '/dashboard')}>Control Panel</a>
+        <a href="/asset-credits.txt" target="_blank" rel="noreferrer" tabIndex={menuOpen ? 0 : -1}>Asset credits</a>
+        <button className="start-desktop" type="button" tabIndex={menuOpen ? 0 : -1} onClick={showDesktop}>Show desktop</button>
+      </div>
     </div>
 
     <footer className="taskbar">
-      <button className={`start-button ${menuOpen ? 'is-active' : ''}`} type="button" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close start menu' : 'Open start menu'} onClick={() => { setMenuOpen((open) => !open); if (soundOn) playTone('select'); }}><span className="start-orb" aria-hidden="true"><span /><span /><span /><span /></span></button>
+      <button className={`start-button ${menuOpen ? 'is-active' : ''}`} type="button" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close start menu' : 'Open start menu'} onClick={() => { setMenuOpen((open) => !open); if (soundOn) playTone('select'); }}><span className="start-orb native-start-orb" aria-hidden="true" /></button>
       <nav className="taskbar-apps" aria-label="Portfolio and apps">
         {desktopApps.map((app) => <a href={app.href} key={app.href} title={app.label} aria-label={app.label} className={pathname === app.href ? 'is-active' : ''} aria-current={pathname === app.href ? 'page' : undefined} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span>{app.label}</span></a>)}
-        {desktopUtilities.map((app) => <button key={app.id} type="button" title={app.label} aria-label={`Open ${app.label}`} className={utilities[app.id].open && !utilities[app.id].minimized ? 'is-active' : ''} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span>{app.label}</span></button>)}
+        {desktopUtilities.map((app) => <button key={app.id} type="button" title={app.label} aria-label={`Open ${app.label}`} className={`${utilities[app.id].open ? 'is-running' : ''} ${utilities[app.id].open && !utilities[app.id].minimized ? 'is-active' : ''}`} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span>{app.label}</span></button>)}
       </nav>
-      <div className="tray"><button type="button" onClick={toggleSound} aria-pressed={soundOn} title={soundOn ? 'Mute UI sounds' : 'Enable UI sounds'}><img src={crystalIcons.sound} alt="" /><span>{soundOn ? 'Sound on' : 'Sound off'}</span></button><time>{clock}</time></div>
-      <button type="button" className="show-desktop" onClick={showDesktop} title="Show desktop" aria-label="Show desktop" />
+      <div className="tray"><button type="button" onClick={toggleSound} aria-pressed={soundOn} aria-label={soundOn ? 'Mute UI sounds' : 'Enable UI sounds'} title={soundOn ? 'Mute UI sounds' : 'Enable UI sounds'}><img src={soundOn ? '/win7/shell/volume.webp' : '/win7/shell/volume-muted.webp'} alt="" /><span>{soundOn ? 'Sound on' : 'Sound off'}</span></button><time><span>{clock}</span><span>{date}</span></time></div>
+      <button type="button" className="show-desktop" onClick={showDesktop} title="Show or restore desktop" aria-label="Show or restore desktop" />
     </footer>
   </div>;
 }
