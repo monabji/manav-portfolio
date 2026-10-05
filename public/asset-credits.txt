@@ -29,6 +29,11 @@ UI sounds
 Original tones synthesized in the browser with the Web Audio API. No audio files are copied or autoplayed.
 
 Design references
+Windows 7 navigation icons copyright Microsoft Corporation.
+Original raster resources: https://github.com/Visnalize/resources/tree/main/icons/win7
+Additional Favorites/Desktop resources: https://github.com/bartekl1/WindowsResources
+Windows frame/control/scrollbar CSS: 7.css by Khang Nguyen Duy (MIT).
+https://github.com/khang-nd/7.css
 https://frutigeraeroarchive.org/
 https://frutiger-aero.neocities.org/
 https://www.craftedbyarjun.com/

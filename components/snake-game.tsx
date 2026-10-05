@@ -71,7 +71,7 @@ export function SnakeGame({ active }: { active: boolean }) {
   }, [active]);
 
   const snakeCells = new Set(game.snake.map((part) => `${part.x},${part.y}`));
-  return <div className="snake-app">
+  return <div className="snake-app has-scrollbar">
     <div className="snake-toolbar"><strong>Snake</strong><span>Score: {game.score}</span><button type="button" onClick={game.phase === 'ready' || game.phase === 'over' ? restart : () => setGame((current) => ({ ...current, phase: current.phase === 'playing' ? 'paused' : 'playing' }))}>{game.phase === 'ready' ? 'Start game' : game.phase === 'over' ? 'Play again' : game.phase === 'playing' ? 'Pause' : 'Resume'}</button></div>
     <div className="snake-board" role="img" aria-label={`Snake game board. Score ${game.score}. ${game.phase}.`}>
       {Array.from({ length: SIZE * SIZE }, (_, index) => {

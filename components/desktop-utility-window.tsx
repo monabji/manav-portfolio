@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { type DesktopUtilityId } from '@/config/portfolio';
 import { SnakeGame } from './snake-game';
+import { ExplorerChrome, ExplorerSidebar, WindowTitlebar } from './window-chrome';
 
 type UtilityState = { open: boolean; minimized: boolean; maximized: boolean; zIndex: number };
 
@@ -32,13 +33,13 @@ function Notepad() {
       <button type="button" onClick={download}>Save as .txt</button>
       <button type="button" onClick={() => textRef.current?.select()}>Select all</button>
     </div>
-    <textarea ref={textRef} aria-label="Notepad text" value={note} onChange={(event) => setNote(event.target.value)} onKeyDown={(event) => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') { event.preventDefault(); download(); } }} spellCheck={false} placeholder="Type anything here. Your note saves in this browser." />
+    <textarea className="has-scrollbar" ref={textRef} aria-label="Notepad text" value={note} onChange={(event) => setNote(event.target.value)} onKeyDown={(event) => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') { event.preventDefault(); download(); } }} spellCheck={false} placeholder="Type anything here. Your note saves in this browser." />
     <div className="utility-status"><span>Saved on this device</span><span>{note.length} characters</span></div>
   </div>;
 }
 
 function Gallery() {
-  return <div className="gallery-app">
+  return <div className="gallery-app has-scrollbar">
     <div className="gallery-toolbar"><span>Pictures Library</span><span>0 items</span></div>
     <div className="gallery-empty">
       <img src="/crystal/gallery.png" alt="" />
@@ -79,10 +80,10 @@ function MusicPlayer() {
     event.target.value = '';
   };
 
-  return <div className="music-app">
+  return <div className="music-app has-scrollbar">
     <div className="music-address"><img src="/crystal/sound.png" alt="" /><span>Manav OS</span><b>›</b><strong>Music</strong><b>›</b><span>Sample Music</span></div>
     <div className="music-layout">
-      <section className="music-file-list" aria-label="Music files">
+      <section className="music-file-list has-scrollbar" aria-label="Music files">
         <div className="music-column-head"><span>Name</span><span>Type</span><span>Artist</span></div>
         {includedMusic.map((track) => <button type="button" key={track.src} className={selectedSrc === track.src ? 'is-selected' : ''} onClick={() => selectTrack(track.title, track.src)}>
           <img src="/crystal/sound.png" alt="" /><span>{track.title}</span><small>{track.format}</small><small>{track.artist}</small>
@@ -114,6 +115,7 @@ export function DesktopUtilityWindow({ id, title, icon, state, onClose, onMinimi
   onFocus: () => void;
 }) {
   const [offset, setOffset] = useState(() => id === 'notepad' ? { x: -85, y: -22 } : { x: 105, y: 18 });
+  const [sidebarHidden, setSidebarHidden] = useState(false);
   const drag = useRef<{ x: number; y: number; startX: number; startY: number } | null>(null);
   if (!state.open) return null;
 
@@ -129,21 +131,17 @@ export function DesktopUtilityWindow({ id, title, icon, state, onClose, onMinimi
   };
 
   return <section
-    className={`aero-window utility-window utility-${id} ${state.maximized ? 'is-maximized' : ''}`}
+    className={`window glass active is-bright aero-window utility-window utility-${id} ${state.maximized ? 'is-maximized' : ''} ${sidebarHidden ? 'navigation-hidden' : ''}`}
     style={{ zIndex: state.zIndex, '--window-x': `${offset.x}px`, '--window-y': `${offset.y}px` } as React.CSSProperties}
     hidden={state.minimized}
     role="dialog"
     aria-label={`${title} window`}
     onPointerDown={onFocus}
   >
-    <header className="window-titlebar utility-titlebar" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={() => { drag.current = null; }} onDoubleClick={onMaximize}>
-      <div className="window-title"><img src={icon} alt="" /><span>{title}</span></div>
-      <div className="window-controls" aria-label={`${title} controls`}>
-        <button type="button" onClick={onMinimize} aria-label={`Minimize ${title}`} title="Minimize">_</button>
-        <button type="button" onClick={onMaximize} aria-label={state.maximized ? `Restore ${title}` : `Maximize ${title}`} title={state.maximized ? 'Restore' : 'Maximize'}>{state.maximized ? '❐' : '□'}</button>
-        <button type="button" className="window-close" onClick={onClose} aria-label={`Close ${title}`} title="Close">×</button>
-      </div>
-    </header>
-    {id === 'notepad' ? <Notepad /> : id === 'snake' ? <SnakeGame active={!state.minimized} /> : id === 'gallery' ? <Gallery /> : <MusicPlayer />}
+    <WindowTitlebar title={title} icon={icon} maximized={state.maximized} onClose={onClose} onMinimize={onMinimize} onMaximize={onMaximize} className="utility-titlebar" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={onMaximize} />
+    <div className="window-interior">
+    <ExplorerChrome title={title} icon={icon} breadcrumbs={[{ label: 'Applications' }, { label: title }]} onToggleSidebar={id === 'gallery' || id === 'music' ? () => setSidebarHidden(value => !value) : undefined} />
+    {id === 'notepad' ? <Notepad /> : id === 'snake' ? <SnakeGame active={!state.minimized} /> : <div className="utility-library-body"><ExplorerSidebar />{id === 'gallery' ? <Gallery /> : <MusicPlayer />}</div>}
+    </div>
   </section>;
 }

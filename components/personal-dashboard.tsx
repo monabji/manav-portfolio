@@ -3,12 +3,14 @@
 import { useMemo, useRef, useState } from 'react';
 import { crystalIcons, desktopApps, desktopLinks, desktopUtilities } from '@/config/portfolio';
 import { useDesktopSettings, type DesktopSettings, type PersonalShortcut } from './desktop-settings';
+import { AeroWindow } from './aero-window';
 
 const iconChoices = [
   ['Home', crystalIcons.home], ['About', crystalIcons.profile], ['Projects', crystalIcons.projects],
   ['Code', crystalIcons.code], ['Browser', crystalIcons.browser], ['Notepad', crystalIcons.notepad],
   ['Snake', crystalIcons.snake], ['Gallery', crystalIcons.gallery], ['Email', crystalIcons.email],
   ['Music', crystalIcons.music], ['Blender', crystalIcons.blender], ['Graphics', crystalIcons.dashboard],
+  ['GitHub', '/brands/github.svg'], ['LinkedIn', '/brands/linkedin.svg'],
 ] as const;
 
 function isSafeWallpaper(value: string) {
@@ -123,10 +125,8 @@ export function PersonalDashboard() {
   };
 
   return <main className="route-stage dashboard-stage" id="main-content">
-    <section className="aero-window content-window dashboard-window" aria-labelledby="dashboard-title">
-      <header className="window-titlebar"><div className="window-title"><img src={crystalIcons.dashboard} alt="" /><span>Personal Desktop Settings</span></div><div className="window-controls" aria-label="Dashboard window controls"><a href="/" aria-label="Close dashboard" title="Close">×</a></div></header>
-      <nav className="window-menubar" aria-label="Dashboard navigation"><a href="/">Desktop</a><a href="/about">About</a><a href="/projects">Projects</a></nav>
-      <div className="dashboard-body">
+    <AeroWindow title="Personal Desktop Settings" icon={crystalIcons.dashboard} className="content-window dashboard-window" breadcrumbs={[{ label: 'Computer' }, { label: 'Personal settings' }]}>
+      <div className="dashboard-body has-scrollbar">
         <header className="dashboard-heading"><div><span className="dashboard-kicker">MANAV OS · PERSONAL</span><h1 id="dashboard-title">Desktop settings</h1><p>Change the wallpaper, shortcut icons, and links on your desktop.</p></div><span className="dashboard-badge">{ready ? 'Ready' : 'Loading'}</span></header>
         <section className="dashboard-section" aria-labelledby="wallpaper-heading">
           <div className="dashboard-section-heading"><img src={crystalIcons.gallery} alt="" /><div><h2 id="wallpaper-heading">Wallpaper</h2><p>Choose a web image or upload one for this browser.</p></div></div>
@@ -135,11 +135,11 @@ export function PersonalDashboard() {
         </section>
         <section className="dashboard-section" aria-labelledby="icons-heading">
           <div className="dashboard-section-heading"><img src={crystalIcons.projects} alt="" /><div><h2 id="icons-heading">Shortcut icons</h2><p>Choose an icon for each built-in desktop shortcut.</p></div></div>
-          <div className="dashboard-icon-list">{editableApps.map((app) => <div key={app.id}><span><img src={settings.iconOverrides[app.id] || app.icon} alt="" />{app.label}</span><select aria-label={`${app.label} icon`} value={settings.iconOverrides[app.id] || app.icon} onChange={(event) => saveIcon(app.id, event.target.value)}>{iconChoices.map(([label, icon]) => <option key={`${app.id}-${icon}`} value={icon}>{label}</option>)}</select><span className="dashboard-icon-custom"><input aria-label={`${app.label} custom icon URL`} type="url" placeholder="Custom HTTPS icon URL" value={iconUrlDrafts[app.id] || ''} onChange={(event) => setIconUrlDrafts((current) => ({ ...current, [app.id]: event.target.value }))} /><button type="button" onClick={() => saveIconUrl(app.id)}>Use</button></span></div>)}</div>
+          <div className="dashboard-icon-list">{editableApps.map((app) => <div key={app.id}><span><img src={settings.iconOverrides[app.id] || app.icon} alt="" />{app.label}</span><select aria-label={`${app.label} icon`} value={settings.iconOverrides[app.id] || app.icon} onChange={(event) => saveIcon(app.id, event.target.value)}>{iconChoices.map(([label, icon]) => <option key={`${app.id}-${label}`} value={icon}>{label}</option>)}</select><span className="dashboard-icon-custom"><input aria-label={`${app.label} custom icon URL`} type="url" placeholder="Custom HTTPS icon URL" value={iconUrlDrafts[app.id] || ''} onChange={(event) => setIconUrlDrafts((current) => ({ ...current, [app.id]: event.target.value }))} /><button type="button" onClick={() => saveIconUrl(app.id)}>Use</button></span></div>)}</div>
         </section>
         <section className="dashboard-section" aria-labelledby="shortcuts-heading">
           <div className="dashboard-section-heading"><img src={crystalIcons.browser} alt="" /><div><h2 id="shortcuts-heading">Your shortcuts</h2><p>Add links that appear on the desktop and in Start.</p></div></div>
-          <form className="dashboard-add-shortcut" onSubmit={addShortcut}><input aria-label="Shortcut name" placeholder="Shortcut name" value={shortcutName} onChange={(event) => setShortcutName(event.target.value)} /><input aria-label="Shortcut URL" placeholder="https:// or mailto:" value={shortcutHref} onChange={(event) => setShortcutHref(event.target.value)} /><select aria-label="Shortcut icon" value={shortcutIcon} onChange={(event) => setShortcutIcon(event.target.value)}>{iconChoices.map(([label, icon]) => <option key={icon} value={icon}>{label} icon</option>)}</select><button type="submit">Add shortcut</button></form>
+          <form className="dashboard-add-shortcut" onSubmit={addShortcut}><input aria-label="Shortcut name" placeholder="Shortcut name" value={shortcutName} onChange={(event) => setShortcutName(event.target.value)} /><input aria-label="Shortcut URL" placeholder="https:// or mailto:" value={shortcutHref} onChange={(event) => setShortcutHref(event.target.value)} /><select aria-label="Shortcut icon" value={shortcutIcon} onChange={(event) => setShortcutIcon(event.target.value)}>{iconChoices.map(([label, icon]) => <option key={label} value={icon}>{label} icon</option>)}</select><button type="submit">Add shortcut</button></form>
           {settings.shortcuts.length > 0 && <ul className="dashboard-shortcuts-list">{settings.shortcuts.map((shortcut) => <li key={shortcut.id}><span><img src={shortcut.icon} alt="" />{shortcut.label}<small>{shortcut.href}</small></span><button type="button" aria-label={`Remove ${shortcut.label}`} onClick={() => updateSettings({ ...settings, shortcuts: settings.shortcuts.filter((item) => item.id !== shortcut.id) })}>Remove</button></li>)}</ul>}
         </section>
         <section className="dashboard-section dashboard-transfer" aria-label="Settings backup">
@@ -150,6 +150,6 @@ export function PersonalDashboard() {
         <p className="dashboard-message" role="status" aria-live="polite">{message || 'Saved automatically on this device.'}</p>
       </div>
       <footer className="window-status"><span>Personal Desktop Settings</span><span>Settings saved on this device</span></footer>
-    </section>
+    </AeroWindow>
   </main>;
 }

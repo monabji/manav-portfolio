@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { AeroWindow } from './aero-window';
 import { useAeroSound } from './desktop-shell';
+import { ExplorerSidebar, explorerIcons } from './window-chrome';
 import { aboutTabs, crystalIcons, education, experience, skills, socialLinks, type AboutTab } from '@/config/portfolio';
 
 export function AboutWindow() {
@@ -11,24 +12,20 @@ export function AboutWindow() {
   const selectTab = (next: AboutTab) => { setTab(next); sound('select'); };
 
   return (
-    <AeroWindow title="About Manav" icon={crystalIcons.profile} className="content-window">
-      <div className="window-toolbar">
-        <a href="/" className="toolbar-arrow" aria-label="Go to Home" title="Home">‹</a>
-        <a href="/projects" className="toolbar-arrow" aria-label="Go to Projects" title="Projects">›</a>
-        <div className="address-bar"><img src={crystalIcons.profile} alt="" /><span>Manav OS</span><b>›</b><strong>About me</strong></div>
-      </div>
+    <AeroWindow title="About Manav" icon={crystalIcons.profile} className="content-window" hasSidebar breadcrumbs={[{ label: 'About me' }, { label: tab }]}>
       <div className="aero-tabs" role="tablist" aria-label="About sections">
-        {aboutTabs.map((item) => <button key={item} type="button" role="tab" aria-selected={tab === item} onClick={() => selectTab(item)}>{item}</button>)}
+        {aboutTabs.map((item, index) => <button key={item} id={`about-tab-${item}`} type="button" role="tab" aria-controls="about-panel" tabIndex={tab === item ? 0 : -1} aria-selected={tab === item} onClick={() => selectTab(item)} onKeyDown={event => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) { event.preventDefault(); const next = event.key === 'Home' ? 0 : event.key === 'End' ? aboutTabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + aboutTabs.length) % aboutTabs.length; selectTab(aboutTabs[next]); document.getElementById(`about-tab-${aboutTabs[next]}`)?.focus(); } }}>{item}</button>)}
       </div>
       <div className="about-app-body">
-        <aside className="about-profile-card">
+        <ExplorerSidebar><div className="sidebar-group"><strong><img src={explorerIcons.documents} alt="" />Profile</strong>{aboutTabs.map(item => <button key={item} type="button" className={tab === item ? 'is-active' : ''} onClick={() => selectTab(item)}><img src={explorerIcons.documents} alt="" />{item}</button>)}</div></ExplorerSidebar>
+        <div className="tab-canvas has-scrollbar" id="about-panel" role="tabpanel" aria-labelledby={`about-tab-${tab}`} tabIndex={0}>
+        <section className="about-profile-card">
           <div className="profile-orb"><img src={crystalIcons.profile} alt="People profile icon" /></div>
           <h1>Hi! I&apos;m Manav!</h1>
           <p>A student at VIT Vellore and I just love messing around in tech.</p>
           <div className="interest-pills"><span>GameDev</span><span>3D Design</span><span>AI/ML</span><span>Cybersecurity</span></div>
           <p>Feel free to reach out!</p>
-        </aside>
-        <div className="tab-canvas" role="tabpanel" aria-label={tab}>
+        </section>
           {(tab === 'Overview' || tab === 'Education') && (
             <section className="app-section education-app">
               <div className="app-section-title"><img src={crystalIcons.home} alt="" /><div><span>LEARNING JOURNEY</span><h2>Education</h2></div></div>

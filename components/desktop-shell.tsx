@@ -68,6 +68,18 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => setMenuOpen(false), [pathname]);
   useEffect(() => {
+    const open = (event: Event) => {
+      const id = (event as CustomEvent).detail as DesktopUtilityId;
+      if (!desktopUtilities.some(app => app.id === id)) return;
+      zCounter.current += 1;
+      setUtilities(current => ({ ...current, [id]: { ...current[id], open: true, minimized: false, zIndex: zCounter.current } }));
+      setMenuOpen(false);
+      if (soundOn) playTone('open');
+    };
+    window.addEventListener('manav:open-utility', open);
+    return () => window.removeEventListener('manav:open-utility', open);
+  }, [soundOn]);
+  useEffect(() => {
     const close = (event: PointerEvent) => {
       if (!menuRef.current?.contains(event.target as Node) && !(event.target as Element).closest('.start-button')) setMenuOpen(false);
     };

@@ -6,6 +6,9 @@ import { DesktopSettingsProvider } from '@/components/desktop-settings';
 import './tokens.css';
 import './globals.css';
 import './windows7.css';
+import '7.css/dist/gui/window.css';
+import '7.css/dist/gui/scrollbar.css';
+import './explorer.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://manav-bhavin-soni-portfolio.monabji.chatgpt.site'),

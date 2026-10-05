@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <main className="route-stage home-stage" id="main-content">
       <AeroWindow title="Welcome to Manav OS" icon={crystalIcons.home} className="home-window">
-        <nav className="window-menubar" aria-label="Portfolio sections"><a href="/">Home</a><a href="/about">About me</a><a href="/projects">Projects</a></nav>
         <div className="home-window-body">
           <div className="landing-copy">
             <h1 id="landing-title">Manav</h1>

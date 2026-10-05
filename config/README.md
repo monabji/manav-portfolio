@@ -16,4 +16,10 @@ The Personal Dashboard can change the wallpaper and shortcut icons, and add webs
 
 Page components render these arrays. `app/globals.css` owns the original layout and `app/windows7.css` layers the Windows 7 / Vista desktop styling on top.
 
-The desktop/taskbar/Start menu come from `components/desktop-shell.tsx`. Windows share the chrome in `components/aero-window.tsx` (pages) and `components/desktop-utility-window.tsx` (floating apps).
+The desktop/taskbar/Start menu come from `components/desktop-shell.tsx`.
+
+All pages, floating apps, and project dialogs use `WindowTitlebar` and `ExplorerChrome` from `components/window-chrome.tsx`. This is the single place to change window controls, breadcrumbs, search, menus, and command bars. `ExplorerSidebar` provides the shared navigation tree. `AeroWindow` manages route-window minimize/restore/maximize and takes `breadcrumbs` and `hasSidebar` props. Floating utility windows use the same chrome with their own draggable window state.
+
+`app/explorer.css` is the final Windows 7 styling layer, after the original CSS and the targeted 7.css frame/scrollbar modules. Add `has-scrollbar` to every new scrolling pane; keep chrome and status bars outside that pane. Authentic navigation icons are in `public/win7/selected`; application icons stay in Crystal. Credits are in `public/asset-credits.txt`.
+
+Search entries are generated from the page/app/project registries. Floating apps open through the `manav:open-utility` event, handled by DesktopShell. A new utility only needs its registry entry, app content, and an entry in the utility content switch. Project detail overlays are portaled to the document body so glass frames do not interfere with their positioning.

@@ -2,21 +2,27 @@
 
 import { useEffect, useState } from 'react';
 import { useAeroSound } from './desktop-shell';
+import { ExplorerChrome, WindowTitlebar, type Breadcrumb } from './window-chrome';
 
 export function AeroWindow({
   title,
   icon,
   children,
   className = '',
+  breadcrumbs,
+  hasSidebar = false,
 }: {
   title: string;
   icon: string;
   children: React.ReactNode;
   className?: string;
+  breadcrumbs?: Breadcrumb[];
+  hasSidebar?: boolean;
 }) {
   const [maximized, setMaximized] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [closed, setClosed] = useState(false);
+  const [sidebarHidden, setSidebarHidden] = useState(false);
   const sound = useAeroSound();
 
   useEffect(() => {
@@ -30,16 +36,12 @@ export function AeroWindow({
   if (minimized || closed) return null;
 
   return (
-    <section className={`aero-window ${maximized ? 'is-maximized' : ''} ${className}`} aria-label={`${title} window`}>
-      <header className="window-titlebar" onDoubleClick={() => { setMaximized((value) => !value); sound('select'); }}>
-        <div className="window-title"><img src={icon} alt="" /><span>{title}</span></div>
-        <div className="window-controls" aria-label="Window controls">
-          <button type="button" aria-label={`Minimize ${title}`} title="Minimize" onClick={() => { setMinimized(true); sound('close'); }}>_</button>
-          <button type="button" aria-label={maximized ? `Restore ${title}` : `Maximize ${title}`} title={maximized ? 'Restore' : 'Maximize'} onClick={() => { setMaximized((value) => !value); sound('select'); }}>{maximized ? '❐' : '□'}</button>
-          <button className="window-close" type="button" aria-label={`Close ${title}`} title="Close" onClick={() => { setClosed(true); sound('close'); }}>×</button>
-        </div>
-      </header>
+    <section className={`window glass active is-bright aero-window ${maximized ? 'is-maximized' : ''} ${sidebarHidden ? 'navigation-hidden' : ''} ${className}`} aria-label={`${title} window`}>
+      <WindowTitlebar title={title} icon={icon} maximized={maximized} onDoubleClick={() => { setMaximized(value => !value); sound('select'); }} onMinimize={() => { setMinimized(true); sound('close'); }} onMaximize={() => { setMaximized(value => !value); sound('select'); }} onClose={() => { setClosed(true); sound('close'); }} />
+      <div className="window-interior">
+      <ExplorerChrome title={title} icon={icon} breadcrumbs={breadcrumbs} onToggleSidebar={hasSidebar ? () => setSidebarHidden(value => !value) : undefined} />
       {children}
+      </div>
     </section>
   );
 }
