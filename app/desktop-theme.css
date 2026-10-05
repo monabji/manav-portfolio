@@ -110,9 +110,9 @@ body, button, input, select { font-family: 'Segoe UI', Tahoma, sans-serif; }
 .online-game-toolbar>span { flex:1; }
 .online-game-toolbar button,.online-game-toolbar a { padding:3px 8px; border:1px solid #8c9daa; border-radius:3px; box-shadow:inset 0 0 0 1px #fff; color:#111; background:linear-gradient(#fff,#e1e6ec); font:12px 'Segoe UI',sans-serif; text-decoration:none; cursor:pointer; }
 .online-game-toolbar button:hover,.online-game-toolbar a:hover { border-color:#358acb; background:linear-gradient(#f0fbff,#c8e5f8); }
-.online-game-stage { position:relative; min-height:0; height:min(52vh,470px); flex:1; }
-.online-game-stage iframe { display:block; width:100%; height:100%; min-height:0; border:0; background:#111; }
+.online-game-stage { position:relative; min-height:0; height:min(52vh,470px); flex:0 1 auto; overflow:hidden; background:#000; }
+.online-game-stage iframe { position:absolute; top:50%; left:50%; display:block; width:640px; height:480px; border:0; background:#000; transform-origin:center; }
 .online-game-loading { position:absolute; inset:0; display:grid; place-items:center; margin:0; color:#fff; font:14px 'Segoe UI',sans-serif; pointer-events:none; }
 .utility-doom.is-maximized .online-game-app { flex:1; }
-.utility-doom.is-maximized .online-game-stage { height:auto; }
+.utility-doom.is-maximized .online-game-stage { height:auto; flex:1; }
 @media(max-width:600px) { .window.aero-window.utility-doom { width:auto; } .online-game-stage { height:43vh; flex-shrink:1; } .online-game-toolbar>span { flex-basis:100%; } .online-game-toolbar { font-size:12px; gap:5px; } .online-game-toolbar a,.online-game-toolbar button { font-size:12px; } }
