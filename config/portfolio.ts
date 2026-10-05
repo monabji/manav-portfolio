@@ -47,8 +47,19 @@ export const desktopUtilities = [
   { id: 'snake', label: 'Snake', icon: crystalIcons.snake, description: 'Play a quick game' },
   { id: 'gallery', label: 'Gallery', icon: crystalIcons.gallery, description: 'Open the picture library' },
   { id: 'music', label: 'Music', icon: crystalIcons.music, description: 'Browse and play music' },
+  { id: 'doom', label: 'DOOM', icon: crystalIcons.gamepad, description: 'Play DOOM online inside Manav OS' },
 ] as const;
 export type DesktopUtilityId = (typeof desktopUtilities)[number]['id'];
+
+// Hosted players, not locally recreated games. Keep embed URLs and providers here.
+export const onlineGames = {
+  doom: {
+    title: 'DOOM',
+    provider: 'Internet Archive',
+    sourceUrl: 'https://archive.org/details/DoomsharewareEpisode',
+    embedUrl: 'https://archive.org/embed/DoomsharewareEpisode',
+  },
+} as const;
 
 export const desktopLinks = [
   { id: 'github', label: 'GitHub', href: 'https://github.com/monabji', description: 'See my code' },

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { type DesktopUtilityId } from '@/config/portfolio';
 import { SnakeGame } from './snake-game';
+import { OnlineGameApp } from './online-game-app';
 import { ExplorerChrome, ExplorerSidebar, WindowTitlebar } from './window-chrome';
 
 type UtilityState = { open: boolean; minimized: boolean; maximized: boolean; zIndex: number };
@@ -144,7 +145,7 @@ export function DesktopUtilityWindow({ id, title, icon, state, onClose, onMinimi
   onMaximize: () => void;
   onFocus: () => void;
 }) {
-  const [offset, setOffset] = useState(() => id === 'notepad' ? { x: -85, y: -22 } : { x: 105, y: 18 });
+  const [offset, setOffset] = useState(() => id === 'notepad' ? { x: -85, y: -22 } : id === 'doom' ? { x: 0, y: 0 } : { x: 105, y: 18 });
   const [sidebarHidden, setSidebarHidden] = useState(false);
   const drag = useRef<{ x: number; y: number; startX: number; startY: number } | null>(null);
   if (!state.open) return null;
@@ -171,7 +172,7 @@ export function DesktopUtilityWindow({ id, title, icon, state, onClose, onMinimi
     <WindowTitlebar title={title} icon={icon} maximized={state.maximized} onClose={onClose} onMinimize={onMinimize} onMaximize={onMaximize} className="utility-titlebar" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={onMaximize} />
     <div className="window-interior">
     <ExplorerChrome title={title} icon={icon} breadcrumbs={[{ label: 'Applications' }, { label: title }]} onToggleSidebar={id === 'gallery' || id === 'music' ? () => setSidebarHidden(value => !value) : undefined} />
-    {id === 'notepad' ? <Notepad /> : id === 'snake' ? <SnakeGame active={!state.minimized} /> : <div className="utility-library-body"><ExplorerSidebar />{id === 'gallery' ? <Gallery /> : <MusicPlayer />}</div>}
+    {id === 'notepad' ? <Notepad /> : id === 'snake' ? <SnakeGame active={!state.minimized} /> : id === 'doom' ? <OnlineGameApp gameId="doom" /> : <div className="utility-library-body"><ExplorerSidebar />{id === 'gallery' ? <Gallery /> : <MusicPlayer />}</div>}
     </div>
   </section>;
 }

@@ -28,6 +28,12 @@ Provided by Manav as a design reference and used directly in the landing-page 3D
 UI sounds
 Original tones synthesized in the browser with the Web Audio API. No audio files are copied or autoplayed.
 
+DOOM online application
+DOOM by id Software, played through the Internet Archive's externally hosted shareware player.
+No game binaries are copied into this portfolio.
+https://archive.org/details/DoomsharewareEpisode
+https://archive.org/embed/DoomsharewareEpisode
+
 Design references
 Windows 7 navigation icons copyright Microsoft Corporation.
 Original raster resources: https://github.com/Visnalize/resources/tree/main/icons/win7

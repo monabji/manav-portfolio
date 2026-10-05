@@ -10,6 +10,7 @@ const iconChoices = [
   ['Code', crystalIcons.code], ['Browser', crystalIcons.browser], ['Notepad', crystalIcons.notepad],
   ['Snake', crystalIcons.snake], ['Gallery', crystalIcons.gallery], ['Email', crystalIcons.email],
   ['Music', crystalIcons.music], ['Blender', crystalIcons.blender], ['Graphics', crystalIcons.dashboard],
+  ['Game', crystalIcons.gamepad],
   ['GitHub', '/brands/github.svg'], ['LinkedIn', '/brands/linkedin.svg'],
 ] as const;
 
