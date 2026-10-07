@@ -2,9 +2,10 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { crystalIcons, desktopApps, desktopLinks, desktopUtilities } from '@/config/portfolio';
+import { crystalIcons, desktopApps, workspaceApps, desktopLinks, desktopUtilities } from '@/config/portfolio';
 import { DesktopUtilityWindow } from './desktop-utility-window';
 import { useDesktopSettings } from './desktop-settings';
+import { DesktopShortcuts } from './desktop-shortcuts';
 
 type UtilityState = { open: boolean; minimized: boolean; maximized: boolean; zIndex: number };
 type UtilityStates = Record<string, UtilityState>;
@@ -157,12 +158,12 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
     <div className="wallpaper" aria-hidden="true" style={settings.wallpaper ? { backgroundImage: `url("${settings.wallpaper.replaceAll('"', '%22')}")` } : undefined} />
     <div className="bubble-field" aria-hidden="true">{Array.from({ length: 8 }, (_, index) => <span key={index} />)}</div>
 
-    <aside className="desktop-icons" aria-label="Desktop shortcuts">
-      {desktopApps.slice(1).map((app) => <a href={app.href} key={app.href} title={app.description} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span>{app.label}</span></a>)}
+    <DesktopShortcuts>
+      {workspaceApps.filter(app => app.href !== '/').map((app) => <a href={app.href} key={`route:${app.href}`} title={app.description} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span>{app.label}</span></a>)}
       {applications.map((app) => <button type="button" key={app.id} title={app.description} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span>{app.label}</span></button>)}
       {desktopLinks.map((link) => <a href={link.href} key={link.id} title={link.description} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined}><BrandIcon brand={link.id} icon={settings.iconOverrides[`link:${link.id}`]} /><span>{link.label}</span></a>)}
       {settings.shortcuts.filter(link => link.mode !== 'window').map((link) => <a href={link.href} key={link.id} title={link.href} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined}><img src={link.icon} alt="" /><span>{link.label}</span></a>)}
-    </aside>
+    </DesktopShortcuts>
 
     <div className="desktop-workspace">{children}</div>
     {applications.map((app) => <DesktopUtilityWindow
@@ -198,7 +199,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
     <footer className="taskbar">
       <button className={`start-button ${menuOpen ? 'is-active' : ''}`} type="button" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close start menu' : 'Open start menu'} onClick={() => { setMenuOpen((open) => !open); if (soundOn) playTone('select'); }}><span className="start-orb native-start-orb" aria-hidden="true" /></button>
       <nav className="taskbar-apps" aria-label="Portfolio and apps">
-        {desktopApps.map((app) => <a href={app.href} key={app.href} title={app.label} aria-label={app.label} className={pathname === app.href ? 'is-active' : ''} aria-current={pathname === app.href ? 'page' : undefined} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span>{app.label}</span></a>)}
+        {workspaceApps.map((app) => <a href={app.href} key={app.href} title={app.label} aria-label={app.label} className={pathname === app.href ? 'is-active' : ''} aria-current={pathname === app.href ? 'page' : undefined} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span>{app.label}</span></a>)}
         {applications.map((app) => <button key={app.id} type="button" title={app.label} aria-label={`Open ${app.label}`} className={`${utilities[app.id]?.open ? 'is-running' : ''} ${utilities[app.id]?.open && !utilities[app.id]?.minimized ? 'is-active' : ''}`} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span>{app.label}</span></button>)}
       </nav>
       <div className="tray"><button type="button" onClick={toggleSound} aria-pressed={soundOn} aria-label={soundOn ? 'Mute UI sounds' : 'Enable UI sounds'} title={soundOn ? 'Mute UI sounds' : 'Enable UI sounds'}><img src={soundOn ? '/win7/shell/volume.webp' : '/win7/shell/volume-muted.webp'} alt="" /><span>{soundOn ? 'Sound on' : 'Sound off'}</span></button><time><span>{clock}</span><span>{date}</span></time></div>

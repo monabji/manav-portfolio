@@ -3,6 +3,7 @@
 Edit `portfolio.ts` to extend the site without changing page components.
 
 - Add a desktop route or shortcut in `desktopApps`.
+- Mark a route `startMenuOnly: true` to keep it in Start but exclude desktop, taskbar, Explorer menus, and search. The dashboard uses this; owner access and password protection remain unchanged.
 - Add a website shortcut in `desktopLinks` (and a brand icon in `public/brands`).
 - Add a utility app in `desktopUtilities`, then render its content in `components/desktop-utility-window.tsx`.
 - Give each utility a unique `id` and icon path. The desktop, Start menu, and taskbar are generated from these registries; the utility window switch lives in `desktop-utility-window.tsx`.
@@ -27,6 +28,8 @@ Database schema belongs in `db/schema.ts`; use Drizzle migrations, never runtime
 Page components render these arrays. `app/globals.css` owns the original layout and `app/windows7.css` layers the Windows 7 / Vista desktop styling on top.
 
 The desktop/taskbar/Start menu come from `components/desktop-shell.tsx`. Start search filters the same app/shortcut registries; the right-hand shortcuts open the existing pages and utilities. Show desktop toggles between minimized windows and their saved state.
+
+`components/desktop-shortcuts.tsx` and `lib/desktop-layout.ts` place desktop icons in stable, scattered positions with non-overlapping hit areas. Placement favors the desktop edges so normal windows remain readable; minimizing windows reveals the entire desktop. Extra applications automatically receive slots. Small screens use a shuffled, gently staggered horizontal strip. Styling is in `app/desktop-theme.css`; do not position shortcuts individually inside the shell.
 
 Online games use `onlineGames` for the hosted embed URL, source page, and provider. `components/online-game-app.tsx` renders the sandboxed player with reload and an external fallback. DOOM is the Internet Archive's existing shareware emulation player, not a local game implementation. Its app entry in `desktopUtilities` also adds it to the desktop, taskbar, Start search, Explorer menus, and dashboard icon settings. Closing the app unmounts its player.
 

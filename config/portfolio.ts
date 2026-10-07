@@ -37,10 +37,14 @@ export const desktopApps = [
   {
     href: '/dashboard',
     label: 'My dashboard',
+    startMenuOnly: true,
     icon: crystalIcons.dashboard,
     description: 'Personal desktop settings',
   },
 ] as const;
+
+// Route shortcuts outside Start use this list, so owner tools stay out of sight.
+export const workspaceApps = desktopApps.filter(app => !('startMenuOnly' in app && app.startMenuOnly));
 
 export const desktopUtilities = [
   { id: 'notepad', label: 'Notepad', icon: crystalIcons.notepad, description: 'Write and save notes' },

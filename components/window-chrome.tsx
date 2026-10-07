@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useId, useState, type HTMLAttributes } from 'react';
-import { desktopApps, desktopUtilities } from '@/config/portfolio';
+import { workspaceApps, desktopUtilities } from '@/config/portfolio';
 import { useDesktopSettings } from './desktop-settings';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from './ui/dropdown-menu';
 
@@ -64,13 +64,13 @@ export function ExplorerChrome({ title, icon, breadcrumbs, onToggleSidebar }: { 
     try { await navigator.clipboard.writeText(window.location.href); setNotice('Link copied'); } catch { setNotice('Copy the link from your browser address bar.'); }
     window.setTimeout(() => setNotice(''), 4000);
   };
-  const appCommands: Command[] = [...desktopApps.map(app => ({ label: app.label, icon: app.icon, action: () => go(app.href) })), ...desktopUtilities.map(app => ({ label: app.label, icon: app.icon, action: () => openUtility(app.id) })), ...shortcuts.map(app => ({ label: app.label, icon: app.icon, action: () => app.mode === 'window' ? openUtility(app.id) : go(app.href) }))];
+  const appCommands: Command[] = [...workspaceApps.map(app => ({ label: app.label, icon: app.icon, action: () => go(app.href) })), ...desktopUtilities.map(app => ({ label: app.label, icon: app.icon, action: () => openUtility(app.id) })), ...shortcuts.map(app => ({ label: app.label, icon: app.icon, action: () => app.mode === 'window' ? openUtility(app.id) : go(app.href) }))];
   const catalog = [...appCommands, ...[...softwareProjects, ...designProjects].map(project => ({ label: project.title, icon: project.icon, action: () => go(`/projects?project=${encodeURIComponent(project.title.toLowerCase().replaceAll(' ', '-'))}`) }))];
   const results = query.trim() ? catalog.filter(item => item.label.toLowerCase().includes(query.trim().toLowerCase())).slice(0, 7) : [];
   const trail = breadcrumbs || [{ label: title }];
   return <div className="explorer-chrome">
     <div className="explorer-navigation">
-      <div className="explorer-history"><button className="navigation-circle" type="button" aria-label="Back" title="Back" disabled={!canGoBack} onClick={() => navigateHistory(-1)}><span>←</span></button><button className="navigation-circle" type="button" aria-label="Forward" title="Forward" disabled={!canGoForward} onClick={() => navigateHistory(1)}><span>→</span></button><Menu label="" arrow items={desktopApps.map(app => ({ label: app.label, action: () => go(app.href) }))} /></div>
+      <div className="explorer-history"><button className="navigation-circle" type="button" aria-label="Back" title="Back" disabled={!canGoBack} onClick={() => navigateHistory(-1)}><span>←</span></button><button className="navigation-circle" type="button" aria-label="Forward" title="Forward" disabled={!canGoForward} onClick={() => navigateHistory(1)}><span>→</span></button><Menu label="" arrow items={workspaceApps.map(app => ({ label: app.label, action: () => go(app.href) }))} /></div>
       <nav className="explorer-address" aria-label="Breadcrumb"><img src={icon || explorerIcons.libraries} alt="" /><a href="/">Manav OS</a>{trail.map((part, index) => <span className="breadcrumb-part" key={`${part.label}-${index}`}><b>›</b>{part.href ? <a href={part.href}>{part.label}</a> : part.onClick ? <button type="button" onClick={part.onClick}>{part.label}</button> : <span>{part.label}</span>}</span>)}<span className="address-spacer" /><Menu label="" arrow items={appCommands} /><button className="explorer-refresh" type="button" aria-label="Refresh window" title="Refresh" onClick={() => window.location.reload()}>↻</button></nav>
       <div className="explorer-search"><form onSubmit={event => { event.preventDefault(); if (results[0]) results[0].action(); }}><input id={searchId} aria-label={`Search ${title}`} type="search" placeholder={`Search ${title}`} value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === 'Escape') setQuery(''); }} /><button type="submit" aria-label="Search"><span className="search-symbol" /></button></form>{query && <div className="explorer-search-results">{results.length ? results.map(item => <button key={item.label} type="button" onClick={() => { setQuery(''); item.action(); }}><img src={item.icon} alt="" />{item.label}</button>) : <p>No matching items</p>}</div>}</div>
     </div>
@@ -78,15 +78,14 @@ export function ExplorerChrome({ title, icon, breadcrumbs, onToggleSidebar }: { 
       <Menu label="File" items={appCommands} />
       <Menu label="Edit" items={[{ label: 'Copy page link', action: () => void copyLink() }, { label: 'Open Notepad', action: () => openUtility('notepad') }]} />
       <Menu label="View" items={[...(onToggleSidebar ? [{ label: 'Show / hide navigation pane', action: onToggleSidebar }] : []), { label: 'Refresh', action: () => window.location.reload() }, { label: 'Pictures library', action: () => openUtility('gallery') }]} />
-      <Menu label="Tools" items={[{ label: 'Desktop settings', action: () => go('/dashboard') }, { label: 'Music player', action: () => openUtility('music') }]} />
+      <Menu label="Tools" items={[{ label: 'Music player', action: () => openUtility('music') }]} />
       <Menu label="Help" items={[{ label: 'Using Manav OS', action: () => setHelp(value => !value) }, { label: 'Asset credits', action: () => window.open('/asset-credits.txt', '_blank', 'noopener,noreferrer') }]} />
     </nav>
     <div className="explorer-library-band"><span><img src={icon || explorerIcons.libraries} alt="" />{title}</span></div>
     <nav className="explorer-commandbar" aria-label={`${title} commands`}>
-      <Menu label="Organize" arrow items={[{ label: 'Desktop settings', action: () => go('/dashboard') }, ...(onToggleSidebar ? [{ label: 'Navigation pane', action: onToggleSidebar }] : [])]} />
+      <Menu label="Organize" arrow items={[{ label: 'Copy page link', action: () => void copyLink() }, ...(onToggleSidebar ? [{ label: 'Navigation pane', action: onToggleSidebar }] : [])]} />
       <Menu label="Open" icon={explorerIcons.folder} items={appCommands} />
       <Menu label="Share with" arrow items={[{ label: 'Copy link', action: () => void copyLink() }, { label: 'Email link', action: () => go(`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(window.location.href)}`) }]} />
-      <button className="explorer-menu-button" type="button" onClick={() => go('/dashboard')}>New shortcut</button>
       <span className="command-spacer" />
       {onToggleSidebar && <button className="explorer-menu-button pane-toggle" type="button" aria-label="Toggle navigation pane" title="Navigation pane" onClick={onToggleSidebar}><span /></button>}
       <button className="explorer-menu-button" type="button" aria-label="Window help" title="Help" onClick={() => setHelp(value => !value)}><img src={explorerIcons.help} alt="" /></button>
@@ -97,5 +96,5 @@ export function ExplorerChrome({ title, icon, breadcrumbs, onToggleSidebar }: { 
 }
 
 export function ExplorerSidebar({ children }: { children?: React.ReactNode }) {
-  return <aside className="native-sidebar has-scrollbar" aria-label="Navigation pane"><strong><img src={explorerIcons.favorites} alt="" />Favorites</strong><a href="/"><img src={explorerIcons.desktop} alt="" />Desktop</a><a href="/about"><img src={explorerIcons.documents} alt="" />About me</a><a href="/projects"><img src={explorerIcons.folder} alt="" />Projects</a><strong><img src={explorerIcons.libraries} alt="" />Libraries</strong><button type="button" onClick={() => openUtility('gallery')}><img src={explorerIcons.pictures} alt="" />Pictures</button><button type="button" onClick={() => openUtility('music')}><img src={explorerIcons.music} alt="" />Music</button>{children}<strong><img src={explorerIcons.computer} alt="" />Computer</strong><a href="/dashboard"><img src={explorerIcons.computer} alt="" />Personal settings</a></aside>;
+  return <aside className="native-sidebar has-scrollbar" aria-label="Navigation pane"><strong><img src={explorerIcons.favorites} alt="" />Favorites</strong><a href="/"><img src={explorerIcons.desktop} alt="" />Desktop</a><a href="/about"><img src={explorerIcons.documents} alt="" />About me</a><a href="/projects"><img src={explorerIcons.folder} alt="" />Projects</a><strong><img src={explorerIcons.libraries} alt="" />Libraries</strong><button type="button" onClick={() => openUtility('gallery')}><img src={explorerIcons.pictures} alt="" />Pictures</button><button type="button" onClick={() => openUtility('music')}><img src={explorerIcons.music} alt="" />Music</button>{children}</aside>;
 }
