@@ -116,3 +116,34 @@ body, button, input, select { font-family: 'Segoe UI', Tahoma, sans-serif; }
 .utility-doom.is-maximized .online-game-app { flex:1; }
 .utility-doom.is-maximized .online-game-stage { height:auto; flex:1; }
 @media(max-width:600px) { .window.aero-window.utility-doom { width:auto; } .online-game-stage { height:43vh; flex-shrink:1; } .online-game-toolbar>span { flex-basis:100%; } .online-game-toolbar { font-size:12px; gap:5px; } .online-game-toolbar a,.online-game-toolbar button { font-size:12px; } }
+.dashboard-login { max-width: 430px; margin: 24px auto 50px; text-align: center; color: #233646; }
+.dashboard-login > img { width: 80px; margin: 0 auto 14px; }
+.dashboard-login h1 { font: 24px 'Segoe UI', sans-serif; color: #0066a8; }
+.dashboard-login p { margin: 14px 0; }
+.dashboard-login form { display: grid; gap: 10px; text-align: left; margin: 24px auto; max-width: 320px; }
+.dashboard-login input { height: 30px; border: 1px solid #8da4b8; padding: 4px 8px; background: white; color: #152333; }
+.dashboard-login [role=alert] { color: #a52828; min-height: 20px; }
+.dashboard-publish-bar { position: sticky; top: 0; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px; background: linear-gradient(#f8fcff, #d8eaf9); border: 1px solid #a8c7dd; box-shadow: 0 2px 5px #0002; }
+.dashboard-publish-bar button { min-width: 135px; }
+.dashboard-editor { border: 0; padding: 0; min-width: 0; }
+.dashboard-records { display: grid; gap: 8px; margin-bottom: 12px; }
+.dashboard-records details { border: 1px solid #b9cbdc; background: #f8fbff; border-radius: 3px; }
+.dashboard-records summary { padding: 10px; cursor: pointer; color: #1b4267; background: linear-gradient(#fbfdff, #e6f0fa); }
+.dashboard-records summary img { display: inline-block; width: 24px; height: 24px; object-fit: contain; vertical-align: middle; margin-right: 10px; }
+.dashboard-records summary small { margin-left: 12px; color: #567; }
+.dashboard-record-form { display: grid; gap: 12px; padding: 16px; }
+.dashboard-field { display: grid; gap: 5px; color: #233646; }
+.dashboard-field input, .dashboard-field textarea, .dashboard-field select, .dashboard-icon-picker input, .dashboard-icon-picker select { width: 100%; min-width: 0; padding: 5px 7px; border: 1px solid #94aaba; background: white; color: #162d42; font: 13px 'Segoe UI', sans-serif; }
+.dashboard-icon-picker { display: grid; grid-template-columns: 28px 120px minmax(100px, 1fr); gap: 8px; align-items: center; min-width: 0; }
+.dashboard-icon-picker img { width: 24px; height: 24px; object-fit: contain; }
+.dashboard-icon-list { grid-template-columns: 1fr; }
+.dashboard-icon-list > div { display: grid; grid-template-columns: 140px minmax(0, 1fr); }
+.dashboard-add-shortcut { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.dashboard-add-shortcut button { justify-self: start; }
+.dashboard-project-links { padding: 12px; border: 1px solid #c5d5e2; display: grid; gap: 12px; }
+.dashboard-project-links > div { display: grid; gap: 8px; }
+.dashboard-record-form > button { justify-self: start; }
+.custom-application { display: flex; flex: 1; min-height: 250px; flex-direction: column; }
+.custom-application .utility-menubar { flex-wrap: wrap; gap: 16px; padding: 6px 12px; }
+.custom-application iframe { flex: 1; width: 100%; min-height: 300px; border: 0; background: white; }
+@media (max-width: 600px) { .dashboard-icon-list > div { grid-template-columns: 1fr; gap: 6px; } .dashboard-icon-picker { grid-template-columns: 28px 1fr; } .dashboard-icon-picker input { grid-column: 1 / -1; } .dashboard-record-form { padding: 10px; } .dashboard-publish-bar { align-items: start; } }

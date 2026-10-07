@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { AeroWindow } from './aero-window';
 import { useAeroSound } from './desktop-shell';
 import { ExplorerSidebar, explorerIcons } from './window-chrome';
-import { aboutTabs, crystalIcons, education, experience, skills, socialLinks, type AboutTab } from '@/config/portfolio';
+import { aboutTabs, crystalIcons, education, skills, socialLinks, type AboutTab } from '@/config/portfolio';
+import { useDesktopSettings } from './desktop-settings';
 
 export function AboutWindow() {
+  const { settings: { experience } } = useDesktopSettings();
   const [tab, setTab] = useState<AboutTab>('Overview');
   const sound = useAeroSound();
   const selectTab = (next: AboutTab) => { setTab(next); sound('select'); };

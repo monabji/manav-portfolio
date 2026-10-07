@@ -2,12 +2,13 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { crystalIcons, desktopApps, desktopLinks, desktopUtilities, type DesktopUtilityId } from '@/config/portfolio';
+import { crystalIcons, desktopApps, desktopLinks, desktopUtilities } from '@/config/portfolio';
 import { DesktopUtilityWindow } from './desktop-utility-window';
 import { useDesktopSettings } from './desktop-settings';
 
 type UtilityState = { open: boolean; minimized: boolean; maximized: boolean; zIndex: number };
-type UtilityStates = Record<DesktopUtilityId, UtilityState>;
+type UtilityStates = Record<string, UtilityState>;
+const closedUtility: UtilityState = { open: false, minimized: false, maximized: false, zIndex: 0 };
 
 const initialUtilities = Object.fromEntries(desktopUtilities.map(({ id }) => [id, {
   open: false, minimized: false, maximized: false, zIndex: 0,
@@ -51,6 +52,7 @@ function BrandIcon({ brand, icon }: { brand: (typeof desktopLinks)[number]['id']
 export function DesktopShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { settings } = useDesktopSettings();
+  const applications = [...desktopUtilities.map(app => ({ ...app, embedUrl: undefined as string | undefined })), ...settings.shortcuts.filter(app => app.mode === 'window').map(app => ({ id: app.id, label: app.label, icon: app.icon, description: 'Online application', embedUrl: app.href }))];
   const [menuOpen, setMenuOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [clock, setClock] = useState('');
@@ -62,9 +64,9 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
   const desktopSnapshot = useRef<UtilityStates | null>(null);
   const matchesSearch = (label: string, description = '') => `${label} ${description}`.toLowerCase().includes(startQuery.trim().toLowerCase());
   const matchingApps = desktopApps.filter(app => matchesSearch(app.label, app.description));
-  const matchingUtilities = desktopUtilities.filter(app => matchesSearch(app.label, app.description));
+  const matchingUtilities = applications.filter(app => matchesSearch(app.label, app.description));
   const matchingLinks = desktopLinks.filter(link => matchesSearch(link.label, link.description));
-  const matchingShortcuts = settings.shortcuts.filter(link => matchesSearch(link.label, link.href));
+  const matchingShortcuts = settings.shortcuts.filter(link => link.mode !== 'window' && matchesSearch(link.label, link.href));
 
   useEffect(() => {
     setSoundOn(localStorage.getItem('manav-sound') === 'on');
@@ -82,17 +84,17 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
   useEffect(() => { if (!menuOpen) setStartQuery(''); }, [menuOpen]);
   useEffect(() => {
     const open = (event: Event) => {
-      const id = (event as CustomEvent).detail as DesktopUtilityId;
-      if (!desktopUtilities.some(app => app.id === id)) return;
+      const id = (event as CustomEvent).detail as string;
+      if (!applications.some(app => app.id === id)) return;
       desktopSnapshot.current = null;
       zCounter.current += 1;
-      setUtilities(current => ({ ...current, [id]: { ...current[id], open: true, minimized: false, zIndex: zCounter.current } }));
+      setUtilities(current => ({ ...current, [id]: { ...closedUtility, ...current[id], open: true, minimized: false, zIndex: zCounter.current } }));
       setMenuOpen(false);
       if (soundOn) playTone('open');
     };
     window.addEventListener('manav:open-utility', open);
     return () => window.removeEventListener('manav:open-utility', open);
-  }, [soundOn]);
+  }, [soundOn, settings.shortcuts]);
   useEffect(() => {
     const close = (event: PointerEvent) => {
       if (!menuRef.current?.contains(event.target as Node) && !(event.target as Element).closest('.start-button')) setMenuOpen(false);
@@ -103,23 +105,23 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
     return () => { document.removeEventListener('pointerdown', close); document.removeEventListener('keydown', escape); };
   }, []);
 
-  const changeUtility = (id: DesktopUtilityId, patch: Partial<UtilityState>) => {
-    setUtilities((current) => ({ ...current, [id]: { ...current[id], ...patch } }));
+  const changeUtility = (id: string, patch: Partial<UtilityState>) => {
+    setUtilities((current) => ({ ...current, [id]: { ...closedUtility, ...current[id], ...patch } }));
   };
-  const openUtility = (id: DesktopUtilityId) => {
+  const openUtility = (id: string) => {
     desktopSnapshot.current = null;
     zCounter.current += 1;
     changeUtility(id, { open: true, minimized: false, zIndex: zCounter.current });
     setMenuOpen(false);
     if (soundOn) playTone('open');
   };
-  const focusUtility = (id: DesktopUtilityId) => {
+  const focusUtility = (id: string) => {
     zCounter.current += 1;
     changeUtility(id, { zIndex: zCounter.current });
   };
-  const closeUtility = (id: DesktopUtilityId) => { changeUtility(id, { open: false }); if (soundOn) playTone('close'); };
-  const minimizeUtility = (id: DesktopUtilityId) => { changeUtility(id, { minimized: true }); if (soundOn) playTone('close'); };
-  const maximizeUtility = (id: DesktopUtilityId) => { changeUtility(id, { maximized: !utilities[id].maximized }); if (soundOn) playTone('select'); };
+  const closeUtility = (id: string) => { changeUtility(id, { open: false }); if (soundOn) playTone('close'); };
+  const minimizeUtility = (id: string) => { changeUtility(id, { minimized: true }); if (soundOn) playTone('close'); };
+  const maximizeUtility = (id: string) => { changeUtility(id, { maximized: !utilities[id]?.maximized }); if (soundOn) playTone('select'); };
 
   const toggleSound = () => {
     const next = !soundOn;
@@ -157,14 +159,14 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
 
     <aside className="desktop-icons" aria-label="Desktop shortcuts">
       {desktopApps.slice(1).map((app) => <a href={app.href} key={app.href} title={app.description} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span>{app.label}</span></a>)}
-      {desktopUtilities.map((app) => <button type="button" key={app.id} title={app.description} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span>{app.label}</span></button>)}
+      {applications.map((app) => <button type="button" key={app.id} title={app.description} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span>{app.label}</span></button>)}
       {desktopLinks.map((link) => <a href={link.href} key={link.id} title={link.description} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined}><BrandIcon brand={link.id} icon={settings.iconOverrides[`link:${link.id}`]} /><span>{link.label}</span></a>)}
-      {settings.shortcuts.map((link) => <a href={link.href} key={link.id} title={link.href} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined}><img src={link.icon} alt="" /><span>{link.label}</span></a>)}
+      {settings.shortcuts.filter(link => link.mode !== 'window').map((link) => <a href={link.href} key={link.id} title={link.href} target={link.href.startsWith('https:') ? '_blank' : undefined} rel={link.href.startsWith('https:') ? 'noreferrer' : undefined}><img src={link.icon} alt="" /><span>{link.label}</span></a>)}
     </aside>
 
     <div className="desktop-workspace">{children}</div>
-    {desktopUtilities.map((app) => <DesktopUtilityWindow
-      key={app.id} id={app.id} title={app.label} icon={settings.iconOverrides[`app:${app.id}`] || app.icon} state={utilities[app.id]}
+    {applications.map((app) => <DesktopUtilityWindow
+      key={app.id} id={app.id} title={app.label} embedUrl={app.embedUrl} icon={settings.iconOverrides[`app:${app.id}`] || app.icon} state={utilities[app.id] || closedUtility}
       onClose={() => closeUtility(app.id)} onMinimize={() => minimizeUtility(app.id)}
       onMaximize={() => maximizeUtility(app.id)} onFocus={() => focusUtility(app.id)}
     />)}
@@ -197,7 +199,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
       <button className={`start-button ${menuOpen ? 'is-active' : ''}`} type="button" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close start menu' : 'Open start menu'} onClick={() => { setMenuOpen((open) => !open); if (soundOn) playTone('select'); }}><span className="start-orb native-start-orb" aria-hidden="true" /></button>
       <nav className="taskbar-apps" aria-label="Portfolio and apps">
         {desktopApps.map((app) => <a href={app.href} key={app.href} title={app.label} aria-label={app.label} className={pathname === app.href ? 'is-active' : ''} aria-current={pathname === app.href ? 'page' : undefined} onClick={(event) => onRouteClick(event, app.href)}><img src={settings.iconOverrides[`route:${app.href}`] || app.icon} alt="" /><span>{app.label}</span></a>)}
-        {desktopUtilities.map((app) => <button key={app.id} type="button" title={app.label} aria-label={`Open ${app.label}`} className={`${utilities[app.id].open ? 'is-running' : ''} ${utilities[app.id].open && !utilities[app.id].minimized ? 'is-active' : ''}`} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span>{app.label}</span></button>)}
+        {applications.map((app) => <button key={app.id} type="button" title={app.label} aria-label={`Open ${app.label}`} className={`${utilities[app.id]?.open ? 'is-running' : ''} ${utilities[app.id]?.open && !utilities[app.id]?.minimized ? 'is-active' : ''}`} onClick={() => openUtility(app.id)}><img src={settings.iconOverrides[`app:${app.id}`] || app.icon} alt="" /><span>{app.label}</span></button>)}
       </nav>
       <div className="tray"><button type="button" onClick={toggleSound} aria-pressed={soundOn} aria-label={soundOn ? 'Mute UI sounds' : 'Enable UI sounds'} title={soundOn ? 'Mute UI sounds' : 'Enable UI sounds'}><img src={soundOn ? '/win7/shell/volume.webp' : '/win7/shell/volume-muted.webp'} alt="" /><span>{soundOn ? 'Sound on' : 'Sound off'}</span></button><time><span>{clock}</span><span>{date}</span></time></div>
       <button type="button" className="show-desktop" onClick={showDesktop} title="Show or restore desktop" aria-label="Show or restore desktop" />

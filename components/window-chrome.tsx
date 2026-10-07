@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useId, useState, type HTMLAttributes } from 'react';
-import { desktopApps, desktopUtilities, softwareProjects, designProjects } from '@/config/portfolio';
+import { desktopApps, desktopUtilities } from '@/config/portfolio';
+import { useDesktopSettings } from './desktop-settings';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from './ui/dropdown-menu';
 
 // One source of truth for Explorer chrome; application icons remain Crystal.
@@ -32,6 +33,7 @@ function openUtility(id: string) { window.dispatchEvent(new CustomEvent('manav:o
 const go = (href: string) => { window.location.assign(href); };
 
 export function ExplorerChrome({ title, icon, breadcrumbs, onToggleSidebar }: { title: string; icon?: string; breadcrumbs?: Breadcrumb[]; onToggleSidebar?: () => void }) {
+  const { settings: { softwareProjects, designProjects, shortcuts } } = useDesktopSettings();
   const [query, setQuery] = useState('');
   const [notice, setNotice] = useState('');
   const [canGoBack, setCanGoBack] = useState(false);
@@ -62,7 +64,7 @@ export function ExplorerChrome({ title, icon, breadcrumbs, onToggleSidebar }: { 
     try { await navigator.clipboard.writeText(window.location.href); setNotice('Link copied'); } catch { setNotice('Copy the link from your browser address bar.'); }
     window.setTimeout(() => setNotice(''), 4000);
   };
-  const appCommands: Command[] = [...desktopApps.map(app => ({ label: app.label, icon: app.icon, action: () => go(app.href) })), ...desktopUtilities.map(app => ({ label: app.label, icon: app.icon, action: () => openUtility(app.id) }))];
+  const appCommands: Command[] = [...desktopApps.map(app => ({ label: app.label, icon: app.icon, action: () => go(app.href) })), ...desktopUtilities.map(app => ({ label: app.label, icon: app.icon, action: () => openUtility(app.id) })), ...shortcuts.map(app => ({ label: app.label, icon: app.icon, action: () => app.mode === 'window' ? openUtility(app.id) : go(app.href) }))];
   const catalog = [...appCommands, ...[...softwareProjects, ...designProjects].map(project => ({ label: project.title, icon: project.icon, action: () => go(`/projects?project=${encodeURIComponent(project.title.toLowerCase().replaceAll(' ', '-'))}`) }))];
   const results = query.trim() ? catalog.filter(item => item.label.toLowerCase().includes(query.trim().toLowerCase())).slice(0, 7) : [];
   const trail = breadcrumbs || [{ label: title }];

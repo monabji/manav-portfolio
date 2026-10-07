@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { type DesktopUtilityId } from '@/config/portfolio';
 import { SnakeGame } from './snake-game';
 import { OnlineGameApp } from './online-game-app';
 import { ExplorerChrome, ExplorerSidebar, WindowTitlebar } from './window-chrome';
@@ -135,8 +134,9 @@ function MusicPlayer() {
   </div>;
 }
 
-export function DesktopUtilityWindow({ id, title, icon, state, onClose, onMinimize, onMaximize, onFocus }: {
-  id: DesktopUtilityId;
+export function DesktopUtilityWindow({ id, title, icon, state, embedUrl, onClose, onMinimize, onMaximize, onFocus }: {
+  id: string;
+  embedUrl?: string;
   title: string;
   icon: string;
   state: UtilityState;
@@ -172,7 +172,7 @@ export function DesktopUtilityWindow({ id, title, icon, state, onClose, onMinimi
     <WindowTitlebar title={title} icon={icon} maximized={state.maximized} onClose={onClose} onMinimize={onMinimize} onMaximize={onMaximize} className="utility-titlebar" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={onMaximize} />
     <div className="window-interior">
     <ExplorerChrome title={title} icon={icon} breadcrumbs={[{ label: 'Applications' }, { label: title }]} onToggleSidebar={id === 'gallery' || id === 'music' ? () => setSidebarHidden(value => !value) : undefined} />
-    {id === 'notepad' ? <Notepad /> : id === 'snake' ? <SnakeGame active={!state.minimized} /> : id === 'doom' ? <OnlineGameApp gameId="doom" /> : <div className="utility-library-body"><ExplorerSidebar />{id === 'gallery' ? <Gallery /> : <MusicPlayer />}</div>}
+    {embedUrl ? <div className="custom-application"><div className="utility-menubar"><a href={embedUrl} target="_blank" rel="noopener noreferrer">Open in a new tab</a><span>Some providers do not allow embedded windows.</span></div><iframe title={title} src={embedUrl} sandbox="allow-scripts allow-forms allow-popups" referrerPolicy="no-referrer" allow="fullscreen" /></div> : id === 'notepad' ? <Notepad /> : id === 'snake' ? <SnakeGame active={!state.minimized} /> : id === 'doom' ? <OnlineGameApp gameId="doom" /> : <div className="utility-library-body"><ExplorerSidebar />{id === 'gallery' ? <Gallery /> : <MusicPlayer />}</div>}
     </div>
   </section>;
 }

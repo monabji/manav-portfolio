@@ -12,7 +12,17 @@ Edit `portfolio.ts` to extend the site without changing page components.
 - Put reusable interface icons in `public/crystal` and register their paths in `crystalIcons`.
 - Keep shared content and app metadata in this file rather than duplicating it in page components.
 
-The Personal Dashboard can change the wallpaper and shortcut icons, and add website shortcuts. Its current settings store is browser-local; connect a secured writable backend before enabling live changes for all visitors.
+## Secured live dashboard
+
+`/dashboard` is rendered on the server: unauthenticated requests receive only the sign-in screen. `lib/admin-auth.ts` verifies a salted scrypt hash using N=16384, r=8, p=5 (16 MiB memory), with timing-safe comparison. The hash lives in the secret runtime variable `ADMIN_PASSWORD_HASH`, never source or browser storage. `SITE_ORIGIN` must be the exact live origin. Do not put the password in source, JSON backups, hosting.json, or a client-side environment variable.
+
+Sessions last eight hours. The browser receives a Secure, HttpOnly, SameSite=Strict `__Host-manav-admin` cookie. Only its SHA-256 digest is persisted in D1; logout deletes the session, and changing the password hash invalidates old sessions. HTTP development uses a separate local cookie that production pages do not accept. Writes require both server authentication and a same-origin request. Login is limited per IP, with a short global throttle protecting expensive hash work. Request bodies have streaming byte caps.
+
+The dashboard edits projects (including the 3D showcase), experience, icons, wallpaper, and applications. Edits are a temporary in-memory preview until **Publish changes**. Publishing persists the validated configuration in D1 and makes it visible to all visitors after reload, without a rebuild. Revision checks prevent one dashboard from silently overwriting another. Image uploads go to R2; JSON exports contain public configuration only. A provider that forbids embedding still opens through the custom app's new-tab fallback.
+
+`lib/site-configuration.ts` defines the editable shape, defaults, and shared validation. `lib/site-store.ts` reads it; `/api/site-config` exposes only public content. Add future editable fields there, then connect the dashboard and consuming components. `portfolio.ts` remains the source of built-in defaults; saved live configuration takes precedence for editable fields. Back up live configuration before changing defaults or resetting the draft.
+
+Database schema belongs in `db/schema.ts`; use Drizzle migrations, never runtime DDL. Generate migrations with `node node_modules/drizzle-kit/bin.cjs generate`; do not rewrite applied migrations. `.openai/hosting.json` declares the logical DB/BUCKET bindings, and Sites manages production resources. Local `.dev.vars` is ignored and holds a test hash and local origin, not a plaintext password. Security smoke tests are in `scripts/check-dashboard.mjs`, require a disposable local server and an explicit `ADMIN_TEST_PASSWORD` environment variable, and restore the original public content after testing.
 
 Page components render these arrays. `app/globals.css` owns the original layout and `app/windows7.css` layers the Windows 7 / Vista desktop styling on top.
 
