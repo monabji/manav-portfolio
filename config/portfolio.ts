@@ -75,19 +75,28 @@ export const aboutTabs = ['Overview', 'Education', 'Skills', 'Experience', 'Conn
 export type AboutTab = (typeof aboutTabs)[number];
 
 export const education = [
-  { years: '2025 - 2029', qualification: 'B.Tech, Computer Science & Engineering (Core)', institution: 'VIT University, Vellore Campus' },
+  { years: '2025 - 2029 (Expected)', qualification: 'B.Tech, Computer Science & Engineering (Core)', institution: 'Vellore Institute of Technology (VIT), Vellore', detail: 'Relevant coursework: Database Management Systems, Object-Oriented Programming, Computer Networks, Computer Architecture, Probability and Statistics, Embedded Systems.' },
   { years: '12th grade', qualification: 'Senior Secondary Education', institution: 'Allen Career Institute, Bangalore' },
   { years: '10th grade', qualification: 'Secondary Education', institution: 'Freedom International School, Bangalore' },
 ] as const;
 
 export const skills = [
-  { label: 'Languages', detail: 'C, C++, Python, Lua, GDScript, HTML, CSS', level: '88%' },
-  { label: 'Development', detail: 'Bots, websites, and AI-based projects using Python', level: '76%' },
-  { label: 'Practice', detail: 'HackerRank, Codeforces, CTFs', level: '67%' },
+  { label: 'Programming', detail: 'Python, C, C++, Java, C#, SQL, JavaScript, TypeScript, Lua, GDScript, HTML, CSS' },
+  { label: 'Databases', detail: 'MySQL, relational modeling, ER/EER design, normalization (1NF to 3NF), recursive and many-to-many relationships' },
+  { label: 'Machine learning', detail: 'Regression, supervised learning, feature engineering, data preprocessing, train/validation/test workflows, model evaluation' },
+  { label: 'Tools and frameworks', detail: 'Unity, Blender, Git, GitHub, Next.js, Tailwind CSS, shadcn/ui, VS Code, Linux, Windows' },
+  { label: 'Practice', detail: 'HackerRank, Codeforces, CTFs' },
+] as const;
+
+export const achievements = [
+  { title: 'ACEi Hackathon, third place', detail: 'TonoClear, an ophthalmology training simulator demonstrated in Chennai' },
+  { title: 'Code Cortex Hackathon winner', detail: 'MANU, a protein mutation stability prediction system' },
+  { title: 'Code2Create Hackathon finalist', detail: 'Selected for final-stage evaluation' },
+  { title: 'NutriHack Food Hackathon finalist', detail: 'sork, a nutrient degradation tracker' },
 ] as const;
 
 export const experience = [
-  { role: 'Core Member', organization: 'Association for Computing Machinery (ACM)', logo: '/experience/acm.png', alt: 'Association for Computing Machinery logo' },
+  { role: 'Technical Core Member', organization: 'ACM-VIT, Association for Computing Machinery', logo: '/experience/acm.png', alt: 'Association for Computing Machinery logo' },
   { role: 'Vice President - PR', organization: 'Nuvens Toastmasters International', logo: '/experience/toastmasters.png', alt: 'Toastmasters International logo' },
 ] as const;
 
@@ -110,11 +119,14 @@ export type Project = {
 };
 
 export const softwareProjects: Project[] = [
-  { title: 'CarWars', status: 'Shipped', description: 'A PSX-style car game built from the ground up with Unity and original Blender assets, showcased at the Gravitas Expo.', tags: ['Unity', 'Blender', 'Game development'], icon: crystalIcons.gamepad, links: [{ label: 'Open source code', href: 'https://github.com/ACM-VIT/carwars' }] },
+  { title: 'MANU', status: 'Code Cortex winner', description: 'A supervised regression system that predicts protein stability changes caused by single amino acid mutations. Built an end-to-end workflow covering dataset preprocessing, mutation-level feature preparation, model training, validation and metric-based evaluation. Presented the research use case, methodology and limitations to judges, winning the Code Cortex Hackathon.', tags: ['Python', 'Machine learning', 'Regression', 'Biotechnology'], icon: crystalIcons.code, links: [{ label: 'Open source code', href: 'https://github.com/monabji/Manu' }] },
+  { title: 'CarWars', status: 'Shipped', description: 'A PS1-style player-versus-player vehicle combat game built in Unity with C#. Developed responsive car controls, collision handling, damage and game-state logic, and an arcade combat loop. Created low-poly assets and retro materials in Blender, then refined physics, asset scaling, UI and handling through playtesting. Showcased at the Gravitas Expo.', tags: ['Unity', 'C#', 'Blender', 'Game development'], icon: crystalIcons.gamepad, links: [{ label: 'Open source code', href: 'https://github.com/ACM-VIT/carwars' }] },
+  { title: 'Research Paper Knowledge Graph', status: 'In progress', description: 'A MySQL database project in progress connecting research papers, authors, institutions, datasets, methods, citations and keywords. The design models many-to-many authorship relationships and recursive citation networks, translates ER/EER designs into relational schemas, and normalizes tables through 3NF for reliable queries and reduced redundancy.', tags: ['MySQL', 'Database design', 'ER/EER modeling', 'Normalization'], icon: crystalIcons.projects, links: [] },
+  { title: 'sork (NutriHack)', status: 'NutriHack finalist', description: 'A nutrient degradation tracker built for the NutriHack Food Hackathon. The project explores food-supply-chain scenarios using product facts, transport assumptions and clearly labeled nutrient-decay and emissions estimates. Built with React, TypeScript and Vite.', tags: ['React', 'TypeScript', 'Vite', 'NutriHack'], icon: crystalIcons.browser, links: [{ label: 'Open source code', href: 'https://github.com/monabji/Nutri' }] },
   { title: 'AI Retinopathy Grading', status: 'In progress', description: 'An AI project in progress for detecting and grading diabetic retinopathy from retinal imagery using the IDRiD dataset.', tags: ['Python', 'AI / ML', 'Healthtech'], icon: crystalIcons.code, links: [{ label: 'Open source code', href: 'https://github.com/monabji/idrid-dr-grading' }] },
   { title: 'Hackathon Winners Library', status: 'Live website', description: 'A focused website for tracking hackathon winners and collecting standout builds in one browsable library.', tags: ['Web', 'Database', 'Hackathons'], icon: crystalIcons.browser, links: [{ label: 'Visit website', href: 'https://hackathon-winners-library.vercel.app/' }, { label: 'Open source code', href: 'https://github.com/monabji/hackathon-winners-library' }] },
   { title: 'UDID Saathi', status: 'Prototype', description: 'An accessible citizen-service redesign for India’s UDID journey: applications, corrections, appointments, renewals, and progress tracking for the Build For India hackathon.', tags: ['React', 'TypeScript', 'Accessibility'], icon: crystalIcons.browser, links: [{ label: 'Visit website', href: 'https://build-for-india-main.vercel.app/' }, { label: 'Open source code', href: 'https://github.com/monabji/build-for-india' }] },
-  { title: 'Tonoclear', status: '3rd place', description: 'A hardware and IoT build created for the ACEi Hackathon in Chennai. The project took third place.', tags: ['Hardware', 'IoT', 'Hackathon'], icon: crystalIcons.projects, links: [{ label: 'View presentation', href: 'https://docs.google.com/presentation/d/1qWeE5ZlsOR0pKk2-CBKRMkFW9mXUaIu1w1aE0Wzf25I/edit?usp=sharing' }] },
+  { title: 'TonoClear', status: '3rd place', description: 'A functional ophthalmology training prototype for applanation tonometry and ocular foreign-body removal, built in response to an Aravind Eye Hospital challenge. Integrated a physical model eye, sensing hardware and software feedback to support instrument positioning, force control and repeatable practice. Demonstrated at the ACEi Hackathon in Chennai.', tags: ['Healthcare simulation', 'Hardware', 'IoT', 'Software integration'], icon: crystalIcons.projects, links: [{ label: 'View presentation', href: 'https://docs.google.com/presentation/d/1qWeE5ZlsOR0pKk2-CBKRMkFW9mXUaIu1w1aE0Wzf25I/edit?usp=sharing' }] },
 ];
 
 export const designProjects: Project[] = [

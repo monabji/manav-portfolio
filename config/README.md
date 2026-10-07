@@ -9,6 +9,7 @@ Edit `portfolio.ts` to extend the site without changing page components.
 - Give each utility a unique `id` and icon path. The desktop, Start menu, and taskbar are generated from these registries; the utility window switch lives in `desktop-utility-window.tsx`.
 - Add or reorder About navigation in `aboutTabs`.
 - Update the profile data in `education`, `skills`, `experience`, and `socialLinks`.
+- Skills are plain-text categories (`label` and `detail`), not proficiency scores. Résumé achievements live in `achievements`; optional education `detail` holds coursework.
 - Add project cards in `softwareProjects` or `designProjects`.
 - Put reusable interface icons in `public/crystal` and register their paths in `crystalIcons`.
 - Keep shared content and app metadata in this file rather than duplicating it in page components.

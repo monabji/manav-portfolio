@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { AeroWindow } from './aero-window';
 import { useAeroSound } from './desktop-shell';
 import { ExplorerSidebar, explorerIcons } from './window-chrome';
-import { aboutTabs, crystalIcons, education, skills, socialLinks, type AboutTab } from '@/config/portfolio';
+import { aboutTabs, achievements, crystalIcons, education, skills, socialLinks, type AboutTab } from '@/config/portfolio';
 import { useDesktopSettings } from './desktop-settings';
 
 export function AboutWindow() {
@@ -24,7 +24,7 @@ export function AboutWindow() {
         <section className="about-profile-card">
           <div className="profile-orb"><img src={crystalIcons.profile} alt="People profile icon" /></div>
           <h1>Hi! I&apos;m Manav!</h1>
-          <p>A student at VIT Vellore and I just love messing around in tech.</p>
+          <p>A Computer Science student at VIT Vellore who loves messing around in tech. I build machine learning, healthcare simulation, database and game-development projects, from early prototypes to hackathon demonstrations.</p>
           <div className="interest-pills"><span>GameDev</span><span>3D Design</span><span>AI/ML</span><span>Cybersecurity</span></div>
           <p>Feel free to reach out!</p>
         </section>
@@ -32,16 +32,16 @@ export function AboutWindow() {
             <section className="app-section education-app">
               <div className="app-section-title"><img src={crystalIcons.home} alt="" /><div><span>LEARNING JOURNEY</span><h2>Education</h2></div></div>
               <div className="timeline">
-                {education.map(({ years, qualification, institution }) => <article key={qualification}><time>{years}</time><div><h3>{qualification}</h3><p>{institution}</p></div></article>)}
+                {education.map(item => <article key={item.qualification}><time>{item.years}</time><div><h3>{item.qualification}</h3><p>{item.institution}</p>{'detail' in item && <p className="coursework">{item.detail}</p>}</div></article>)}
               </div>
             </section>
           )}
           {(tab === 'Overview' || tab === 'Skills') && (
             <section className="app-section skills-app">
               <div className="app-section-title"><img src={crystalIcons.code} alt="" /><div><span>TOOLBOX</span><h2>Technical skills</h2></div></div>
-              <div className="meter-list">
-                {skills.map((skill) => <div key={skill.label}><strong>{skill.label}</strong><p>{skill.detail}</p><span><i style={{ width: skill.level }} /></span></div>)}
-              </div>
+              <dl className="skills-list">
+                {skills.map(skill => <div key={skill.label}><dt>{skill.label}</dt><dd>{skill.detail}</dd></div>)}
+              </dl>
             </section>
           )}
           {(tab === 'Overview' || tab === 'Experience') && (
@@ -60,9 +60,15 @@ export function AboutWindow() {
               </div>
             </section>
           )}
+          {(tab === 'Overview' || tab === 'Education') && (
+            <section className="app-section achievements-app">
+              <div className="app-section-title"><img src={crystalIcons.projects} alt="" /><div><h2>Achievements</h2></div></div>
+              <ul className="achievements-list">{achievements.map(item => <li key={item.title}><strong>{item.title}</strong><p>{item.detail}</p></li>)}</ul>
+            </section>
+          )}
         </div>
       </div>
-      <div className="window-status"><span>{tab}</span><span>{tab === 'Overview' ? '4 sections' : '1 section'} · Manav&apos;s profile</span></div>
+      <div className="window-status"><span>{tab}</span><span>{tab === 'Overview' ? '5 sections' : tab === 'Education' ? '2 sections' : '1 section'} · Manav&apos;s profile</span></div>
     </AeroWindow>
   );
 }

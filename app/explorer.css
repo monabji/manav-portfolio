@@ -100,11 +100,18 @@
 .timeline time { border:0; border-radius:0; background:none; color:#666; font:12px 'Segoe UI',sans-serif; }
 .timeline h3,.experience-tiles h3 { font-weight:400; color:#111; }
 .timeline p,.experience-tiles p { color:#555; font-size:12px; }
-.meter-list { padding:5px 0; }
-.meter-list strong { font-weight:400; font-size:12px; }
-.meter-list p { color:#555; font-size:12px; }
-.meter-list>div>span { border-radius:2px; height:13px; background:#eee; }
-.meter-list i { border-radius:1px; box-shadow:inset 0 1px #c7ffa2; background:linear-gradient(#b1ec89,#5cc834 48%,#36a520 52%,#91dd73); }
+.skills-list { margin:0; padding:5px 0; }
+.skills-list>div { padding:10px 0; border-bottom:1px solid #e5e9ef; }
+.skills-list>div:last-child { border-bottom:0; }
+.skills-list dt { color:#1b4267; font:600 14px/1.4 'Segoe UI',sans-serif; }
+.skills-list dd { margin:4px 0 0; color:#333; font:14px/1.6 'Segoe UI',sans-serif; overflow-wrap:anywhere; }
+.timeline p.coursework { margin-top:8px; line-height:1.6; }
+.achievements-app { grid-column:1/-1; }
+.achievements-list { margin:0; padding:6px 0; list-style:none; }
+.achievements-list li { padding:10px 0; border-bottom:1px solid #e5e9ef; }
+.achievements-list li:last-child { border-bottom:0; }
+.achievements-list strong { font:600 14px/1.4 'Segoe UI',sans-serif; color:#1b4267; }
+.achievements-list p { margin:4px 0 0; color:#333; font:14px/1.5 'Segoe UI',sans-serif; }
 .experience-tiles { padding:6px 0; }
 .contact-tiles { padding:8px 0; grid-template-columns:1fr; gap:3px; }
 .contact-tiles a { border:1px solid transparent; border-radius:2px; background:#fff; box-shadow:none; }
