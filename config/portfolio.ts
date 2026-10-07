@@ -50,10 +50,16 @@ export const desktopUtilities = [
   { id: 'notepad', label: 'Notepad', icon: crystalIcons.notepad, description: 'Write and save notes' },
   { id: 'snake', label: 'Snake', icon: crystalIcons.snake, description: 'Play a quick game' },
   { id: 'gallery', label: 'Gallery', icon: crystalIcons.gallery, description: 'Open the picture library' },
-  { id: 'music', label: 'Music', icon: crystalIcons.music, description: 'Browse and play music' },
+  { id: 'music', label: 'Music', icon: crystalIcons.music, description: 'Listen to my Spotify playlist' },
   { id: 'doom', label: 'DOOM', icon: crystalIcons.gamepad, description: 'Play DOOM online inside Manav OS' },
 ] as const;
 export type DesktopUtilityId = (typeof desktopUtilities)[number]['id'];
+
+export const spotifyMusic = {
+  embedUrl: 'https://open.spotify.com/embed/playlist/0jhgk8M8ITveMfCZJYpXbZ?utm_source=generator&si=aa44161879384bae',
+  playlistUrl: 'https://open.spotify.com/playlist/0jhgk8M8ITveMfCZJYpXbZ',
+  profileUrl: 'https://open.spotify.com/user/bbmdqdt5b0oncnzpy8tmpgxax',
+} as const;
 
 // Hosted players, not locally recreated games. Keep embed URLs and providers here.
 export const onlineGames = {
