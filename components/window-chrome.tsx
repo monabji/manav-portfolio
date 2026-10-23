@@ -64,7 +64,7 @@ export function WindowTitlebar({
           alt=""
           onError={(event) => {
             event.currentTarget.onerror = null;
-            event.currentTarget.src = '/crystal/projects.png';
+            event.currentTarget.src = publicPath('/crystal/projects.png');
           }}
         />
         <span>{title}</span>
@@ -413,7 +413,7 @@ export function ExplorerChrome({
               label: 'Asset credits',
               action: () =>
                 window.open(
-                  '/asset-credits.txt',
+                  publicPath('/asset-credits.txt'),
                   '_blank',
                   'noopener,noreferrer',
                 ),

@@ -549,7 +549,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
             Control Panel
           </Link>
           <a
-            href="/asset-credits.txt"
+            href={publicPath('/asset-credits.txt')}
             target="_blank"
             rel="noreferrer"
             tabIndex={menuOpen ? 0 : -1}

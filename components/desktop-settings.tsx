@@ -16,6 +16,10 @@ export function DesktopSettingsProvider({ children }: { children: React.ReactNod
   const [error, setError] = useState('');
 
   useEffect(() => {
+    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === 'true') {
+      setReady(true);
+      return;
+    }
     const controller = new AbortController();
     fetch('/api/site-config', { cache: 'no-store', signal: controller.signal }).then(async response => {
       const data = await response.json() as { settings: DesktopSettings; revision: number; error?: string };

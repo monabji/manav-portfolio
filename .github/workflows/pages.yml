@@ -30,11 +30,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build static site
-        run: npm run build
-        env:
-          GITHUB_PAGES: 'true'
-      - name: Prefix repository paths
-        run: node scripts/prepare-github-pages.mjs
+        run: node scripts/build-github-pages.mjs
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
