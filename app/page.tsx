@@ -1,8 +1,13 @@
 import { PeopleHero3D } from '@/components/people-hero-3d';
 import { AeroWindow } from '@/components/aero-window';
 import { crystalIcons } from '@/config/portfolio';
+import { readConfiguration } from '@/lib/site-store';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+
+export default async function Home() {
+  const { settings } = await readConfiguration();
+  const projectCount = settings.softwareProjects.length + settings.designProjects.length;
   return (
     <main className="route-stage home-stage" id="main-content">
       <AeroWindow title="Welcome to Manav OS" icon={crystalIcons.home} className="home-window">
@@ -18,7 +23,7 @@ export default function Home() {
           </div>
           <PeopleHero3D />
         </div>
-        <div className="window-status"><span>Ready</span><span>4 pages · 11 projects</span></div>
+        <div className="window-status"><span>Ready</span><span>4 pages · {projectCount} projects</span></div>
       </AeroWindow>
     </main>
   );

@@ -34,10 +34,10 @@ export function ProjectsWindow() {
       <div className="projects-app-body">
         <ExplorerSidebar><div className="sidebar-group"><strong><img src={explorerIcons.folder} alt="" />My projects</strong><button className={tab==='software'?'is-active':''} type="button" onClick={() => {setTab('software');sound('select')}}><img src={crystalIcons.code} alt="" />Things I built</button><button className={tab==='design'?'is-active':''} type="button" onClick={() => {setTab('design');sound('select')}}><img src={crystalIcons.blender} alt="" />3D showcase</button><a href="https://special-goat-5c6.notion.site/My-Portfolio-Manav-Bhavin-Soni-2e2e42723d8f802da4fdee6434d0d53c" target="_blank" rel="noreferrer"><img src={explorerIcons.pictures} alt="" />Full showcase</a></div></ExplorerSidebar>
         <section className="explorer-content has-scrollbar" aria-live="polite">
-          <div className="explorer-heading"><div><span>{tab==='software'?'CODE · GAMES · HARDWARE':'3D · ENVIRONMENTS · ASSETS'}</span><h2>{tab==='software'?'Things I’ve built':'Design work'}</h2></div><em>{tab === 'software' ? softwareProjects.length : designProjects.length} items</em></div>
+          <div className="explorer-heading"><h2>{tab==='software'?'Things I’ve built':'Design work'}</h2><em>{tab === 'software' ? softwareProjects.length : designProjects.length} items</em></div>
           {tab === 'software' ? (
             <div className="project-icon-grid">
-              {softwareProjects.map((project,index) => <button key={project.title} type="button" onClick={() => openProject(project)}><span className={`project-file-icon tint-${index+1}`}><img src={project.icon} alt="" /></span><strong>{project.title}</strong><small>{project.status}</small></button>)}
+              {softwareProjects.map((project,index) => <button key={project.title} type="button" onClick={() => openProject(project)}><span className={`project-file-icon tint-${index+1}`}><img src={project.icon} alt="" onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = crystalIcons.projects; }} /></span><strong>{project.title}</strong><small>{project.status}</small></button>)}
             </div>
           ) : (
             <div className="gallery-grid">

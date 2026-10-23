@@ -13,7 +13,7 @@ export function WindowTitlebar({ title, icon, maximized = false, onMinimize, onM
   title: string; icon: string; maximized?: boolean; onMinimize?: () => void; onMaximize?: () => void; onClose: () => void;
 }) {
   return <header {...props} className={`title-bar window-titlebar ${props.className || ''}`}>
-    <div className="title-bar-text window-title"><img src={icon} alt="" /><span>{title}</span></div>
+    <div className="title-bar-text window-title"><img src={icon} alt="" onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = '/crystal/projects.png'; }} /><span>{title}</span></div>
     <div className="title-bar-controls window-controls" aria-label={`${title} window controls`} onDoubleClick={event => event.stopPropagation()}>
       {onMinimize && <button type="button" className="is-minimize" aria-label={`Minimize ${title}`} title="Minimize" onClick={onMinimize} />}
       {onMaximize && <button type="button" className={maximized ? 'is-restore' : 'is-maximize'} aria-label={`${maximized ? 'Restore' : 'Maximize'} ${title}`} title={maximized ? 'Restore' : 'Maximize'} onClick={onMaximize} />}
