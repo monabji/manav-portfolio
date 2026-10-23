@@ -1,7 +1,7 @@
 import { sites } from '@openai/sites-vite-plugin';
 import tailwindcss from '@tailwindcss/postcss';
 import vinext from 'vinext';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import hostingConfig from './.openai/hosting.json';
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
@@ -11,6 +11,43 @@ const { d1, r2 } = hostingConfig;
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === 'seatbelt';
+
+function preserveVinextLinkNavigation(): Plugin {
+  return {
+    name: 'preserve-vinext-link-navigation',
+    apply: 'build',
+    enforce: 'pre',
+    transform(code, id) {
+      if (
+        this.environment.name !== 'client' ||
+        !id.replaceAll('\\', '/').endsWith('/vinext/dist/shims/link.js') ||
+        !code.includes('import("./navigation.js")')
+      )
+        return;
+
+      // vinext beta.5 / Rolldown 1.0.1 can merge navigation into the browser
+      // entry and lose named dynamic-import namespaces. Keep these namespaces
+      // statically analyzable so production Link clicks and prefetch both work.
+      // The shell already loads navigation through its useRouter/usePathname hooks.
+      const patched = code
+        .replaceAll(
+          'import("./navigation.js")',
+          'Promise.resolve(__vinextNavigation)',
+        )
+        .replaceAll(
+          'import("../server/app-rsc-cache-busting.js")',
+          'Promise.resolve(__vinextRscCacheBusting)',
+        );
+      return {
+        code: patched.replace(
+          '"use client";',
+          '"use client";\nimport * as __vinextNavigation from "./navigation.js";\nimport * as __vinextRscCacheBusting from "../server/app-rsc-cache-busting.js";',
+        ),
+        map: null,
+      };
+    },
+  };
+}
 
 const localBindingConfig = {
   main: 'vinext/server/fetch-handler',
@@ -50,6 +87,7 @@ export default defineConfig(async () => {
       ? { watch: { useFsEvents: false, usePolling: true } }
       : undefined,
     plugins: [
+      preserveVinextLinkNavigation(),
       vinext(),
       sites(),
       cloudflare({
