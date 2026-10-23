@@ -54,6 +54,8 @@ Retain existing compact rectangular controls, small corner radii, and Crystal ic
 
 AeroWindow owns route window state; DesktopUtilityWindow owns utility placement; WindowTitlebar owns window controls; ExplorerChrome and ExplorerSidebar own shared navigation. About tabs and Projects category buttons retain their current content and selection model. Use framework navigation for internal routes with the same rendered anchors, URLs, and keyboard semantics. Native back/forward, project deep links, and external destinations remain available.
 
+Hosted games remain inside DesktopUtilityWindow. OnlineGameApp owns loading, keyboard focus, restart, and visible controls. Its provider iframe scales as a whole from a 680×660 viewport to preserve the host's start button, canvas, attribution, and fullscreen control; the game window's sizing and compact toolbar remain in app/desktop-theme.css. Closing a game unmounts its iframe.
+
 ## Do's and Don'ts
 
 Keep visible animation geometry, materials, and timing. Suspend work when content is hidden, and respect reduced-motion preferences. Deliver pixel-identical lossless artwork where available; leave custom media URLs untouched. Optimize rendering, scheduling, and transfer costs without removing features or redesigning the interface.

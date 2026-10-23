@@ -4,6 +4,7 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { SnakeGame } from './snake-game';
 import { OnlineGameApp } from './online-game-app';
 import { SpotifyMusic } from './spotify-music';
+import { crystalIcons } from '@/config/portfolio';
 import {
   ExplorerChrome,
   ExplorerSidebar,

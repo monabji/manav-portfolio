@@ -95,9 +95,9 @@ export const spotifyMusic = {
 export const onlineGames = {
   doom: {
     title: 'DOOM',
-    provider: 'Internet Archive',
-    sourceUrl: 'https://archive.org/details/DoomsharewareEpisode',
-    embedUrl: 'https://archive.org/embed/DoomsharewareEpisode',
+    provider: 'TheDoggyBrad / JS-DOS',
+    sourceUrl: 'https://thedoggybrad.github.io/doom_on_js-dos/',
+    embedUrl: 'https://thedoggybrad.github.io/doom_on_js-dos/',
   },
 } as const;
 

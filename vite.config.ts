@@ -14,7 +14,6 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === 'seatbelt';
 
 function preserveVinextLinkNavigation(): Plugin {
   return {
-    base: '/',
     name: 'preserve-vinext-link-navigation',
     apply: 'build',
     enforce: 'pre',
