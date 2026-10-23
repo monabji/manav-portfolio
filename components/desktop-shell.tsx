@@ -13,6 +13,7 @@ import {
 import { DesktopUtilityWindow } from './desktop-utility-window';
 import { useDesktopSettings } from './desktop-settings';
 import { DesktopShortcuts } from './desktop-shortcuts';
+import { publicPath } from '@/lib/public-path';
 
 type UtilityState = {
   open: boolean;
@@ -98,7 +99,7 @@ function BrandIcon({
     );
   return (
     <span className={`desktop-brand desktop-brand-${brand}`} aria-hidden="true">
-      <img src={`/brands/${brand}.svg`} alt="" />
+      <img src={publicPath(`/brands/${brand}.svg`)} alt="" />
     </span>
   );
 }
@@ -626,8 +627,8 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
             <img
               src={
                 soundOn
-                  ? '/win7/shell/volume.webp'
-                  : '/win7/shell/volume-muted.webp'
+                  ? publicPath('/win7/shell/volume.webp')
+                  : publicPath('/win7/shell/volume-muted.webp')
               }
               alt=""
             />

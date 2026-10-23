@@ -5,13 +5,14 @@ import { crystalIcons, desktopApps, desktopLinks, desktopUtilities, type Project
 import { useDesktopSettings, type DesktopSettings, type PersonalShortcut } from './desktop-settings';
 import { defaultSettings, safeUrl, validateSettings, type Experience } from '@/lib/site-configuration';
 import { AeroWindow } from './aero-window';
+import { publicPath } from '@/lib/public-path';
 
 const iconChoices = [
   ['Home', crystalIcons.home], ['About', crystalIcons.profile], ['Projects', crystalIcons.projects],
   ['Code', crystalIcons.code], ['Browser', crystalIcons.browser], ['Notepad', crystalIcons.notepad],
   ['Snake', crystalIcons.snake], ['Gallery', crystalIcons.gallery], ['Email', crystalIcons.email],
   ['Music', crystalIcons.music], ['Blender', crystalIcons.blender], ['Graphics', crystalIcons.dashboard],
-  ['Game', crystalIcons.gamepad], ['GitHub', '/brands/github.svg'], ['LinkedIn', '/brands/linkedin.svg'],
+  ['Game', crystalIcons.gamepad], ['GitHub', publicPath('/brands/github.svg')], ['LinkedIn', publicPath('/brands/linkedin.svg')],
 ] as const;
 
 function IconPicker({ value, onChange, label }: { value: string; onChange: (value: string) => void; label: string }) {
@@ -53,7 +54,7 @@ export function PersonalDashboard() {
   const editableApps = useMemo(() => [
     ...desktopApps.map(app => ({ id: `route:${app.href}`, label: app.label, icon: app.icon })),
     ...desktopUtilities.map(app => ({ id: `app:${app.id}`, label: app.label, icon: app.icon })),
-    ...desktopLinks.map(link => ({ id: `link:${link.id}`, label: link.label, icon: link.id === 'email' ? crystalIcons.email : `/brands/${link.id}.svg` })),
+    ...desktopLinks.map(link => ({ id: `link:${link.id}`, label: link.label, icon: link.id === 'email' ? crystalIcons.email : publicPath(`/brands/${link.id}.svg`) })),
   ], []);
   async function save() {
     setBusy(true); setMessage('');

@@ -1,18 +1,20 @@
+import { publicPath } from '@/lib/public-path';
+
 export const crystalIcons = {
-  home: '/crystal/network.png',
-  profile: '/crystal/people.png',
-  projects: '/crystal/projects.png',
-  browser: '/crystal/browser.png',
-  code: '/crystal/graphics.png',
-  blender: '/crystal/blender.png',
-  notepad: '/crystal/notepad.png',
-  gamepad: '/crystal/gamepad.png',
-  snake: '/crystal/ksnake.png',
-  gallery: '/crystal/gallery.png',
-  email: '/aero/email.png',
-  music: '/crystal/sound.png',
-  dashboard: '/crystal/graphics.png',
-  sound: '/crystal/sound.png',
+  home: publicPath('/crystal/network.png'),
+  profile: publicPath('/crystal/people.png'),
+  projects: publicPath('/crystal/projects.png'),
+  browser: publicPath('/crystal/browser.png'),
+  code: publicPath('/crystal/graphics.png'),
+  blender: publicPath('/crystal/blender.png'),
+  notepad: publicPath('/crystal/notepad.png'),
+  gamepad: publicPath('/crystal/gamepad.png'),
+  snake: publicPath('/crystal/ksnake.png'),
+  gallery: publicPath('/crystal/gallery.png'),
+  email: publicPath('/aero/email.png'),
+  music: publicPath('/crystal/sound.png'),
+  dashboard: publicPath('/crystal/graphics.png'),
+  sound: publicPath('/crystal/sound.png'),
 } as const;
 
 export const desktopApps = [
@@ -197,13 +199,13 @@ export const experience = [
   {
     role: 'Technical Core Member',
     organization: 'ACM-VIT, Association for Computing Machinery',
-    logo: '/experience/acm.png',
+    logo: publicPath('/experience/acm.png'),
     alt: 'Association for Computing Machinery logo',
   },
   {
     role: 'Vice President - PR',
     organization: 'Nuvens Toastmasters International',
-    logo: '/experience/toastmasters.png',
+    logo: publicPath('/experience/toastmasters.png'),
     alt: 'Toastmasters International logo',
   },
 ] as const;
@@ -213,13 +215,13 @@ export const socialLinks = [
     label: 'GitHub',
     detail: '@monabji',
     href: 'https://github.com/monabji',
-    icon: '/brands/github.svg',
+    icon: publicPath('/brands/github.svg'),
   },
   {
     label: 'LinkedIn',
     detail: 'Manav Soni',
     href: 'https://in.linkedin.com/in/manav-soni-310784375',
-    icon: '/brands/linkedin.svg',
+    icon: publicPath('/brands/linkedin.svg'),
   },
   {
     label: 'Email',
@@ -412,7 +414,7 @@ export const designProjects: Project[] = [
     title: 'Skull Landscape',
     status: 'Blender',
     category: 'Landscapes / Blender',
-    image: '/work/skull-landscape.png',
+    image: publicPath('/work/skull-landscape.png'),
     alt: 'A Blender render of a skull in a rocky landscape with shallow depth of field',
     description:
       'Natural textures, depth of field, and a cinematic environmental composition.',
@@ -424,7 +426,7 @@ export const designProjects: Project[] = [
     title: 'Liminal Pool',
     status: 'Blender',
     category: 'Landscapes / Blender',
-    image: '/work/liminal-pool.png',
+    image: publicPath('/work/liminal-pool.png'),
     alt: 'A liminal indoor swimming pool rendered in Blender',
     description:
       'An atmospheric interior study built around reflections and spatial lighting.',
@@ -436,7 +438,7 @@ export const designProjects: Project[] = [
     title: 'Flooded Tunnel',
     status: 'Blender',
     category: 'Landscapes / Blender',
-    image: '/work/flooded-tunnel.png',
+    image: publicPath('/work/flooded-tunnel.png'),
     alt: 'A moody flooded tunnel environment rendered in Blender',
     description:
       'Repetition, water, and subdued lighting create an immersive architectural scene.',
@@ -448,7 +450,7 @@ export const designProjects: Project[] = [
     title: 'Fog City',
     status: 'Game map',
     category: 'Game map design',
-    image: '/work/game-map.png',
+    image: publicPath('/work/game-map.png'),
     alt: 'A foggy, abandoned-looking city block designed as a game map',
     description:
       'A quiet urban block with worn buildings, dim streetlights, and an uneasy mood.',
@@ -460,7 +462,7 @@ export const designProjects: Project[] = [
     title: 'Procedural Planet',
     status: 'Blender',
     category: 'Nodes / Blender',
-    image: '/work/procedural-planet.png',
+    image: publicPath('/work/procedural-planet.png'),
     alt: 'A blue procedural planet with cloud detail against a black background',
     description:
       'Layered noise and shader nodes create scalable terrain, clouds, and atmosphere.',
@@ -472,7 +474,7 @@ export const designProjects: Project[] = [
     title: 'Board Game Assets',
     status: 'Blender',
     category: 'Assets / Blender',
-    image: '/work/dice-assets.png',
+    image: publicPath('/work/dice-assets.png'),
     alt: 'A colorful Blender render of a die surrounded by board game pawns',
     description:
       'A playful modeling and materials study using simple, readable forms.',

@@ -12,6 +12,7 @@ import {
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { workspaceApps, desktopUtilities } from '@/config/portfolio';
+import { publicPath } from '@/lib/public-path';
 import { useDesktopSettings } from './desktop-settings';
 import {
   DropdownMenu,
@@ -32,7 +33,7 @@ export const explorerIcons = Object.fromEntries(
     'desktop',
     'folder',
     'help',
-  ].map((name) => [name, `/win7/selected/${name}-16.png`]),
+  ].map((name) => [name, publicPath(`/win7/selected/${name}-16.png`)]),
 ) as Record<string, string>;
 export type Breadcrumb = { label: string; href?: string; onClick?: () => void };
 

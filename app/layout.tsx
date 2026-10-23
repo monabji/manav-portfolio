@@ -12,7 +12,7 @@ import './explorer.css';
 import './desktop-theme.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://manav-bhavin-soni-portfolio.monabji.chatgpt.site'),
+  metadataBase: new URL('https://monabji.github.io/manav-portfolio/'),
   title: {
     default: 'Manav - 3D Designer & Game Developer',
     template: '%s - Manav',

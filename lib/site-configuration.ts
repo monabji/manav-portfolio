@@ -1,4 +1,5 @@
 import { softwareProjects, designProjects, experience, desktopUtilities, type Project } from '@/config/portfolio';
+import { publicPath } from '@/lib/public-path';
 
 export type PersonalShortcut = { id: string; label: string; href: string; icon: string; mode?: 'link' | 'window' };
 export type Experience = { role: string; organization: string; logo: string; alt: string };
@@ -26,7 +27,7 @@ function string(value: unknown, max: number, optional = false): string {
 function url(value: unknown, optional = false): string {
   const text = string(value, 2048, optional);
   if ((text || !optional) && !safeUrl(text, true)) throw new Error('Use HTTPS image URLs or paths within this site.');
-  return text;
+  return publicPath(text);
 }
 function array(value: unknown, max: number): unknown[] {
   if (!Array.isArray(value) || value.length > max) throw new Error('Invalid list or too many items.');

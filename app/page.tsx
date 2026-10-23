@@ -2,14 +2,13 @@ import Link from 'next/link';
 import { PeopleHero3D } from '@/components/people-hero-3d';
 import { AeroWindow } from '@/components/aero-window';
 import { crystalIcons } from '@/config/portfolio';
-import { readConfiguration } from '@/lib/site-store';
+import { defaultSettings } from '@/lib/site-configuration';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
-export default async function Home() {
-  const { settings } = await readConfiguration();
+export default function Home() {
   const projectCount =
-    settings.softwareProjects.length + settings.designProjects.length;
+    defaultSettings.softwareProjects.length + defaultSettings.designProjects.length;
   return (
     <main className="route-stage home-stage" id="main-content">
       <AeroWindow

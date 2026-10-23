@@ -94,7 +94,7 @@ function Gallery() {
         <span>0 items</span>
       </div>
       <div className="gallery-empty">
-        <img src="/crystal/gallery.png" alt="" />
+        <img src={crystalIcons.gallery} alt="" />
         <strong>This folder is empty</strong>
         <span>Photos you add later will appear here.</span>
       </div>

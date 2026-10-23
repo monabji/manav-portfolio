@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { AboutWindow } from '@/components/about-window';
 
+export const dynamic = 'force-static';
+
 export const metadata: Metadata = {
   title: 'About',
   description:
