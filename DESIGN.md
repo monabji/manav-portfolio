@@ -52,6 +52,8 @@ Retain existing compact rectangular controls, small corner radii, and Crystal ic
 
 ## Components
 
+StickyNotes owns desktop paper notes, their colour palette, dragging, and browser-local persistence. Sticky Notes is registered as a desktop utility, adding desktop, Start menu, and taskbar entries; choosing it creates a note. Notes stay mounted through route changes and are removed only by their close button. New notes cycle through yellow, blue, pink, and grey; the header colour menu can change an individual note. app/sticky-notes.css owns the paper palette and Segoe Print handwriting treatment.
+
 AeroWindow owns route window state; DesktopUtilityWindow owns utility placement; WindowTitlebar owns window controls; ExplorerChrome and ExplorerSidebar own shared navigation. About tabs and Projects category buttons retain their current content and selection model. Use framework navigation for internal routes with the same rendered anchors, URLs, and keyboard semantics. Native back/forward, project deep links, and external destinations remain available.
 
 Hosted games remain inside DesktopUtilityWindow. OnlineGameApp owns loading, keyboard focus, restart, and visible controls. Its provider iframe scales as a whole from a 680×660 viewport to preserve the host's start button, canvas, attribution, and fullscreen control; the game window's sizing and compact toolbar remain in app/desktop-theme.css. Closing a game unmounts its iframe.

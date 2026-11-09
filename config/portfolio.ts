@@ -81,6 +81,12 @@ export const desktopUtilities = [
     icon: crystalIcons.gamepad,
     description: 'Play DOOM online inside Manav OS',
   },
+  {
+    id: 'sticky-notes',
+    label: 'Sticky Notes',
+    icon: crystalIcons.notepad,
+    description: 'Create and keep desktop notes',
+  },
 ] as const;
 export type DesktopUtilityId = (typeof desktopUtilities)[number]['id'];
 

@@ -13,6 +13,7 @@ import {
 import { DesktopUtilityWindow } from './desktop-utility-window';
 import { useDesktopSettings } from './desktop-settings';
 import { DesktopShortcuts } from './desktop-shortcuts';
+import { StickyNotes } from './sticky-notes';
 import { publicPath } from '@/lib/public-path';
 
 type UtilityState = {
@@ -237,6 +238,12 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
     }));
   };
   const openUtility = (id: string) => {
+    if (id === 'sticky-notes') {
+      window.dispatchEvent(new Event('manav:new-sticky-note'));
+      setMenuOpen(false);
+      if (soundOn) playTone('open');
+      return;
+    }
     desktopSnapshot.current = null;
     zCounter.current += 1;
     changeUtility(id, {
@@ -327,6 +334,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
         ))}
       </div>
 
+      <StickyNotes />
       <DesktopShortcuts>
         {workspaceApps
           .filter((app) => app.href !== '/')
@@ -392,6 +400,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
 
       <div className="desktop-workspace">{children}</div>
       {applications.map((app) => (
+        app.id === 'sticky-notes' ? null :
         <DesktopUtilityWindow
           key={app.id}
           id={app.id}
