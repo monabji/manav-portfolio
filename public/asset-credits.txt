@@ -5,7 +5,12 @@ Desktop wallpaper
 Source: https://wallpapers.com/background/windows-7-background-imfecqv6cnsicbx4.html
 Wallpaper provided by Wallpapers.com and used with the attribution requested on its source page.
 
-Interface icons
+Welcome window background
+"Bliss" photograph by Charles O'Rear, with rights acquired by Microsoft for Windows XP.
+Source file: https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png
+Background: https://en.wikipedia.org/wiki/Bliss_(photograph)
+
+Legacy Crystal Project icons (retained in public/crystal)
 Crystal Project icons by Everaldo Coelho, used under GNU LGPL 2.1 or later.
 Source and icon gallery: https://commons.wikimedia.org/wiki/Category:Crystal_Project_App_Icons
 Blender icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_Blender.png
@@ -13,6 +18,12 @@ Notepad (KEdit) icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_ke
 Snake (KSnake) icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_Ksnake.png
 Gallery (KView) icon: https://commons.wikimedia.org/wiki/File:Crystal_Project_Kview.png
 License: https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+Windows 7 application and Explorer icons
+Windows Se7en icon theme by B00merang-Artwork, based on the original Win2-7 icon theme. The upstream README credits Xopek-Endurance.
+Source: https://github.com/B00merang-Artwork/Windows-7
+Credits: https://github.com/B00merang-Artwork/Windows-7/blob/master/README.md
+No license file or repository license metadata was present in the source repository.
 
 Included sample music (CC0 1.0)
 "Emotional piano" by triangelx: https://commons.wikimedia.org/wiki/File:Emotional_piano.wav
