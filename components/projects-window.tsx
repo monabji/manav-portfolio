@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'next/navigation';
 import { getOptimizedImageSrc } from '@/lib/optimized-image';
+import { publicPath } from '@/lib/public-path';
 import { AeroWindow } from './aero-window';
 import { useAeroSound } from './desktop-shell';
 import {
@@ -12,7 +13,7 @@ import {
   WindowTitlebar,
   explorerIcons,
 } from './window-chrome';
-import { crystalIcons, type Project } from '@/config/portfolio';
+import { windows7Icons, type Project } from '@/config/portfolio';
 import { useDesktopSettings } from './desktop-settings';
 
 export function ProjectsWindow() {
@@ -29,22 +30,38 @@ export function ProjectsWindow() {
 
   useEffect(() => {
     if (!ready) return;
-    const slug = projectSlug;
+    const slug =
+      new URLSearchParams(window.location.search).get('project') || projectSlug;
     const project = [...softwareProjects, ...designProjects].find(
       (item) => item.title.toLowerCase().replaceAll(' ', '-') === slug,
     );
     setSelected(project || null);
     if (project)
       setTab(designProjects.includes(project) ? 'design' : 'software');
+    const openProjectFromLibrary = (event: Event) => {
+      const projectTitle = (event as CustomEvent<string>).detail;
+      const selectedProject = [...softwareProjects, ...designProjects].find(
+        (item) => item.title === projectTitle,
+      );
+      if (!selectedProject) return;
+      setSelected(selectedProject);
+      setTab(designProjects.includes(selectedProject) ? 'design' : 'software');
+      setDetailMaximized(false);
+      setDetailMinimized(false);
+    };
     const close = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setSelected(null);
         setDetailMinimized(false);
-        history.replaceState(null, '', '/projects');
+        history.replaceState(null, '', publicPath('/projects'));
       }
     };
     window.addEventListener('keydown', close);
-    return () => window.removeEventListener('keydown', close);
+    window.addEventListener('manav:open-project', openProjectFromLibrary);
+    return () => {
+      window.removeEventListener('keydown', close);
+      window.removeEventListener('manav:open-project', openProjectFromLibrary);
+    };
   }, [ready, softwareProjects, designProjects, projectSlug]);
 
   const openProject = (project: Project) => {
@@ -55,20 +72,20 @@ export function ProjectsWindow() {
     history.replaceState(
       null,
       '',
-      `/projects?project=${encodeURIComponent(project.title.toLowerCase().replaceAll(' ', '-'))}`,
+      `${publicPath('/projects')}?project=${encodeURIComponent(project.title.toLowerCase().replaceAll(' ', '-'))}`,
     );
   };
   const closeProject = () => {
     setSelected(null);
     setDetailMinimized(false);
     sound('close');
-    history.replaceState(null, '', '/projects');
+    history.replaceState(null, '', publicPath('/projects'));
   };
 
   return (
     <AeroWindow
       title="Manav's Project Explorer"
-      icon={crystalIcons.projects}
+      icon={windows7Icons.projects}
       className="content-window projects-window"
       hasSidebar
       breadcrumbs={[
@@ -91,7 +108,7 @@ export function ProjectsWindow() {
                 sound('select');
               }}
             >
-              <img src={crystalIcons.code} alt="" />
+              <img src={windows7Icons.code} alt="" />
               Things I built
             </button>
             <button
@@ -102,7 +119,7 @@ export function ProjectsWindow() {
                 sound('select');
               }}
             >
-              <img src={crystalIcons.blender} alt="" />
+              <img src={windows7Icons.blender} alt="" />
               3D showcase
             </button>
             <a
@@ -139,7 +156,7 @@ export function ProjectsWindow() {
                       alt=""
                       onError={(event) => {
                         event.currentTarget.onerror = null;
-                        event.currentTarget.src = crystalIcons.projects;
+                        event.currentTarget.src = windows7Icons.projects;
                       }}
                     />
                   </span>

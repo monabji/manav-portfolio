@@ -4,7 +4,10 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { SnakeGame } from './snake-game';
 import { OnlineGameApp } from './online-game-app';
 import { SpotifyMusic } from './spotify-music';
-import { crystalIcons } from '@/config/portfolio';
+import { windows7Icons } from '@/config/portfolio';
+import { getOptimizedImageSrc } from '@/lib/optimized-image';
+import { useDesktopSettings } from './desktop-settings';
+import Link from 'next/link';
 import {
   ExplorerChrome,
   ExplorerSidebar,
@@ -88,20 +91,56 @@ function Notepad() {
 }
 
 function Gallery() {
+  const {
+    settings: { designProjects },
+  } = useDesktopSettings();
+
   return (
     <div className="gallery-app has-scrollbar">
       <div className="gallery-toolbar">
         <span>Pictures Library</span>
-        <span>0 items</span>
+        <span>{designProjects.length} items</span>
       </div>
-      <div className="gallery-empty">
-        <img src={crystalIcons.gallery} alt="" />
-        <strong>This folder is empty</strong>
-        <span>Photos you add later will appear here.</span>
-      </div>
+      {designProjects.length ? (
+        <div className="gallery-grid">
+          {designProjects.map((project) => (
+            <Link
+              key={project.title}
+              href={`/projects?project=${encodeURIComponent(project.title.toLowerCase().replaceAll(' ', '-'))}`}
+              aria-label={`Open ${project.title} in the 3D showcase`}
+              onClick={() => {
+                window.dispatchEvent(
+                  new CustomEvent('manav:open-project', {
+                    detail: project.title,
+                  }),
+                );
+              }}
+            >
+              <img
+                src={
+                  project.image
+                    ? getOptimizedImageSrc(project.image)
+                    : windows7Icons.gallery
+                }
+                alt={project.alt}
+              />
+              <span>
+                <strong>{project.title}</strong>
+                <small>{project.category}</small>
+              </span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="gallery-empty">
+          <img src={windows7Icons.gallery} alt="" />
+          <strong>No images to show</strong>
+          <span>Design work will appear here when it is added.</span>
+        </div>
+      )}
       <div className="utility-status">
         <span>Gallery</span>
-        <span>0 pictures</span>
+        <span>{designProjects.length} pictures</span>
       </div>
     </div>
   );

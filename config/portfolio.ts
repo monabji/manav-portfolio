@@ -17,9 +17,6 @@ export const windows7Icons = {
   sound: publicPath('/win7/theme/apps/multimedia-volume-control.png'),
 } as const;
 
-// Kept while the Pictures Library and project explorer migrate to the theme registry.
-export const crystalIcons = windows7Icons;
-
 export const desktopApps = [
   {
     href: '/',
