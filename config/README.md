@@ -12,7 +12,7 @@ Edit `portfolio.ts` to extend the site without changing page components.
 - Skills are plain-text categories (`label` and `detail`), not proficiency scores. Résumé achievements live in `achievements`; optional education `detail` holds coursework.
 - Add project cards in `softwareProjects` or `designProjects`.
 - Change the Music app's playlist embed, playlist link, or profile link in `spotifyMusic`. `components/spotify-music.tsx` renders Spotify's player inside the shared Explorer window; it replaces the old sample-file player.
-- Put reusable interface icons in `public/crystal` and register their paths in `crystalIcons`.
+- Put reusable Windows Se7en interface icons in `public/win7/theme` and register their paths in `windows7Icons`.
 - Keep shared content and app metadata in this file rather than duplicating it in page components.
 
 ## Secured live dashboard

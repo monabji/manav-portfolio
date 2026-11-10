@@ -1,18 +1,18 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { crystalIcons, desktopApps, desktopLinks, desktopUtilities, type Project } from '@/config/portfolio';
+import { windows7Icons, desktopApps, desktopLinks, desktopUtilities, type Project } from '@/config/portfolio';
 import { useDesktopSettings, type DesktopSettings, type PersonalShortcut } from './desktop-settings';
 import { defaultSettings, safeUrl, validateSettings, type Experience } from '@/lib/site-configuration';
 import { AeroWindow } from './aero-window';
 import { publicPath } from '@/lib/public-path';
 
 const iconChoices = [
-  ['Home', crystalIcons.home], ['About', crystalIcons.profile], ['Projects', crystalIcons.projects],
-  ['Code', crystalIcons.code], ['Browser', crystalIcons.browser], ['Notepad', crystalIcons.notepad],
-  ['Snake', crystalIcons.snake], ['Gallery', crystalIcons.gallery], ['Email', crystalIcons.email],
-  ['Music', crystalIcons.music], ['Blender', crystalIcons.blender], ['Graphics', crystalIcons.dashboard],
-  ['Game', crystalIcons.gamepad], ['GitHub', publicPath('/brands/github.svg')], ['LinkedIn', publicPath('/brands/linkedin.svg')],
+  ['Home', windows7Icons.home], ['About', windows7Icons.profile], ['Projects', windows7Icons.projects],
+  ['Code', windows7Icons.code], ['Browser', windows7Icons.browser], ['Notepad', windows7Icons.notepad],
+  ['Snake', windows7Icons.snake], ['Gallery', windows7Icons.gallery], ['Email', windows7Icons.email],
+  ['Music', windows7Icons.music], ['Blender', windows7Icons.blender], ['Graphics', windows7Icons.dashboard],
+  ['Game', windows7Icons.gamepad], ['GitHub', publicPath('/brands/github.svg')], ['LinkedIn', publicPath('/brands/linkedin.svg')],
 ] as const;
 
 function IconPicker({ value, onChange, label }: { value: string; onChange: (value: string) => void; label: string }) {
@@ -37,7 +37,7 @@ export function PersonalDashboard() {
   const [wallpaperDraft, setWallpaperDraft] = useState('');
   const [shortcutName, setShortcutName] = useState('');
   const [shortcutHref, setShortcutHref] = useState('');
-  const [shortcutIcon, setShortcutIcon] = useState<string>(crystalIcons.browser);
+  const [shortcutIcon, setShortcutIcon] = useState<string>(windows7Icons.browser);
   const [shortcutMode, setShortcutMode] = useState<'link' | 'window'>('link');
   const importRef = useRef<HTMLInputElement>(null);
   const saved = useRef('');
@@ -54,7 +54,7 @@ export function PersonalDashboard() {
   const editableApps = useMemo(() => [
     ...desktopApps.map(app => ({ id: `route:${app.href}`, label: app.label, icon: app.icon })),
     ...desktopUtilities.map(app => ({ id: `app:${app.id}`, label: app.label, icon: app.icon })),
-    ...desktopLinks.map(link => ({ id: `link:${link.id}`, label: link.label, icon: link.id === 'email' ? crystalIcons.email : publicPath(`/brands/${link.id}.svg`) })),
+    ...desktopLinks.map(link => ({ id: `link:${link.id}`, label: link.label, icon: link.id === 'email' ? windows7Icons.email : publicPath(`/brands/${link.id}.svg`) })),
   ], []);
   async function save() {
     setBusy(true); setMessage('');
@@ -99,23 +99,23 @@ export function PersonalDashboard() {
   const updateApp = (id: string, patch: Partial<PersonalShortcut>) => change({ ...settings, shortcuts: settings.shortcuts.map(item => item.id === id ? { ...item, ...patch } : item) });
 
   return <main className="route-stage dashboard-stage" id="main-content">
-    <AeroWindow title="Manav OS Control Panel" icon={crystalIcons.dashboard} className="content-window dashboard-window" breadcrumbs={[{ label: 'Computer' }, { label: 'Control Panel' }]}>
+    <AeroWindow title="Manav OS Control Panel" icon={windows7Icons.dashboard} className="content-window dashboard-window" breadcrumbs={[{ label: 'Computer' }, { label: 'Control Panel' }]}>
       <div className="dashboard-body has-scrollbar">
         <header className="dashboard-heading"><div><span className="dashboard-kicker">MANAV OS · ADMINISTRATOR</span><h1>Control Panel</h1><p>Edit your portfolio and desktop. Changes go live only when you publish.</p></div><button type="button" onClick={() => void logout()} disabled={busy}>Sign out</button></header>
         <div className="dashboard-publish-bar"><span>{error || (!ready ? 'Loading live configuration…' : dirty ? 'Unpublished changes' : 'All changes published')}</span><button type="button" disabled={busy || !ready || !!error || !dirty} onClick={() => void save()}>{busy ? 'Please wait…' : 'Publish changes'}</button></div>
         <p className="dashboard-message" role="status" aria-live="polite">{message}</p>
         <fieldset className="dashboard-editor" disabled={busy || !ready || !!error}>
           <section className="dashboard-section">
-            <SectionHeading icon={crystalIcons.gallery} title="Wallpaper" description="Use an image URL or upload a PNG, JPEG, WebP, or GIF under 1.5 MB." />
+            <SectionHeading icon={windows7Icons.gallery} title="Wallpaper" description="Use an image URL or upload a PNG, JPEG, WebP, or GIF under 1.5 MB." />
             <div className="dashboard-wallpaper-row"><input aria-label="Wallpaper image URL" placeholder="https://example.com/wallpaper.jpg" value={wallpaperDraft} onChange={event => setWallpaperDraft(event.target.value)} /><button type="button" onClick={() => { if (safeUrl(wallpaperDraft, true)) change({ ...settings, wallpaper: wallpaperDraft }); else setMessage('Use an HTTPS image URL or /path.'); }}>Use URL</button><label className="dashboard-file-button">Choose image<input type="file" accept="image/png,image/jpeg,image/webp,image/gif" onChange={event => void loadWallpaper(event)} /></label><button type="button" onClick={() => change({ ...settings, wallpaper: '' })}>Default wallpaper</button></div>
             <div className="dashboard-current-wallpaper"><span>Current preview</span><span className="wallpaper-preview" style={settings.wallpaper ? { backgroundImage: `url("${settings.wallpaper.replaceAll('"', '%22')}")` } : undefined} /></div>
           </section>
           <section className="dashboard-section">
-            <SectionHeading icon={crystalIcons.projects} title="Desktop icons" description="Choose a Crystal icon or supply your own image URL." />
+            <SectionHeading icon={windows7Icons.projects} title="Desktop icons" description="Choose a Windows 7 theme icon or supply your own image URL." />
             <div className="dashboard-icon-list">{editableApps.map(app => <div key={app.id}><strong>{app.label}</strong><IconPicker label={`${app.label} icon`} value={settings.iconOverrides[app.id] || app.icon} onChange={icon => change({ ...settings, iconOverrides: { ...settings.iconOverrides, [app.id]: icon } })} /></div>)}</div>
           </section>
           {(['softwareProjects', 'designProjects'] as const).map(kind => <section key={kind} className="dashboard-section">
-            <SectionHeading icon={kind === 'designProjects' ? crystalIcons.blender : crystalIcons.code} title={kind === 'softwareProjects' ? 'Projects' : '3D showcase'} description="Add, edit, or remove projects, with images, tags, repository links, and live website links." />
+            <SectionHeading icon={kind === 'designProjects' ? windows7Icons.blender : windows7Icons.code} title={kind === 'softwareProjects' ? 'Projects' : '3D showcase'} description="Add, edit, or remove projects, with images, tags, repository links, and live website links." />
             <div className="dashboard-records">{settings[kind].map((project, index) => <details key={index}>
               <summary><img src={project.icon} alt="" />{project.title || 'Untitled project'}<small>{project.status}</small></summary>
               <div className="dashboard-record-form"><Field label="Project title" value={project.title} onChange={title => updateProject(kind, index, { title })} /><Field label="Status" value={project.status} onChange={status => updateProject(kind, index, { status })} /><Field label="Description" value={project.description} multiline onChange={description => updateProject(kind, index, { description })} /><Field label="Tags (comma separated)" value={project.tags.join(',')} onChange={value => updateProject(kind, index, { tags: value.split(',') })} /><Field label="Image URL (optional)" value={project.image || ''} onChange={image => updateProject(kind, index, { image })} /><Field label="Image description" value={project.alt || ''} onChange={alt => updateProject(kind, index, { alt })} /><Field label="Category" value={project.category || ''} onChange={category => updateProject(kind, index, { category })} /><IconPicker label="Project icon" value={project.icon} onChange={icon => updateProject(kind, index, { icon })} />
@@ -123,15 +123,15 @@ export function PersonalDashboard() {
                 <button type="button" onClick={() => change({ ...settings, [kind]: settings[kind].filter((_, i) => i !== index) })}>Remove project</button>
               </div>
             </details>)}</div>
-            <button type="button" onClick={() => change({ ...settings, [kind]: [...settings[kind], { title: 'New project', status: 'In progress', description: '', tags: [], links: [], icon: kind === 'designProjects' ? crystalIcons.blender : crystalIcons.code }] })}>Add {kind === 'designProjects' ? '3D project' : 'project'}</button>
+            <button type="button" onClick={() => change({ ...settings, [kind]: [...settings[kind], { title: 'New project', status: 'In progress', description: '', tags: [], links: [], icon: kind === 'designProjects' ? windows7Icons.blender : windows7Icons.code }] })}>Add {kind === 'designProjects' ? '3D project' : 'project'}</button>
           </section>)}
           <section className="dashboard-section">
-            <SectionHeading icon={crystalIcons.profile} title="Experience" description="Manage your roles, organizations, and logos." />
+            <SectionHeading icon={windows7Icons.profile} title="Experience" description="Manage your roles, organizations, and logos." />
             <div className="dashboard-records">{settings.experience.map((item, index) => <details key={index}><summary><img src={item.logo} alt="" />{item.role || 'New role'}<small>{item.organization}</small></summary><div className="dashboard-record-form"><Field label="Role" value={item.role} onChange={role => updateExperience(index, { role })} /><Field label="Organization" value={item.organization} onChange={organization => updateExperience(index, { organization })} /><Field label="Logo URL" value={item.logo} onChange={logo => updateExperience(index, { logo })} /><Field label="Logo description" value={item.alt} onChange={alt => updateExperience(index, { alt })} /><button type="button" onClick={() => change({ ...settings, experience: settings.experience.filter((_, i) => i !== index) })}>Remove experience</button></div></details>)}</div>
-            <button type="button" onClick={() => change({ ...settings, experience: [...settings.experience, { role: 'New role', organization: '', logo: crystalIcons.profile, alt: '' }] })}>Add experience</button>
+            <button type="button" onClick={() => change({ ...settings, experience: [...settings.experience, { role: 'New role', organization: '', logo: windows7Icons.profile, alt: '' }] })}>Add experience</button>
           </section>
           <section className="dashboard-section">
-            <SectionHeading icon={crystalIcons.browser} title="Applications and shortcuts" description="Add a desktop link or an online application that opens inside a Manav OS window." />
+            <SectionHeading icon={windows7Icons.browser} title="Applications and shortcuts" description="Add a desktop link or an online application that opens inside a Manav OS window." />
             <form className="dashboard-add-shortcut" onSubmit={event => {
               event.preventDefault(); if (!shortcutName.trim() || !safeUrl(shortcutHref) || (shortcutMode === 'window' && !shortcutHref.startsWith('https://'))) { setMessage('Enter a name and a valid URL. Window applications need HTTPS.'); return; }
               change({ ...settings, shortcuts: [...settings.shortcuts, { id: crypto.randomUUID(), label: shortcutName.trim(), href: shortcutHref, icon: shortcutIcon, mode: shortcutMode }] }); setShortcutName(''); setShortcutHref('');

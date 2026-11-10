@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { PeopleHero3D } from '@/components/people-hero-3d';
 import { AeroWindow } from '@/components/aero-window';
-import { crystalIcons } from '@/config/portfolio';
+import { windows7Icons } from '@/config/portfolio';
 import { defaultSettings } from '@/lib/site-configuration';
+import { publicPath } from '@/lib/public-path';
 
 export const dynamic = 'force-static';
 
@@ -13,10 +13,18 @@ export default function Home() {
     <main className="route-stage home-stage" id="main-content">
       <AeroWindow
         title="Welcome to Manav OS"
-        icon={crystalIcons.home}
+        icon={windows7Icons.home}
         className="home-window"
       >
-        <div className="home-window-body">
+        <div
+          className="home-window-body"
+          style={{
+            backgroundImage: `linear-gradient(rgba(242,250,255,.28), rgba(232,246,252,.18)), url("${publicPath('/wallpapers/bliss-xp.png')}")`,
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+        >
           <div className="landing-copy">
             <h1 id="landing-title">Manav</h1>
             <p>a boy who loves tech.</p>
@@ -29,7 +37,7 @@ export default function Home() {
                 href="/about"
                 className="aero-button aero-button-primary"
               >
-                <img src={crystalIcons.profile} alt="" />
+                <img src={windows7Icons.profile} alt="" />
                 know more about me
               </Link>
               <Link
@@ -37,7 +45,7 @@ export default function Home() {
                 href="/projects"
                 className="aero-button aero-button-secondary"
               >
-                <img src={crystalIcons.projects} alt="" />
+                <img src={windows7Icons.projects} alt="" />
                 my projects
               </Link>
             </nav>
@@ -45,7 +53,6 @@ export default function Home() {
               Open a shortcut or choose an app from the taskbar.
             </p>
           </div>
-          <PeopleHero3D />
         </div>
         <div className="window-status">
           <span>Ready</span>

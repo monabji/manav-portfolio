@@ -66,9 +66,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; }
 .window-menubar a { display: inline-flex; align-items: center; height: 26px; padding: 0 .65rem; border: 1px solid transparent; border-radius: 3px; text-decoration: none; }
 .window-menubar a:hover, .window-menubar a:focus-visible { border-color: #80b9dc; background: linear-gradient(#fff, #bbdff4); outline: none; }
 .window-status { background: linear-gradient(#f1f8fb, #d2e5ee); }
-.home-window-body { min-height: min(62vh, 32rem); background: radial-gradient(circle at 70% 46%, #f5ffff, transparent 34%), linear-gradient(145deg, #f3fbff, #dceef8 55%, #b3d9ee); }
+.home-window-body { min-height: min(62vh, 32rem); grid-template-columns: minmax(0, 1fr); place-items: center; background: radial-gradient(circle at 50% 46%, #f5ffff, transparent 40%), linear-gradient(145deg, #f3fbff, #dceef8 55%, #b3d9ee); background-position: center; background-size: cover; background-repeat: no-repeat; }
 .home-window-body:after { display: none; }
 .landing-copy { padding: clamp(2rem, 5vw, 4rem); }
+.landing-copy { width: min(100%, 48rem); text-align: center; }
+.landing-actions { justify-content: center; }
 .landing-copy h1 { color: #fdf9f3; text-shadow: 0 2px 0 #167cb7, 0 5px 0 #0d5b98, 0 12px 24px rgba(0,69,123,.4); }
 .desktop-hint { color: #536c79!important; }
 .aero-button-primary, .aero-button-secondary { background: linear-gradient(#fff, #d8f0ff 47%, #70b9e4 51%, #c9e8f9); }
@@ -261,7 +263,9 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; }
   .desktop-workspace { padding: .35rem .65rem 5.1rem; }
   .aero-window { box-shadow: 0 0 0 1px rgba(17,72,110,.82), 0 0 0 3px rgba(73,155,202,.58), 0 8px 28px rgba(3,32,57,.45); }
   .home-window-body { min-height: calc(100svh - 10.5rem); }
-  .landing-copy { padding: 3.2rem 1.3rem 8rem; }
+  .landing-copy { padding: 2.5rem 1rem; }
+  .landing-actions { flex-direction: column; align-items: center; }
+  .landing-actions .aero-button { width: min(100%, 20rem); }
   .taskbar { grid-template-columns: 54px minmax(0,1fr) 40px 8px; gap: .2rem; padding-right: 0; }
   .start-button { width: 52px; }
   .taskbar-apps a, .taskbar-apps button { width: 46px; min-width: 46px; height: 49px; }

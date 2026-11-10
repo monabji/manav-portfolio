@@ -11,7 +11,7 @@ import {
 } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { workspaceApps, desktopUtilities } from '@/config/portfolio';
+import { windows7Icons, workspaceApps, desktopUtilities } from '@/config/portfolio';
 import { publicPath } from '@/lib/public-path';
 import { useDesktopSettings } from './desktop-settings';
 import {
@@ -21,20 +21,18 @@ import {
   DropdownMenuItem,
 } from './ui/dropdown-menu';
 
-// One source of truth for Explorer chrome; application icons remain Crystal.
-export const explorerIcons = Object.fromEntries(
-  [
-    'libraries',
-    'documents',
-    'pictures',
-    'music',
-    'computer',
-    'favorites',
-    'desktop',
-    'folder',
-    'help',
-  ].map((name) => [name, publicPath(`/win7/selected/${name}-16.png`)]),
-) as Record<string, string>;
+// Keep Explorer's navigation art aligned with the Windows 7 desktop theme.
+export const explorerIcons = {
+  libraries: publicPath('/win7/selected/libraries-16.png'),
+  documents: publicPath('/win7/theme/filesystems/folder-documents.png'),
+  pictures: publicPath('/win7/theme/filesystems/folder-pictures.png'),
+  music: publicPath('/win7/theme/filesystems/folder-music.png'),
+  computer: publicPath('/win7/theme/filesystems/computer.png'),
+  favorites: publicPath('/win7/theme/filesystems/folder_favorite.png'),
+  desktop: publicPath('/win7/theme/filesystems/gnome-fs-desktop.png'),
+  folder: publicPath('/win7/theme/filesystems/folder.png'),
+  help: publicPath('/win7/theme/apps/gnome-help.png'),
+} as const;
 export type Breadcrumb = { label: string; href?: string; onClick?: () => void };
 
 export function WindowTitlebar({
@@ -64,7 +62,7 @@ export function WindowTitlebar({
           alt=""
           onError={(event) => {
             event.currentTarget.onerror = null;
-            event.currentTarget.src = publicPath('/crystal/projects.png');
+            event.currentTarget.src = windows7Icons.projects;
           }}
         />
         <span>{title}</span>

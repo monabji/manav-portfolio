@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import type { Material, Mesh } from 'three';
-import { crystalIcons } from '@/config/portfolio';
+import { windows7Icons } from '@/config/portfolio';
 
 export function PeopleHero3D() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -49,7 +49,7 @@ export function PeopleHero3D() {
         scene.add(group);
 
         const texture = new THREE.TextureLoader().load(
-          crystalIcons.profile,
+          windows7Icons.profile,
           () => requestRender(),
         );
         texture.colorSpace = THREE.SRGBColorSpace;
@@ -245,7 +245,7 @@ export function PeopleHero3D() {
 
     function showFallback() {
       // Retain the portrait on devices where WebGL is unavailable or lost.
-      mount!.style.backgroundImage = `url("${crystalIcons.profile}")`;
+      mount!.style.backgroundImage = `url("${windows7Icons.profile}")`;
       mount!.style.backgroundRepeat = 'no-repeat';
       mount!.style.backgroundPosition = 'center';
       mount!.style.backgroundSize = 'auto 106%';

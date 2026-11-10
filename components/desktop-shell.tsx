@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import {
-  crystalIcons,
+  windows7Icons,
   desktopApps,
   workspaceApps,
   desktopLinks,
@@ -95,7 +95,7 @@ function BrandIcon({
   if (brand === 'email')
     return (
       <span className="desktop-brand desktop-brand-email" aria-hidden="true">
-        <img src={crystalIcons.email} alt="" />
+        <img src={windows7Icons.email} alt="" />
       </span>
     );
   return (
@@ -512,7 +512,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
         </div>
         <div className="start-places">
           <div className="start-user">
-            <img src={crystalIcons.profile} alt="" />
+            <img src={windows7Icons.profile} alt="" />
             <div>
               <strong>Manav</strong>
               <span>VIT Vellore</span>

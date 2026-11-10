@@ -8,7 +8,7 @@ import { ExplorerSidebar, explorerIcons } from './window-chrome';
 import {
   aboutTabs,
   achievements,
-  crystalIcons,
+  windows7Icons,
   education,
   skills,
   socialLinks,
@@ -30,7 +30,7 @@ export function AboutWindow() {
   return (
     <AeroWindow
       title="About Manav"
-      icon={crystalIcons.profile}
+      icon={windows7Icons.profile}
       className="content-window"
       hasSidebar
       breadcrumbs={[{ label: 'About me' }, { label: tab }]}
@@ -100,7 +100,7 @@ export function AboutWindow() {
         >
           <section className="about-profile-card">
             <div className="profile-orb">
-              <img src={crystalIcons.profile} alt="People profile icon" />
+              <img src={windows7Icons.profile} alt="People profile icon" />
             </div>
             <h1>Hi! I&apos;m Manav!</h1>
             <p>
@@ -120,7 +120,7 @@ export function AboutWindow() {
           {(tab === 'Overview' || tab === 'Education') && (
             <section className="app-section education-app">
               <div className="app-section-title">
-                <img src={crystalIcons.home} alt="" />
+                <img src={windows7Icons.home} alt="" />
                 <div>
                   <span>LEARNING JOURNEY</span>
                   <h2>Education</h2>
@@ -145,7 +145,7 @@ export function AboutWindow() {
           {(tab === 'Overview' || tab === 'Skills') && (
             <section className="app-section skills-app">
               <div className="app-section-title">
-                <img src={crystalIcons.code} alt="" />
+                <img src={windows7Icons.code} alt="" />
                 <div>
                   <span>TOOLBOX</span>
                   <h2>Technical skills</h2>
@@ -164,7 +164,7 @@ export function AboutWindow() {
           {(tab === 'Overview' || tab === 'Experience') && (
             <section className="app-section experience-app">
               <div className="app-section-title">
-                <img src={crystalIcons.projects} alt="" />
+                <img src={windows7Icons.projects} alt="" />
                 <div>
                   <span>CURRENT ROLES</span>
                   <h2>Experience</h2>
@@ -190,7 +190,7 @@ export function AboutWindow() {
           {(tab === 'Overview' || tab === 'Connect') && (
             <section className="app-section connect-app">
               <div className="app-section-title">
-                <img src={crystalIcons.browser} alt="" />
+                <img src={windows7Icons.browser} alt="" />
                 <div>
                   <span>CONTACTS</span>
                   <h2>Find me online</h2>
@@ -220,7 +220,7 @@ export function AboutWindow() {
           {(tab === 'Overview' || tab === 'Education') && (
             <section className="app-section achievements-app">
               <div className="app-section-title">
-                <img src={crystalIcons.projects} alt="" />
+                <img src={windows7Icons.projects} alt="" />
                 <div>
                   <h2>Achievements</h2>
                 </div>

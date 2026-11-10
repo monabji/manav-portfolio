@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Manav OS
-description: A portfolio inside a Windows 7 desktop with Crystal icons and Aero window chrome.
+description: A portfolio inside a Windows 7 desktop with the Windows Se7en icon theme and Aero window chrome.
 colors:
   primary: '#0876bb'
   background: '#75d4ff'
@@ -48,7 +48,7 @@ Aero glass, window shadows, title bars, and wallpaper establish the desktop dept
 
 ## Shapes
 
-Retain existing compact rectangular controls, small corner radii, and Crystal icon artwork.
+Retain existing compact rectangular controls, small corner radii, and Windows Se7en icon artwork.
 
 ## Components
 

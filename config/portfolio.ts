@@ -1,46 +1,49 @@
 import { publicPath } from '@/lib/public-path';
 
-export const crystalIcons = {
-  home: publicPath('/crystal/network.png'),
-  profile: publicPath('/crystal/people.png'),
-  projects: publicPath('/crystal/projects.png'),
-  browser: publicPath('/crystal/browser.png'),
-  code: publicPath('/crystal/graphics.png'),
-  blender: publicPath('/crystal/blender.png'),
-  notepad: publicPath('/crystal/notepad.png'),
-  gamepad: publicPath('/crystal/gamepad.png'),
-  snake: publicPath('/crystal/ksnake.png'),
-  gallery: publicPath('/crystal/gallery.png'),
-  email: publicPath('/aero/email.png'),
-  music: publicPath('/crystal/sound.png'),
-  dashboard: publicPath('/crystal/graphics.png'),
-  sound: publicPath('/crystal/sound.png'),
+export const windows7Icons = {
+  home: publicPath('/win7/theme/filesystems/gnome-fs-home.png'),
+  profile: publicPath('/win7/theme/apps/user-icon.png'),
+  projects: publicPath('/win7/theme/filesystems/folder-software.png'),
+  browser: publicPath('/win7/theme/apps/web-browser.png'),
+  code: publicPath('/win7/theme/categories/applications-development.png'),
+  blender: publicPath('/win7/theme/apps/blender.png'),
+  notepad: publicPath('/win7/theme/apps/wine-notepad.png'),
+  gamepad: publicPath('/win7/theme/categories/applications-games.png'),
+  snake: publicPath('/win7/theme/categories/applications-games.png'),
+  gallery: publicPath('/win7/theme/apps/eog.png'),
+  email: publicPath('/win7/theme/apps/internet-mail.png'),
+  music: publicPath('/win7/theme/apps/banshee.png'),
+  dashboard: publicPath('/win7/theme/apps/control-center.png'),
+  sound: publicPath('/win7/theme/apps/multimedia-volume-control.png'),
 } as const;
+
+// Kept while the Pictures Library and project explorer migrate to the theme registry.
+export const crystalIcons = windows7Icons;
 
 export const desktopApps = [
   {
     href: '/',
     label: 'Home',
-    icon: crystalIcons.home,
+    icon: windows7Icons.home,
     description: 'Welcome screen',
   },
   {
     href: '/about',
     label: 'About me',
-    icon: crystalIcons.profile,
+    icon: windows7Icons.profile,
     description: 'Education, skills and experience',
   },
   {
     href: '/projects',
     label: 'My projects',
-    icon: crystalIcons.projects,
+    icon: windows7Icons.projects,
     description: 'Code, games and 3D work',
   },
   {
     href: '/dashboard',
     label: 'My dashboard',
     startMenuOnly: true,
-    icon: crystalIcons.dashboard,
+    icon: windows7Icons.dashboard,
     description: 'Personal desktop settings',
   },
 ] as const;
@@ -54,37 +57,37 @@ export const desktopUtilities = [
   {
     id: 'notepad',
     label: 'Notepad',
-    icon: crystalIcons.notepad,
+    icon: windows7Icons.notepad,
     description: 'Write and save notes',
   },
   {
     id: 'snake',
     label: 'Snake',
-    icon: crystalIcons.snake,
+    icon: windows7Icons.snake,
     description: 'Play a quick game',
   },
   {
     id: 'gallery',
     label: 'Gallery',
-    icon: crystalIcons.gallery,
+    icon: windows7Icons.gallery,
     description: 'Open the picture library',
   },
   {
     id: 'music',
     label: 'Music',
-    icon: crystalIcons.music,
+    icon: windows7Icons.music,
     description: 'Listen to my Spotify playlist',
   },
   {
     id: 'doom',
     label: 'DOOM',
-    icon: crystalIcons.gamepad,
+    icon: windows7Icons.gamepad,
     description: 'Play DOOM online inside Manav OS',
   },
   {
     id: 'sticky-notes',
     label: 'Sticky Notes',
-    icon: crystalIcons.notepad,
+    icon: windows7Icons.notepad,
     description: 'Create and keep desktop notes',
   },
 ] as const;
@@ -233,7 +236,7 @@ export const socialLinks = [
     label: 'Email',
     detail: 'manav.bhavinsoni2025@vitstudent.ac.in',
     href: 'mailto:manav.bhavinsoni2025@vitstudent.ac.in',
-    icon: crystalIcons.email,
+    icon: windows7Icons.email,
   },
 ] as const;
 
@@ -256,7 +259,7 @@ export const softwareProjects: Project[] = [
     description:
       'A supervised regression system that predicts protein stability changes caused by single amino acid mutations. Built an end-to-end workflow covering dataset preprocessing, mutation-level feature preparation, model training, validation and metric-based evaluation. Presented the research use case, methodology and limitations to judges, winning the Code Cortex Hackathon.',
     tags: ['Python', 'Machine learning', 'Regression', 'Biotechnology'],
-    icon: crystalIcons.code,
+    icon: windows7Icons.code,
     links: [
       { label: 'Open source code', href: 'https://github.com/monabji/Manu' },
     ],
@@ -267,7 +270,7 @@ export const softwareProjects: Project[] = [
     description:
       'A PS1-style player-versus-player vehicle combat game built in Unity with C#. Developed responsive car controls, collision handling, damage and game-state logic, and an arcade combat loop. Created low-poly assets and retro materials in Blender, then refined physics, asset scaling, UI and handling through playtesting. Showcased at the Gravitas Expo.',
     tags: ['Unity', 'C#', 'Blender', 'Game development'],
-    icon: crystalIcons.gamepad,
+    icon: windows7Icons.gamepad,
     links: [
       { label: 'Open source code', href: 'https://github.com/ACM-VIT/carwars' },
     ],
@@ -278,7 +281,7 @@ export const softwareProjects: Project[] = [
     description:
       'A MySQL database project in progress connecting research papers, authors, institutions, datasets, methods, citations and keywords. The design models many-to-many authorship relationships and recursive citation networks, translates ER/EER designs into relational schemas, and normalizes tables through 3NF for reliable queries and reduced redundancy.',
     tags: ['MySQL', 'Database design', 'ER/EER modeling', 'Normalization'],
-    icon: crystalIcons.projects,
+    icon: windows7Icons.projects,
     links: [],
   },
   {
@@ -287,7 +290,7 @@ export const softwareProjects: Project[] = [
     description:
       'A nutrient degradation tracker built for the NutriHack Food Hackathon. The project explores food-supply-chain scenarios using product facts, transport assumptions and clearly labeled nutrient-decay and emissions estimates. Built with React, TypeScript and Vite.',
     tags: ['React', 'TypeScript', 'Vite', 'NutriHack'],
-    icon: crystalIcons.projects,
+    icon: windows7Icons.projects,
     links: [
       { label: 'Open source code', href: 'https://github.com/monabji/Sork' },
     ],
@@ -298,7 +301,7 @@ export const softwareProjects: Project[] = [
     description:
       'An AI project in progress for detecting and grading diabetic retinopathy from retinal imagery using the IDRiD dataset.',
     tags: ['Python', 'AI / ML', 'Healthtech'],
-    icon: crystalIcons.code,
+    icon: windows7Icons.code,
     links: [
       {
         label: 'Open source code',
@@ -312,7 +315,7 @@ export const softwareProjects: Project[] = [
     description:
       'A focused website for tracking hackathon winners and collecting standout builds in one browsable library.',
     tags: ['Web', 'Database', 'Hackathons'],
-    icon: crystalIcons.browser,
+    icon: windows7Icons.browser,
     links: [
       {
         label: 'Visit website',
@@ -330,7 +333,7 @@ export const softwareProjects: Project[] = [
     description:
       'An accessible citizen-service redesign for India’s UDID journey: applications, corrections, appointments, renewals, and progress tracking for the Build For India hackathon.',
     tags: ['React', 'TypeScript', 'Accessibility'],
-    icon: crystalIcons.browser,
+    icon: windows7Icons.browser,
     links: [
       {
         label: 'Visit website',
@@ -348,7 +351,7 @@ export const softwareProjects: Project[] = [
     description:
       'A functional ophthalmology training prototype for applanation tonometry and ocular foreign-body removal, built in response to an Aravind Eye Hospital challenge. Integrated a physical model eye, sensing hardware and software feedback to support instrument positioning, force control and repeatable practice. Demonstrated at the ACEi Hackathon in Chennai.',
     tags: ['Healthcare simulation', 'Hardware', 'IoT', 'Software integration'],
-    icon: crystalIcons.code,
+    icon: windows7Icons.code,
     links: [
       {
         label: 'View presentation',
@@ -366,7 +369,7 @@ export const softwareProjects: Project[] = [
     description:
       'A privacy-first Chromium extension that automatically rejects cookie consent pop-ups.',
     tags: ['JavaScript', 'Chromium', 'Browser extension', 'Privacy'],
-    icon: crystalIcons.browser,
+    icon: windows7Icons.browser,
     links: [
       {
         label: 'Open source code',
@@ -380,7 +383,7 @@ export const softwareProjects: Project[] = [
     description:
       'A game-like user interface for the pi harness, written in Zig. This repository is a fork of ACM-VIT/spica.',
     tags: ['Zig', 'UI', 'Game development'],
-    icon: crystalIcons.gamepad,
+    icon: windows7Icons.gamepad,
     links: [
       { label: 'Open source code', href: 'https://github.com/monabji/spica' },
     ],
@@ -391,7 +394,7 @@ export const softwareProjects: Project[] = [
     description:
       'A personal portfolio website that is still being developed and has not yet been hosted.',
     tags: ['TypeScript', 'Portfolio', 'Web'],
-    icon: crystalIcons.home,
+    icon: windows7Icons.home,
     links: [
       {
         label: 'Open source code',
@@ -405,7 +408,7 @@ export const softwareProjects: Project[] = [
     description:
       'A financial learning game for kids, made for the IIIT Hyderabad Megathon x Singularity Hackathon.',
     tags: ['Game development', 'Financial literacy', 'Hackathon'],
-    icon: crystalIcons.profile,
+    icon: windows7Icons.profile,
     links: [
       {
         label: 'Open source code',
@@ -425,7 +428,7 @@ export const designProjects: Project[] = [
     description:
       'Natural textures, depth of field, and a cinematic environmental composition.',
     tags: ['3D', 'Environment'],
-    icon: crystalIcons.blender,
+    icon: windows7Icons.blender,
     links: [],
   },
   {
@@ -437,7 +440,7 @@ export const designProjects: Project[] = [
     description:
       'An atmospheric interior study built around reflections and spatial lighting.',
     tags: ['3D', 'Lighting'],
-    icon: crystalIcons.blender,
+    icon: windows7Icons.blender,
     links: [],
   },
   {
@@ -449,7 +452,7 @@ export const designProjects: Project[] = [
     description:
       'Repetition, water, and subdued lighting create an immersive architectural scene.',
     tags: ['3D', 'Environment'],
-    icon: crystalIcons.blender,
+    icon: windows7Icons.blender,
     links: [],
   },
   {
@@ -461,7 +464,7 @@ export const designProjects: Project[] = [
     description:
       'A quiet urban block with worn buildings, dim streetlights, and an uneasy mood.',
     tags: ['Game map', 'Worldbuilding'],
-    icon: crystalIcons.blender,
+    icon: windows7Icons.blender,
     links: [],
   },
   {
@@ -473,7 +476,7 @@ export const designProjects: Project[] = [
     description:
       'Layered noise and shader nodes create scalable terrain, clouds, and atmosphere.',
     tags: ['Shaders', 'Nodes'],
-    icon: crystalIcons.blender,
+    icon: windows7Icons.blender,
     links: [],
   },
   {
@@ -485,7 +488,7 @@ export const designProjects: Project[] = [
     description:
       'A playful modeling and materials study using simple, readable forms.',
     tags: ['Assets', 'Materials'],
-    icon: crystalIcons.blender,
+    icon: windows7Icons.blender,
     links: [],
   },
 ];
