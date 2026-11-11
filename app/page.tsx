@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { AeroWindow } from '@/components/aero-window';
-import { windows7Icons } from '@/config/portfolio';
+import { desktopApps, windows7Icons } from '@/config/portfolio';
 import { defaultSettings } from '@/lib/site-configuration';
 import { publicPath } from '@/lib/public-path';
 
@@ -55,8 +55,9 @@ export default function Home() {
           </div>
         </div>
         <div className="window-status">
-          <span>Ready</span>
-          <span>4 pages · {projectCount} projects</span>
+          <span style={{ marginLeft: 'auto' }}>
+            {desktopApps.length} pages · {projectCount} projects
+          </span>
         </div>
       </AeroWindow>
     </main>
