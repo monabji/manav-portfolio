@@ -251,6 +251,17 @@ export type Project = {
 
 export const softwareProjects: Project[] = [
   {
+    title: 'Loom',
+    status: 'Early development',
+    description:
+      'A desktop LaTeX workspace for writing research papers, managing references, and previewing compiled PDFs, with optional OpenCode and Codex agents to help with research workflows and build errors.',
+    tags: ['Electron', 'LaTeX', 'TypeScript', 'AI agents'],
+    icon: publicPath('/brands/loom.svg'),
+    links: [
+      { label: 'Open source code', href: 'https://github.com/monabji/Loom' },
+    ],
+  },
+  {
     title: 'MANU',
     status: 'Code Cortex winner',
     description:
