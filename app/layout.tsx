@@ -11,6 +11,7 @@ import '7.css/dist/gui/scrollbar.css';
 import './explorer.css';
 import './desktop-theme.css';
 import './sticky-notes.css';
+import './taskbar-clock.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://monabji.github.io/manav-portfolio/'),

@@ -52,6 +52,8 @@ Retain existing compact rectangular controls, small corner radii, and Windows Se
 
 ## Components
 
+TaskbarClock owns the taskbar date/time trigger and its Windows 7 calendar flyout. It reuses the shared Popover and Calendar primitives, with the reference's blue date heading, compact Sunday-first calendar, and silver analog clock. app/taskbar-clock.css owns the flyout's glass frame, 350px width, compact calendar geometry, and layer above the taskbar; it inherits the shared font and taskbar height. The clock follows the visitor's local time, ticks once per second while open, and has no system-settings link. Month navigation and day selection do not change the system date. Escape and outside clicks dismiss the flyout and keyboard dismissal returns focus to the trigger.
+
 StickyNotes owns desktop paper notes, their colour palette, dragging, and browser-local persistence. Sticky Notes is registered as a desktop utility, adding desktop, Start menu, and taskbar entries; choosing it creates a note. Notes stay mounted through route changes and are removed only by their close button. New notes cycle through yellow, blue, pink, and grey; the header colour menu can change an individual note. app/sticky-notes.css owns the paper palette and Segoe Print handwriting treatment.
 
 AeroWindow owns route window state; DesktopUtilityWindow owns utility placement; WindowTitlebar owns window controls; ExplorerChrome and ExplorerSidebar own shared navigation. About tabs and Projects category buttons retain their current content and selection model. Use framework navigation for internal routes with the same rendered anchors, URLs, and keyboard semantics. Native back/forward, project deep links, and external destinations remain available.

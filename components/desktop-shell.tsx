@@ -14,6 +14,7 @@ import { DesktopUtilityWindow } from './desktop-utility-window';
 import { useDesktopSettings } from './desktop-settings';
 import { DesktopShortcuts } from './desktop-shortcuts';
 import { StickyNotes } from './sticky-notes';
+import { TaskbarClock } from './taskbar-clock';
 import { publicPath } from '@/lib/public-path';
 
 type UtilityState = {
@@ -102,38 +103,6 @@ function BrandIcon({
     <span className={`desktop-brand desktop-brand-${brand}`} aria-hidden="true">
       <img src={publicPath(`/brands/${brand}.svg`)} alt="" />
     </span>
-  );
-}
-
-function DesktopClock() {
-  const [clock, setClock] = useState('');
-  const [date, setDate] = useState('');
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      setClock(
-        new Intl.DateTimeFormat('en-IN', {
-          hour: '2-digit',
-          minute: '2-digit',
-        }).format(now),
-      );
-      setDate(
-        new Intl.DateTimeFormat('en-IN', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        }).format(now),
-      );
-    };
-    updateClock();
-    const timer = window.setInterval(updateClock, 30_000);
-    return () => window.clearInterval(timer);
-  }, []);
-  return (
-    <time>
-      <span>{clock}</span>
-      <span>{date}</span>
-    </time>
   );
 }
 
@@ -635,7 +604,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
             />
             <span>{soundOn ? 'Sound on' : 'Sound off'}</span>
           </button>
-          <DesktopClock />
+          <TaskbarClock />
         </div>
         <button
           type="button"
