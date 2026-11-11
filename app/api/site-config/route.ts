@@ -1,6 +1,5 @@
 import { readConfiguration } from '@/lib/site-store';
-import { json } from '@/lib/admin-auth';
 export async function GET() {
-  try { return json(await readConfiguration()); }
-  catch { console.error('Site configuration could not be read.'); return json({ error: 'Site settings are temporarily unavailable.' }, 503); }
+  try { return Response.json(await readConfiguration(), { headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' } }); }
+  catch { console.error('Site configuration could not be read.'); return Response.json({ error: 'Site settings are temporarily unavailable.' }, { status: 503, headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' } }); }
 }

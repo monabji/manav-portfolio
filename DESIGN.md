@@ -26,7 +26,7 @@ components:
 
 ## Overview
 
-The existing Windows 7 desktop is the visual reference. Visitors explore a personal portfolio through desktop shortcuts, taskbar apps, and Explorer windows. English content uses compact Windows control typography. The owner dashboard retains the same shell. Performance work must preserve all existing visuals, content, window controls, and responsive geometry.
+The existing Windows 7 desktop is the visual reference. Visitors explore a personal portfolio through desktop shortcuts, taskbar apps, and Explorer windows. English content uses compact Windows control typography. Performance work must preserve all existing visuals, content, window controls, and responsive geometry.
 
 Runtime CSS is authoritative: app/tokens.css and app/globals.css provide the base, app/windows7.css and 7.css provide window primitives, app/explorer.css owns shared Explorer chrome, and app/desktop-theme.css supplies the final Windows personalization overrides. This file records that implementation; it does not generate tokens.
 

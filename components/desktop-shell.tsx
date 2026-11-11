@@ -549,14 +549,6 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
             Music
           </button>
           <div className="start-separator" />
-          <Link
-            prefetch={true}
-            href="/dashboard"
-            tabIndex={menuOpen ? 0 : -1}
-            onClick={(event) => onRouteClick(event, '/dashboard')}
-          >
-            Control Panel
-          </Link>
           <a
             href={publicPath('/asset-credits.txt')}
             target="_blank"

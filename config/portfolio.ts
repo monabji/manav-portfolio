@@ -13,7 +13,6 @@ export const windows7Icons = {
   gallery: publicPath('/win7/theme/apps/eog.png'),
   email: publicPath('/win7/theme/apps/internet-mail.png'),
   music: publicPath('/win7/theme/apps/banshee.png'),
-  dashboard: publicPath('/win7/theme/apps/control-center.png'),
   sound: publicPath('/win7/theme/apps/multimedia-volume-control.png'),
 } as const;
 
@@ -36,19 +35,9 @@ export const desktopApps = [
     icon: windows7Icons.projects,
     description: 'Code, games and 3D work',
   },
-  {
-    href: '/dashboard',
-    label: 'My dashboard',
-    startMenuOnly: true,
-    icon: windows7Icons.dashboard,
-    description: 'Personal desktop settings',
-  },
 ] as const;
 
-// Route shortcuts outside Start use this list, so owner tools stay out of sight.
-export const workspaceApps = desktopApps.filter(
-  (app) => !('startMenuOnly' in app && app.startMenuOnly),
-);
+export const workspaceApps = desktopApps;
 
 export const desktopUtilities = [
   {
