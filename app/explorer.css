@@ -31,7 +31,10 @@
 .breadcrumb-part>span { overflow:hidden; text-overflow:ellipsis; }
 .breadcrumb-part b { padding:0 5px; font:16px/16px Arial,sans-serif; font-weight:400; }
 .address-spacer,.command-spacer { flex:1; }
-.explorer-refresh { width:24px; height:21px; flex-shrink:0; border:0; border-left:1px solid #b9c7d3; background:linear-gradient(#fff,#e1ebf5); color:#1761a7; font:bold 20px/18px Arial,sans-serif; cursor:pointer; }
+.explorer-refresh { width:24px; height:21px; display:grid; flex-shrink:0; place-items:center; padding:0; border:0; border-left:1px solid #b9c7d3; background:linear-gradient(#fff,#e1ebf5); color:#1761a7; cursor:pointer; }
+.explorer-refresh:hover { background:linear-gradient(#fff,#d4e9f8); color:#0b4e8d; }
+.explorer-refresh:active { background:linear-gradient(#d7e6f2,#f5faff); }
+.explorer-refresh:focus-visible { outline:1px dotted #1761a7; outline-offset:-3px; }
 .explorer-search { position:relative; width:180px; margin-right:1px; }
 .explorer-search form { display:flex; height:23px; background:white; border:1px solid #7790a8; }
 .explorer-search input { width:100%; min-width:0; height:21px; padding:1px 5px; border:0; border-radius:0; background:white; color:#222; outline:none; font:12px 'Segoe UI',sans-serif; }

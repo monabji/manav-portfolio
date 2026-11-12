@@ -322,7 +322,21 @@ export function ExplorerChrome({
             title="Refresh"
             onClick={() => window.location.reload()}
           >
-            ↻
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+              fill="none"
+            >
+              <path
+                d="M13.5 5.5A5.75 5.75 0 0 0 3.4 4L2 5.5m0 0V2.75m0 2.75h2.75M2.5 10.5A5.75 5.75 0 0 0 12.6 12L14 10.5m0 0v2.75m0-2.75h-2.75"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
         </nav>
         <div className="explorer-search">
