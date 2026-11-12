@@ -376,7 +376,7 @@ export const softwareProjects: Project[] = [
   },
   {
     title: 'spica',
-    status: 'Public repository',
+    status: 'Contributor',
     description:
       'A game-like user interface for the pi harness, written in Zig. This repository is a fork of ACM-VIT/spica.',
     tags: ['Zig', 'UI', 'Game development'],
