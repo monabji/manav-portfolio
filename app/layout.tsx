@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  icons: {
+    icon: '/crystal/browser.png',
+  },
   openGraph: {
     type: 'website',
     url: '/',
@@ -33,9 +36,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/og.png',
-        width: 1733,
-        height: 908,
-        alt: 'Manav, a boy who loves tech, in a bright Frutiger Aero landscape',
+        width: 1216,
+        height: 760,
+        alt: 'Screenshot of the portfolio home page with Manav displayed',
       },
     ],
   },
