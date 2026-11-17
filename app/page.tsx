@@ -27,7 +27,6 @@ export default function Home() {
         >
           <div className="landing-copy">
             <h1 id="landing-title">Manav</h1>
-            <p>a boy who loves tech.</p>
             <nav
               className="landing-actions"
               aria-label="Explore Manav's portfolio"
