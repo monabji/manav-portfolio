@@ -1,8 +1,10 @@
+import type { Metadata } from 'next';
+
 export const siteOpenGraph = {
-  type: 'website' as const,
+  type: 'website',
   url: '/',
   siteName: 'Manav - Portfolio',
-  title: 'Manav - 3D Designer & Game Developer',
+  title: "Manav's portfolio",
   description:
     'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
   images: [
@@ -13,4 +15,4 @@ export const siteOpenGraph = {
       alt: 'Bliss wallpaper: green hills beneath a blue sky',
     },
   ],
-};
+} satisfies Metadata['openGraph'];

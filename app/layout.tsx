@@ -18,8 +18,8 @@ import './taskbar-clock.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://monabji.github.io/manav-portfolio/'),
   title: {
-    default: 'Manav - 3D Designer & Game Developer',
-    template: '%s - Manav',
+    default: "Manav's portfolio",
+    template: "%s - Manav's portfolio",
   },
   description:
     'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: siteOpenGraph,
   twitter: {
     card: 'summary_large_image',
-    title: 'Manav - 3D Designer & Game Developer',
+    title: "Manav's portfolio",
     description:
       'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
     images: ['/og.png?v=bliss'],
@@ -47,7 +47,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <DesktopSettingsProvider><DesktopShell>{children}</DesktopShell></DesktopSettingsProvider>
+        <DesktopSettingsProvider>
+          <DesktopShell>{children}</DesktopShell>
+        </DesktopSettingsProvider>
       </body>
     </html>
   );
