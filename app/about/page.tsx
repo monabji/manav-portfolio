@@ -14,6 +14,8 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="route-stage" id="main-content"><AboutWindow /></main>
+    <main className="route-stage" id="main-content">
+      <AboutWindow />
+    </main>
   );
 }

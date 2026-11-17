@@ -69,7 +69,10 @@ function playTone(kind: 'open' | 'close' | 'select') {
 
 function readSoundPreference() {
   try {
-    return typeof window !== 'undefined' && localStorage.getItem('manav-sound') === 'on';
+    return (
+      typeof window !== 'undefined' &&
+      localStorage.getItem('manav-sound') === 'on'
+    );
   } catch {
     return false;
   }
@@ -382,21 +385,22 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
       </DesktopShortcuts>
 
       <div className="desktop-workspace">{children}</div>
-      {applications.map((app) => (
-        app.id === 'sticky-notes' ? null :
-        <DesktopUtilityWindow
-          key={app.id}
-          id={app.id}
-          title={app.label}
-          embedUrl={app.embedUrl}
-          icon={settings.iconOverrides[`app:${app.id}`] || app.icon}
-          state={utilities[app.id] || closedUtility}
-          onClose={() => closeUtility(app.id)}
-          onMinimize={() => minimizeUtility(app.id)}
-          onMaximize={() => maximizeUtility(app.id)}
-          onFocus={() => focusUtility(app.id)}
-        />
-      ))}
+      {applications.map((app) =>
+        app.id === 'sticky-notes' ? null : (
+          <DesktopUtilityWindow
+            key={app.id}
+            id={app.id}
+            title={app.label}
+            embedUrl={app.embedUrl}
+            icon={settings.iconOverrides[`app:${app.id}`] || app.icon}
+            state={utilities[app.id] || closedUtility}
+            onClose={() => closeUtility(app.id)}
+            onMinimize={() => minimizeUtility(app.id)}
+            onMaximize={() => maximizeUtility(app.id)}
+            onFocus={() => focusUtility(app.id)}
+          />
+        ),
+      )}
 
       <div
         className={`start-menu ${menuOpen ? 'is-open' : ''}`}

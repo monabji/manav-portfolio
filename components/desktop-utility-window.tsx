@@ -35,15 +35,16 @@ function Notepad() {
       setSaveError(true);
     }
   }, []);
-  useEffect(() => {
+  const updateNote = (value: string) => {
+    setNote(value);
     if (!loaded) return;
     try {
-      localStorage.setItem('manav-notepad', note);
+      localStorage.setItem('manav-notepad', value);
       setSaveError(false);
     } catch {
       setSaveError(true);
     }
-  }, [loaded, note]);
+  };
 
   const download = () => {
     const url = URL.createObjectURL(
@@ -62,7 +63,7 @@ function Notepad() {
         <button
           type="button"
           onClick={() => {
-            setNote('');
+            updateNote('');
             textRef.current?.focus();
           }}
         >
@@ -80,7 +81,7 @@ function Notepad() {
         ref={textRef}
         aria-label="Notepad text"
         value={note}
-        onChange={(event) => setNote(event.target.value)}
+        onChange={(event) => updateNote(event.target.value)}
         onKeyDown={(event) => {
           if (
             (event.ctrlKey || event.metaKey) &&
@@ -94,7 +95,13 @@ function Notepad() {
         placeholder="Type anything here. Your note saves in this browser."
       />
       <div className="utility-status">
-        <span role="status">{saveError ? 'Not saved — use Save as .txt' : loaded ? 'Saved on this device' : 'Loading note…'}</span>
+        <output>
+          {saveError
+            ? 'Not saved — use Save as .txt'
+            : loaded
+              ? 'Saved on this device'
+              : 'Loading note…'}
+        </output>
         <span>{note.length} characters</span>
       </div>
     </div>

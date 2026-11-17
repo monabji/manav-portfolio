@@ -11,7 +11,11 @@ import {
 } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { windows7Icons, workspaceApps, desktopUtilities } from '@/config/portfolio';
+import {
+  windows7Icons,
+  workspaceApps,
+  desktopUtilities,
+} from '@/config/portfolio';
 import { appPath, publicPath } from '@/lib/public-path';
 import { useDesktopSettings } from './desktop-settings';
 import {
@@ -156,7 +160,8 @@ export function ExplorerChrome({
   const router = useRouter();
   const go = useCallback(
     (href: string) => {
-      if (href.startsWith('/') && !href.startsWith('//')) router.push(appPath(href));
+      if (href.startsWith('/') && !href.startsWith('//'))
+        router.push(appPath(href));
       else window.location.assign(href);
     },
     [router],
