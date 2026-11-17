@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 
 import { DesktopShell } from '@/components/desktop-shell';
 import { DesktopSettingsProvider } from '@/components/desktop-settings';
+import { publicPath } from '@/lib/public-path';
+import { siteOpenGraph } from '@/lib/site-metadata';
 
 import './tokens.css';
 import './globals.css';
@@ -25,30 +27,15 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   icons: {
-    icon: '/crystal/browser.png',
+    icon: publicPath('/favicon.png'),
   },
-  openGraph: {
-    type: 'website',
-    url: '/',
-    siteName: 'Manav - Portfolio',
-    title: 'Manav - 3D Designer & Game Developer',
-    description:
-      'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
-    images: [
-      {
-        url: '/og.png',
-        width: 1216,
-        height: 760,
-        alt: 'Screenshot of the portfolio home page with Manav displayed',
-      },
-    ],
-  },
+  openGraph: siteOpenGraph,
   twitter: {
     card: 'summary_large_image',
     title: 'Manav - 3D Designer & Game Developer',
     description:
       'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
-    images: ['/og.png'],
+    images: ['/og.png?v=bliss'],
   },
 };
 
