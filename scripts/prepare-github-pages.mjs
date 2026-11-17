@@ -20,7 +20,7 @@ async function prefixCssImages(directory) {
     else if (entry.name.endsWith('.css')) {
       const source = await readFile(path, 'utf8');
       const fixed = source
-        .replace(/url\((['"]?)\/_next\/static\/fonts\//g, 'url($1/manav-portfolio/fonts/')
+        .replace(/url\((['"]?)(?:\/manav-portfolio)?\/_next\/static\/fonts\//g, 'url($1/manav-portfolio/fonts/')
         .replace(/url\((["']?)\/(?!\/|manav-portfolio\/)/g, 'url($1/manav-portfolio/')
         .replace(/url\((["']?)\/manav-portfolio\/_next\/static\/(crystal|win7|aero|brands)\//g, 'url($1/manav-portfolio/$2/');
       await writeFile(path, fixed);
