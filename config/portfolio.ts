@@ -178,6 +178,14 @@ export const achievements = [
     title: 'NutriHack Food Hackathon finalist',
     detail: 'sork, a nutrient degradation tracker',
   },
+  {
+    title: '#46 University Leaderboard, Gaslight CTF',
+    detail: 'Placed 46th on the university leaderboard',
+  },
+  {
+    title: '#2 CodexCryptum Internal CTF',
+    detail: 'Placed 2nd in the internal CTF',
+  },
 ] as const;
 
 export const experience = [
