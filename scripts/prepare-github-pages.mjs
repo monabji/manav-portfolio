@@ -11,8 +11,8 @@ try {
   if (error.code !== 'ENOENT') throw error;
 }
 
-// Only CSS image URLs need a public asset prefix. Never rewrite JS, JSON,
-// HTML payloads, or framework route identifiers.
+// Prefix public assets in CSS for the repository Pages base path. Never rewrite
+// JS, JSON, HTML payloads, or framework route identifiers.
 async function prefixCssImages(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);
@@ -20,6 +20,7 @@ async function prefixCssImages(directory) {
     else if (entry.name.endsWith('.css')) {
       const source = await readFile(path, 'utf8');
       const fixed = source
+        .replace(/url\((['"]?)\/_next\/static\/fonts\//g, 'url($1/manav-portfolio/fonts/')
         .replace(/url\((["']?)\/(?!\/|manav-portfolio\/)/g, 'url($1/manav-portfolio/')
         .replace(/url\((["']?)\/manav-portfolio\/_next\/static\/(crystal|win7|aero|brands)\//g, 'url($1/manav-portfolio/$2/');
       await writeFile(path, fixed);
