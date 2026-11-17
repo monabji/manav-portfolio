@@ -162,7 +162,7 @@ export const skills = [
 
 export const achievements = [
   {
-    title: 'ACEi Hackathon, third place',
+    title: 'ACEi Midterm Hackathon winner',
     detail:
       'TonoClear, an ophthalmology training simulator demonstrated in Chennai',
   },
