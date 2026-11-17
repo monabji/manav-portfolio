@@ -186,6 +186,10 @@ export const achievements = [
     title: '#2 CodexCryptum Internal CTF',
     detail: 'Placed 2nd in the internal CTF',
   },
+  {
+    title: 'IITH Megathon × Sigularity Hackathon finalist',
+    detail: 'Selected as a finalist',
+  },
 ] as const;
 
 export const experience = [
