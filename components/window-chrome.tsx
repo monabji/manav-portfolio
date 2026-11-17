@@ -12,7 +12,7 @@ import {
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { windows7Icons, workspaceApps, desktopUtilities } from '@/config/portfolio';
-import { publicPath } from '@/lib/public-path';
+import { appPath, publicPath } from '@/lib/public-path';
 import { useDesktopSettings } from './desktop-settings';
 import {
   DropdownMenu,
@@ -156,7 +156,7 @@ export function ExplorerChrome({
   const router = useRouter();
   const go = useCallback(
     (href: string) => {
-      if (href.startsWith('/') && !href.startsWith('//')) router.push(href);
+      if (href.startsWith('/') && !href.startsWith('//')) router.push(appPath(href));
       else window.location.assign(href);
     },
     [router],
