@@ -167,6 +167,12 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
     const open = (event: Event) => {
       const id = (event as CustomEvent).detail as string;
       if (!applications.some((app) => app.id === id)) return;
+      if (id === 'sticky-notes') {
+        window.dispatchEvent(new Event('manav:new-sticky-note'));
+        setMenuOpen(false);
+        if (soundOn) playTone('open');
+        return;
+      }
       desktopSnapshot.current = null;
       zCounter.current += 1;
       setUtilities((current) => ({
