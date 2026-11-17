@@ -421,15 +421,6 @@ export function ExplorerChrome({
               label: 'Using Manav OS',
               action: () => setHelp((value) => !value),
             },
-            {
-              label: 'Asset credits',
-              action: () =>
-                window.open(
-                  publicPath('/asset-credits.txt'),
-                  '_blank',
-                  'noopener,noreferrer',
-                ),
-            },
           ]}
         />
       </nav>

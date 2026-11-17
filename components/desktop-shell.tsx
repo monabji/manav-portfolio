@@ -518,14 +518,6 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
             Music
           </button>
           <div className="start-separator" />
-          <a
-            href={publicPath('/asset-credits.txt')}
-            target="_blank"
-            rel="noreferrer"
-            tabIndex={menuOpen ? 0 : -1}
-          >
-            Asset credits
-          </a>
           <button
             className="start-desktop"
             type="button"
