@@ -150,17 +150,7 @@ export const skills = [
   {
     label: 'Programming',
     detail:
-      'Python, C, C++, Java, C#, SQL, JavaScript, TypeScript, Lua, GDScript, HTML, CSS',
-  },
-  {
-    label: 'Databases',
-    detail:
-      'MySQL, relational modeling, ER/EER design, normalization (1NF to 3NF), recursive and many-to-many relationships',
-  },
-  {
-    label: 'Machine learning',
-    detail:
-      'Regression, supervised learning, feature engineering, data preprocessing, train/validation/test workflows, model evaluation',
+      'Python, C, C++, Java, C#, SQL, MySQL, PyTorch, JavaScript, TypeScript, Lua, GDScript, HTML, CSS',
   },
   {
     label: 'Tools and frameworks',
