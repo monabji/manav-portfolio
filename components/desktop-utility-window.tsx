@@ -24,14 +24,25 @@ type UtilityState = {
 function Notepad() {
   const [note, setNote] = useState('');
   const [loaded, setLoaded] = useState(false);
+  const [saveError, setSaveError] = useState(false);
   const textRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    setNote(localStorage.getItem('manav-notepad') || '');
-    setLoaded(true);
+    try {
+      setNote(localStorage.getItem('manav-notepad') || '');
+      setLoaded(true);
+    } catch {
+      setSaveError(true);
+    }
   }, []);
   useEffect(() => {
-    if (loaded) localStorage.setItem('manav-notepad', note);
+    if (!loaded) return;
+    try {
+      localStorage.setItem('manav-notepad', note);
+      setSaveError(false);
+    } catch {
+      setSaveError(true);
+    }
   }, [loaded, note]);
 
   const download = () => {
@@ -83,7 +94,7 @@ function Notepad() {
         placeholder="Type anything here. Your note saves in this browser."
       />
       <div className="utility-status">
-        <span>Saved on this device</span>
+        <span role="status">{saveError ? 'Not saved — use Save as .txt' : loaded ? 'Saved on this device' : 'Loading note…'}</span>
         <span>{note.length} characters</span>
       </div>
     </div>

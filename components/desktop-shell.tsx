@@ -67,13 +67,17 @@ function playTone(kind: 'open' | 'close' | 'select') {
   oscillator.addEventListener('ended', () => void ctx.close());
 }
 
+function readSoundPreference() {
+  try {
+    return typeof window !== 'undefined' && localStorage.getItem('manav-sound') === 'on';
+  } catch {
+    return false;
+  }
+}
+
 export function useAeroSound() {
   return (kind: 'open' | 'close' | 'select' = 'select') => {
-    if (
-      typeof window !== 'undefined' &&
-      localStorage.getItem('manav-sound') === 'on'
-    )
-      playTone(kind);
+    if (readSoundPreference()) playTone(kind);
   };
 }
 
@@ -149,7 +153,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    setSoundOn(localStorage.getItem('manav-sound') === 'on');
+    setSoundOn(readSoundPreference());
   }, []);
 
   useEffect(() => {
@@ -244,7 +248,11 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
   const toggleSound = () => {
     const next = !soundOn;
     setSoundOn(next);
-    localStorage.setItem('manav-sound', next ? 'on' : 'off');
+    try {
+      localStorage.setItem('manav-sound', next ? 'on' : 'off');
+    } catch {
+      // Sound still works for this visit when browser storage is unavailable.
+    }
     if (next) playTone('open');
   };
   const showDesktop = () => {
