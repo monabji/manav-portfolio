@@ -32,7 +32,8 @@ export const metadata: Metadata = {
     url: '/',
     siteName: 'Manav - Portfolio',
     title: 'Manav - 3D Designer & Game Developer',
-    description: 'a boy who loves tech',
+    description:
+      'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
     images: [
       {
         url: '/og.png',
@@ -45,7 +46,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Manav - 3D Designer & Game Developer',
-    description: 'a boy who loves tech',
+    description:
+      'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
     images: ['/og.png'],
   },
 };
