@@ -9,10 +9,10 @@ export const siteOpenGraph = {
     'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
   images: [
     {
-      url: '/og.png?v=bliss',
-      width: 365,
-      height: 274,
-      alt: 'Bliss wallpaper: green hills beneath a blue sky',
+      url: '/og.png?v=portfolio',
+      width: 1925,
+      height: 1143,
+      alt: "Manav's portfolio desktop with Bliss wallpaper",
     },
   ],
 } satisfies Metadata['openGraph'];

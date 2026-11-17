@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "Manav's portfolio",
     description:
       'The portfolio of Manav Bhavin Soni - student, 3D designer, game developer, and builder.',
-    images: ['/og.png?v=bliss'],
+    images: ['/og.png?v=portfolio'],
   },
 };
 
