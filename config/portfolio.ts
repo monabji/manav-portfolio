@@ -179,7 +179,7 @@ export const achievements = [
     detail: 'sork, a nutrient degradation tracker',
   },
   {
-    title: '#46 University Leaderboard, Gaslight CTF',
+    title: '#46/700 Teams, Gaslight CTF University Leaderboard',
     detail: 'Placed 46th on the university leaderboard',
   },
   {
