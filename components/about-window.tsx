@@ -217,7 +217,7 @@ export function AboutWindow() {
               </div>
             </section>
           )}
-          {(tab === 'Overview' || tab === 'Education') && (
+          {tab === 'Overview' && (
             <section className="app-section achievements-app">
               <div className="app-section-title">
                 <img src={windows7Icons.projects} alt="" />
