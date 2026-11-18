@@ -106,10 +106,10 @@ body, button, input, select { font-family: 'Segoe UI', Tahoma, sans-serif; }
 @media(max-width:860px) { .desktop-icons { position:relative; display:flex; top:auto; left:auto; bottom:auto; width:100%; padding:5px; overflow-x:auto; overflow-y:hidden; gap:3px; } .desktop-icons a,.desktop-icons button { flex:0 0 72px; width:72px; min-height:76px; font-size:11px; } .desktop-icons img,.desktop-brand { width:40px; height:40px; } .desktop-brand img { width:30px; height:30px; } .desktop-workspace { padding:6px 10px 62px; min-height:0; } .route-stage { min-height:0; } .taskbar-apps a,.taskbar-apps button { width:48px; min-width:48px; } .home-window-body { min-height:350px; } }
 @media(min-width:861px) and (max-width:1100px) { .desktop-workspace { padding-left:224px; padding-right:118px; } }
 @media(max-width:860px) {
-  .desktop-icons.scattered-desktop { position:relative; inset:auto; width:100%; padding:8px 10px 12px; overflow-x:auto; overflow-y:hidden; pointer-events:auto; }
-  .desktop-icon-canvas { display:flex; align-items:flex-start; gap:8px; height:90px; width:max-content; }
-  .desktop-icon-position { position:relative; left:auto; top:var(--desktop-icon-nudge); width:72px; height:80px; flex:0 0 72px; order:var(--desktop-icon-order); }
-  .desktop-icon-position > :is(a,button) { width:72px; height:80px; min-height:80px; }
+  .desktop-icons.scattered-desktop { position:relative; inset:auto; width:100%; padding:8px 10px 12px; overflow:visible; pointer-events:auto; }
+  .desktop-icon-canvas { display:grid; grid-template-columns:repeat(auto-fit,minmax(64px,1fr)); gap:4px; height:auto; }
+  .desktop-icon-position { position:static; width:auto; height:auto; }
+  .desktop-icon-position > :is(a,button) { width:100%; height:auto; min-height:72px; }
 }
 @media(max-width:600px) { .taskbar { grid-template-columns:44px minmax(0,1fr) auto 9px; gap:2px; } .start-button,.start-button:hover,.start-button.is-active { width:42px; } .taskbar-apps a,.taskbar-apps button { width:42px; min-width:42px; } .taskbar-apps img { width:28px; height:28px; } .tray { padding:0 2px; gap:2px; } .tray time { display:flex; min-width:65px; font-size:10px; line-height:14px; } .tray button { width:22px; } .show-desktop { width:9px; } .start-menu { grid-template-columns:minmax(0,1fr) 120px; gap:6px; } .start-menu nav small { display:none; } .start-menu nav :is(a,button) { min-height:38px; } .start-menu nav { max-height:calc(100svh - 137px); } .start-user { padding-bottom:4px; } .start-places>a,.start-places>button { min-height:29px; font-size:11px; padding:5px; } .landing-copy h1 { font-size:76px; } .landing-copy { padding:30px 20px; } .aero-button { min-height:38px; font-size:12px; } }
 @media(prefers-contrast:more) { .start-menu { background:#234263; } .taskbar { background:#234263; } }
