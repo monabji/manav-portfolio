@@ -177,7 +177,8 @@
 .detail-content p { color:#333; font:13px/1.6 'Segoe UI',sans-serif; }
 .detail-status,.detail-content li { border:1px solid #c2cfdd; border-radius:2px; background:#f0f5fb; color:#335a83; font:12px 'Segoe UI',sans-serif; }
 .detail-links a,.detail-window footer button { min-height:28px; border:1px solid #8c9eaf; border-radius:3px; background:linear-gradient(#fff,#e0e7f0); color:#111; font:12px 'Segoe UI',sans-serif; box-shadow:inset 0 0 0 1px #fff; }
-.detail-window footer { flex-shrink:0; padding:8px 12px; background:#f0f0f0; }
+.window.detail-window footer { flex-shrink:0; margin:0; padding:8px 12px; border:0; background:transparent; box-shadow:none; }
+.window.detail-window footer::before { content:none; }
 .aero-window.is-maximized :is(.about-app-body,.projects-app-body,.utility-library-body,.home-window-body) { flex:1; height:auto; max-height:none; min-height:0; }
 .aero-window.is-maximized :is(.notepad-app,.snake-app) { flex:1; }
 .aero-window.is-maximized .notepad-app textarea { height:auto; }
